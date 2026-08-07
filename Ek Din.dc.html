@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/industry-f6309034-54e2-47f6-83e5-9537e6b30a11/styles.css">
+<style>
+  :root {
+    --paper: #fbfaf9;
+    --ink: #1a1c1e;
+    --navy: #1d2d3d;
+    --navy-mid: #2c455d;
+    --brown-900: #3a2e25;
+    --brown-700: #6b5344;
+    --brown-500: #8f745c;
+    --brown-200: #e3d9ce;
+    --hair: color-mix(in srgb, #1d1f20 16%, transparent);
+  }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); }
+  a { color: var(--color-accent-700); text-underline-offset: 3px; }
+  a:hover { color: var(--navy); }
+  ::selection { background: color-mix(in srgb, var(--color-accent) 25%, transparent); }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div style="min-height:100vh; display:flex; flex-direction:column; background:var(--paper)">
+
+  <header style="position:sticky; top:0; z-index:20; backdrop-filter:saturate(180%) blur(18px); background:color-mix(in srgb, var(--paper) 78%, transparent); border-bottom:1px solid var(--hair)">
+    <div style="max-width:1120px; margin:0 auto; padding:14px 28px; display:flex; align-items:center; gap:32px">
+      <button onClick="{{ goHome }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-heading); font-weight:600; font-size:19px; letter-spacing:0.22em; text-transform:uppercase; color:var(--ink); margin-right:auto">Ek Din</button>
+      <nav style="display:flex; gap:28px; align-items:center; font-size:14px">
+        <button onClick="{{ goHome }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ homeColor }}">Home</button>
+        <button onClick="{{ goServices }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ servicesColor }}">Services</button>
+        <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:8px 16px; font-size:13px; letter-spacing:0.04em">Contact</button>
+      </nav>
+    </div>
+  </header>
+
+  <main style="flex:1">
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <section style="max-width:1120px; margin:0 auto; padding:120px 28px 96px; text-align:center; animation:rise .5s ease both">
+        <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:26px">Technical consulting for small business</div>
+        <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(46px,7vw,88px); line-height:1.02; letter-spacing:-0.02em; margin:0 auto 24px; max-width:16ch">The technical side of your business, handled.</h1>
+        <p style="max-width:56ch; margin:0 auto 36px; font-size:19px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); text-wrap:pretty">Websites, domains, email, QR codes and the rest of the setup that keeps a business running online. One person, start to finish, explained in plain language.</p>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
+          <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:12px 24px; font-size:15px">Start a project</button>
+          <button onClick="{{ goServices }}" class="btn btn-secondary" style="padding:12px 24px; font-size:15px">See services</button>
+        </div>
+      </section>
+
+      <section style="max-width:1120px; margin:0 auto; padding:0 28px 96px">
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--hair); border-bottom:1px solid var(--hair)">
+          <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="3">
+            <div style="padding:32px 28px; border-left:1px solid var(--hair)">
+              <div style="font-family:var(--font-heading); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brown-700); margin-bottom:10px">{{ p.kicker }}</div>
+              <div style="font-size:15px; line-height:1.6; color:color-mix(in srgb, var(--ink) 72%, transparent)">{{ p.text }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:40px; flex-wrap:wrap">
+          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0">What I build and set up</h2>
+          <button onClick="{{ goServices }}" class="btn btn-ghost" style="color:var(--color-accent-700); font-size:14px">All services →</button>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:26px">
+          <sc-for list="{{ homeServices }}" as="s" hint-placeholder-count="6">
+            <div class="card blueprint" style="padding:26px 24px; gap:10px">
+              <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              <div style="font-family:var(--font-heading); font-size:12px; letter-spacing:0.12em; color:var(--color-accent-700)">{{ s.num }}</div>
+              <div style="font-family:var(--font-heading); font-weight:600; font-size:22px; line-height:1.15">{{ s.name }}</div>
+              <p style="margin:0; font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <sc-if value="{{ showProcess }}" hint-placeholder-val="{{ true }}">
+        <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px">
+          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px">How it works</h2>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--hair)">
+            <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+              <div style="padding:36px 28px 8px; border-left:1px solid var(--hair)">
+                <div style="font-family:var(--font-heading); font-size:52px; line-height:1; color:var(--brown-200); margin-bottom:18px">{{ st.n }}</div>
+                <div style="font-family:var(--font-heading); font-weight:600; font-size:21px; margin-bottom:8px">{{ st.title }}</div>
+                <p style="margin:0; font-size:14px; line-height:1.65; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ st.text }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </sc-if>
+
+      <section style="background:{{ bandColor }}; color:var(--paper)">
+        <div style="max-width:1120px; margin:0 auto; padding:88px 28px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap">
+          <div>
+            <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(28px,3.4vw,42px); letter-spacing:-0.015em; margin:0 0 10px; color:var(--paper)">Not sure what you need yet?</h2>
+            <p style="margin:0; font-size:17px; line-height:1.6; color:color-mix(in srgb, #ffffff 70%, transparent); max-width:52ch">Send a short description of your business. I'll reply with what I'd set up first and what can wait.</p>
+          </div>
+          <button onClick="{{ goContact }}" class="btn" style="background:var(--paper); border-color:var(--paper); color:var(--navy); padding:13px 26px; font-size:15px">Get in touch</button>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isServices }}" hint-placeholder-val="{{ true }}">
+      <section style="max-width:1120px; margin:0 auto; padding:96px 28px 64px; animation:rise .5s ease both">
+        <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:22px">Services</div>
+        <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(42px,6vw,74px); line-height:1.04; letter-spacing:-0.02em; margin:0 0 22px; max-width:18ch">Everything a small business needs to exist online.</h1>
+        <p style="max-width:60ch; margin:0; font-size:18px; line-height:1.65; color:color-mix(in srgb, var(--ink) 65%, transparent)">Take one piece or the whole setup. Work is scoped per project after a short call, so you only pay for what your business actually uses.</p>
+      </section>
+
+      <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px; display:flex; flex-direction:column; gap:64px">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+          <div>
+            <div style="display:flex; align-items:baseline; gap:16px; padding-bottom:16px; border-bottom:1px solid var(--hair); margin-bottom:32px">
+              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:30px; margin:0">{{ g.title }}</h2>
+              <span style="font-size:13px; color:color-mix(in srgb, var(--ink) 55%, transparent)">{{ g.note }}</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:26px">
+              <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="3">
+                <div class="card blueprint" style="padding:26px 24px; gap:10px">
+                  <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+                  <div style="font-family:var(--font-heading); font-size:12px; letter-spacing:0.12em; color:var(--color-accent-700)">{{ s.num }}</div>
+                  <div style="font-family:var(--font-heading); font-weight:600; font-size:22px; line-height:1.15">{{ s.name }}</div>
+                  <p style="margin:0 0 6px; font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
+                  <div style="font-size:12px; line-height:1.7; color:var(--brown-700); border-top:1px solid var(--hair); padding-top:10px">{{ s.detail }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </section>
+
+      <section style="background:{{ bandColor }}; color:var(--paper)">
+        <div style="max-width:1120px; margin:0 auto; padding:80px 28px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap">
+          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(28px,3.4vw,42px); letter-spacing:-0.015em; margin:0; color:var(--paper); max-width:20ch">Tell me what you're working with and I'll scope it.</h2>
+          <button onClick="{{ goContact }}" class="btn" style="background:var(--paper); border-color:var(--paper); color:var(--navy); padding:13px 26px; font-size:15px">Contact</button>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ isContact }}" hint-placeholder-val="{{ true }}">
+      <section style="max-width:1120px; margin:0 auto; padding:96px 28px 104px; display:grid; grid-template-columns:0.85fr 1.15fr; gap:72px; align-items:start; animation:rise .5s ease both">
+        <div>
+          <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:22px">Contact</div>
+          <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(40px,5vw,64px); line-height:1.05; letter-spacing:-0.02em; margin:0 0 20px">Let's start with the basics.</h1>
+          <p style="font-size:17px; line-height:1.65; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 36px; max-width:40ch">Fill in the form and it opens an email to me with your details ready to send. Replies usually come within one business day.</p>
+          <div style="border-top:1px solid var(--hair); padding-top:22px; display:flex; flex-direction:column; gap:18px">
+            <div>
+              <div style="font-family:var(--font-heading); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:color-mix(in srgb, var(--ink) 55%, transparent); margin-bottom:4px">Email</div>
+              <a href="{{ mailtoPlain }}" style="font-size:16px">{{ contactEmail }}</a>
+            </div>
+            <div>
+              <div style="font-family:var(--font-heading); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:color-mix(in srgb, var(--ink) 55%, transparent); margin-bottom:4px">Response time</div>
+              <div style="font-size:16px">Within 1 business day</div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-heading); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:color-mix(in srgb, var(--ink) 55%, transparent); margin-bottom:4px">Good first message</div>
+              <div style="font-size:15px; line-height:1.6; color:color-mix(in srgb, var(--ink) 70%, transparent)">What your business does, what you have already, and what isn't working.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="blueprint" style="padding:40px 36px; background:#ffffff">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:14px; padding:24px 0">
+              <div style="font-family:var(--font-heading); font-weight:600; font-size:28px">Your email is ready to send.</div>
+              <p style="margin:0; font-size:15px; line-height:1.65; color:color-mix(in srgb, var(--ink) 68%, transparent)">Your mail app should have opened with the details filled in. If it didn't, email me directly at <a href="{{ mailtoPlain }}">{{ contactEmail }}</a>.</p>
+              <div>
+                <button onClick="{{ resetForm }}" class="btn btn-secondary" style="padding:10px 20px; font-size:14px; margin-top:8px">Write another</button>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ submit }}" style="display:grid; grid-template-columns:1fr 1fr; gap:20px">
+              <div class="field">
+                <label>Name</label>
+                <input class="input" type="text" required="{{ true }}" value="{{ form.name }}" onChange="{{ onName }}" placeholder="Your name">
+              </div>
+              <div class="field">
+                <label>Email</label>
+                <input class="input" type="email" required="{{ true }}" value="{{ form.email }}" onChange="{{ onEmail }}" placeholder="you@example.com">
+              </div>
+              <div class="field">
+                <label>Phone</label>
+                <input class="input" type="tel" value="{{ form.phone }}" onChange="{{ onPhone }}" placeholder="Optional">
+              </div>
+              <div class="field">
+                <label>Company</label>
+                <input class="input" type="text" value="{{ form.company }}" onChange="{{ onCompany }}" placeholder="Business name">
+              </div>
+              <div class="field">
+                <label>Service interested in</label>
+                <select class="input" value="{{ form.service }}" onChange="{{ onService }}">
+                  <option value="">Select one</option>
+                  <option value="Website design &amp; build">Website design &amp; build</option>
+                  <option value="Domain setup &amp; DNS">Domain setup &amp; DNS</option>
+                  <option value="Business email setup">Business email setup</option>
+                  <option value="QR codes">QR codes</option>
+                  <option value="SEO basics">SEO basics</option>
+                  <option value="Social media setup">Social media setup</option>
+                  <option value="Logo &amp; brand basics">Logo &amp; brand basics</option>
+                  <option value="Not sure yet">Not sure yet</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Timeline</label>
+                <select class="input" value="{{ form.timeline }}" onChange="{{ onTimeline }}">
+                  <option value="">Select one</option>
+                  <option value="As soon as possible">As soon as possible</option>
+                  <option value="Within a month">Within a month</option>
+                  <option value="1–3 months">1–3 months</option>
+                  <option value="Just exploring">Just exploring</option>
+                </select>
+              </div>
+              <div class="field" style="grid-column:1 / -1">
+                <label>Message</label>
+                <textarea class="input" rows="5" value="{{ form.message }}" onChange="{{ onMessage }}" placeholder="What does your business do, and what do you need?"></textarea>
+              </div>
+              <div style="grid-column:1 / -1; display:flex; align-items:center; gap:16px; flex-wrap:wrap">
+                <button type="submit" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:12px 26px; font-size:15px">Send message</button>
+                <span style="font-size:12px; color:color-mix(in srgb, var(--ink) 55%, transparent)">Opens your email app with everything filled in.</span>
+              </div>
+            </form>
+          </sc-if>
+        </div>
+      </section>
+    </sc-if>
+
+  </main>
+
+  <footer style="border-top:1px solid var(--hair)">
+    <div style="max-width:1120px; margin:0 auto; padding:40px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap">
+      <div style="font-family:var(--font-heading); font-weight:600; font-size:15px; letter-spacing:0.22em; text-transform:uppercase">Ek Din</div>
+      <div style="display:flex; gap:26px; align-items:center; font-size:14px">
+        <button onClick="{{ goHome }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:color-mix(in srgb, var(--ink) 70%, transparent)">Home</button>
+        <button onClick="{{ goServices }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:color-mix(in srgb, var(--ink) 70%, transparent)">Services</button>
+        <a href="{{ mailtoPlain }}" style="font-size:14px">{{ contactEmail }}</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;contactEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;rimsha.a.rashid@gmail.com&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bandTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;navy&quot;,&quot;brown&quot;],&quot;default&quot;:&quot;navy&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showProcess&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = {
+    page: 'home',
+    sent: false,
+    form: { name: '', email: '', phone: '', company: '', service: '', timeline: '', message: '' }
+  };
+
+  go(page) {
+    this.setState({ page, sent: false });
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  set(key) {
+    return (e) => {
+      const v = e.target.value;
+      this.setState((s) => ({ form: { ...s.form, [key]: v } }));
+    };
+  }
+
+  email() { return this.props.contactEmail ?? 'rimsha.a.rashid@gmail.com'; }
+
+  submit(e) {
+    e.preventDefault();
+    const f = this.state.form;
+    const subject = 'New enquiry' + (f.company ? ' — ' + f.company : f.name ? ' — ' + f.name : '');
+    const body = [
+      'Name: ' + f.name,
+      'Email: ' + f.email,
+      'Phone: ' + (f.phone || '—'),
+      'Company: ' + (f.company || '—'),
+      'Service: ' + (f.service || '—'),
+      'Timeline: ' + (f.timeline || '—'),
+      '',
+      'Message:',
+      f.message || '—'
+    ].join('\n');
+    const href = 'mailto:' + this.email() + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    if (typeof window !== 'undefined') window.location.href = href;
+    this.setState({ sent: true });
+  }
+
+  services() {
+    return [
+      { num: '01', name: 'Website design & build', blurb: 'A fast, mobile-first site that says what you do and how to reach you.', detail: 'Copy structure, build, launch, and a short handover so you can edit it yourself.', group: 'build' },
+      { num: '02', name: 'Logo & brand basics', blurb: 'A simple mark, type choices and colors that hold up across print and screen.', detail: 'Files packaged for signage, socials, invoices and the site.', group: 'build' },
+      { num: '03', name: 'Domain setup & DNS', blurb: 'Register the right domain and point the records where they belong.', detail: 'Transfers, renewals, subdomains, SSL, and records documented in writing.', group: 'setup' },
+      { num: '04', name: 'Business email setup', blurb: 'Email on your own domain instead of a personal address.', detail: 'Mailboxes, aliases, signatures, plus SPF and DKIM so mail lands in inboxes.', group: 'setup' },
+      { num: '05', name: 'QR codes', blurb: 'Codes for menus, signage, packaging, business cards and shop windows.', detail: 'Print-ready files at the right size, pointing to pages you can change later.', group: 'setup' },
+      { num: '06', name: 'SEO basics', blurb: 'The groundwork that helps people find you when they search nearby.', detail: 'Titles, descriptions, sitemap, page speed and a search console you can read.', group: 'grow' },
+      { num: '07', name: 'Social media setup', blurb: 'Accounts claimed, named consistently and connected back to your site.', detail: 'Profiles, handles, link pages and a posting setup you can maintain.', group: 'grow' }
+    ];
+  }
+
+  renderVals() {
+    const page = this.state.page;
+    const all = this.services();
+    const muted = 'color-mix(in srgb, #1a1c1e 70%, transparent)';
+    const active = '#1d2d3d';
+    const band = (this.props.bandTone ?? 'navy') === 'brown' ? 'var(--brown-900)' : 'var(--navy)';
+    return {
+      isHome: page === 'home',
+      isServices: page === 'services',
+      isContact: page === 'contact',
+      homeColor: page === 'home' ? active : muted,
+      servicesColor: page === 'services' ? active : muted,
+      goHome: () => this.go('home'),
+      goServices: () => this.go('services'),
+      goContact: () => this.go('contact'),
+      bandColor: band,
+      showProcess: this.props.showProcess ?? true,
+      contactEmail: this.email(),
+      mailtoPlain: 'mailto:' + this.email(),
+      homeServices: all.slice(0, 6),
+      groups: [
+        { title: 'Build', note: 'What people see', items: all.filter((s) => s.group === 'build') },
+        { title: 'Set up', note: 'The plumbing behind it', items: all.filter((s) => s.group === 'setup') },
+        { title: 'Grow', note: 'Getting found', items: all.filter((s) => s.group === 'grow') }
+      ],
+      pillars: [
+        { kicker: 'Websites', text: 'Designed and built end to end, or rebuilt from whatever you have now.' },
+        { kicker: 'Domains & email', text: 'Domains, DNS and business email set up properly and documented.' },
+        { kicker: 'QR & local presence', text: 'QR codes, listings and profiles so people can find and reach you.' }
+      ],
+      steps: [
+        { n: '1', title: 'Short call', text: 'Twenty minutes on what your business does and what is getting in the way.' },
+        { n: '2', title: 'Written scope', text: 'A plain-language plan of what gets built, in what order, and what it costs.' },
+        { n: '3', title: 'Build & handover', text: 'Everything set up in your name, with instructions you can actually follow.' }
+      ],
+      form: this.state.form,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      resetForm: () => this.setState({ sent: false, form: { name: '', email: '', phone: '', company: '', service: '', timeline: '', message: '' } }),
+      submit: (e) => this.submit(e),
+      onName: this.set('name'),
+      onEmail: this.set('email'),
+      onPhone: this.set('phone'),
+      onCompany: this.set('company'),
+      onService: this.set('service'),
+      onTimeline: this.set('timeline'),
+      onMessage: this.set('message')
+    };
+  }
+}
+
+</script>
+</body>
+</html>
