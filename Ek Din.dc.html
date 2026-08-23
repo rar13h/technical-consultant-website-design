@@ -11,21 +11,26 @@
 <link rel="stylesheet" href="_ds/industry-f6309034-54e2-47f6-83e5-9537e6b30a11/styles.css">
 <style>
   :root {
-    --paper: #fbfaf9;
-    --ink: #1a1c1e;
-    --navy: #1d2d3d;
-    --navy-mid: #2c455d;
-    --brown-900: #3a2e25;
-    --brown-700: #6b5344;
-    --brown-500: #8f745c;
-    --brown-200: #e3d9ce;
-    --hair: color-mix(in srgb, #1d1f20 16%, transparent);
+    --paper: #f7f4ef;
+    --ink: #161513;
+    --navy: #1c2430;
+    --navy-mid: #33465c;
+    --brown-900: #4a3b21;
+    --brown-700: #6e5730;
+    --brown-500: #ab8a5c;
+    --brown-200: #ecdfc4;
+    --hair: color-mix(in srgb, #161513 16%, transparent);
   }
   body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); }
   a { color: var(--color-accent-700); text-underline-offset: 3px; }
   a:hover { color: var(--navy); }
   ::selection { background: color-mix(in srgb, var(--color-accent) 25%, transparent); }
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .svc-row summary { list-style: none; cursor: pointer; }
+  .svc-row summary::-webkit-details-marker { display: none; }
+  .svc-row .chev { display: inline-block; transition: transform .25s ease; color: var(--color-accent-700); }
+  .svc-row[open] .chev { transform: rotate(90deg); }
+  .svc-row .svc-body { animation: rise .25s ease both; }
 </style>
 </helmet>
 
@@ -33,10 +38,11 @@
 
   <header style="position:sticky; top:0; z-index:20; backdrop-filter:saturate(180%) blur(18px); background:color-mix(in srgb, var(--paper) 78%, transparent); border-bottom:1px solid var(--hair)">
     <div style="max-width:1120px; margin:0 auto; padding:14px 28px; display:flex; align-items:center; gap:32px">
-      <button onClick="{{ goHome }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-heading); font-weight:600; font-size:19px; letter-spacing:0.22em; text-transform:uppercase; color:var(--ink); margin-right:auto">Ek Din</button>
+      <button onClick="{{ goHome }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-heading); font-weight:600; font-size:17px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink); margin-right:auto">Ek Din Consulting</button>
       <nav style="display:flex; gap:28px; align-items:center; font-size:14px">
         <button onClick="{{ goHome }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ homeColor }}">Home</button>
         <button onClick="{{ goServices }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ servicesColor }}">Services</button>
+        <button onClick="{{ goAbout }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ aboutColor }}">About</button>
         <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:8px 16px; font-size:13px; letter-spacing:0.04em">Contact</button>
       </nav>
     </div>
@@ -46,7 +52,7 @@
 
     <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
       <section style="max-width:1120px; margin:0 auto; padding:120px 28px 96px; text-align:center; animation:rise .5s ease both">
-        <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:26px">Technical consulting for small business</div>
+        <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:26px">Technical consulting</div>
         <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(46px,7vw,88px); line-height:1.02; letter-spacing:-0.02em; margin:0 auto 24px; max-width:16ch">The technical side of your business, handled.</h1>
         <p style="max-width:56ch; margin:0 auto 36px; font-size:19px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); text-wrap:pretty">Websites, domains, email, QR codes and the rest of the setup that keeps a business running online. One person, start to finish, explained in plain language.</p>
         <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
@@ -88,8 +94,7 @@
           <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px">How it works</h2>
           <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--hair)">
             <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
-              <div style="padding:36px 28px 8px; border-left:1px solid var(--hair)">
-                <div style="font-family:var(--font-heading); font-size:52px; line-height:1; color:var(--brown-200); margin-bottom:18px">{{ st.n }}</div>
+              <div style="padding:28px 28px 8px; border-left:1px solid var(--hair)">
                 <div style="font-family:var(--font-heading); font-weight:600; font-size:21px; margin-bottom:8px">{{ st.title }}</div>
                 <p style="margin:0; font-size:14px; line-height:1.65; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ st.text }}</p>
               </div>
@@ -112,28 +117,29 @@
     <sc-if value="{{ isServices }}" hint-placeholder-val="{{ true }}">
       <section style="max-width:1120px; margin:0 auto; padding:96px 28px 64px; animation:rise .5s ease both">
         <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:22px">Services</div>
-        <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(42px,6vw,74px); line-height:1.04; letter-spacing:-0.02em; margin:0 0 22px; max-width:18ch">Everything a small business needs to exist online.</h1>
+        <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(42px,6vw,74px); line-height:1.04; letter-spacing:-0.02em; margin:0 0 22px; max-width:18ch">Everything a business needs to exist online.</h1>
         <p style="max-width:60ch; margin:0; font-size:18px; line-height:1.65; color:color-mix(in srgb, var(--ink) 65%, transparent)">Take one piece or the whole setup. Work is scoped per project after a short call, so you only pay for what your business actually uses.</p>
       </section>
 
       <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px; display:flex; flex-direction:column; gap:64px">
         <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
           <div>
-            <div style="display:flex; align-items:baseline; gap:16px; padding-bottom:16px; border-bottom:1px solid var(--hair); margin-bottom:32px">
+            <div style="display:flex; align-items:baseline; gap:16px; padding-bottom:16px; border-bottom:1px solid var(--hair); margin-bottom:8px">
               <h2 style="font-family:var(--font-heading); font-weight:600; font-size:30px; margin:0">{{ g.title }}</h2>
               <span style="font-size:13px; color:color-mix(in srgb, var(--ink) 55%, transparent)">{{ g.note }}</span>
             </div>
-            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:26px">
-              <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="3">
-                <div class="card blueprint" style="padding:26px 24px; gap:10px">
-                  <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-                  <div style="font-family:var(--font-heading); font-size:12px; letter-spacing:0.12em; color:var(--color-accent-700)">{{ s.num }}</div>
-                  <div style="font-family:var(--font-heading); font-weight:600; font-size:22px; line-height:1.15">{{ s.name }}</div>
-                  <p style="margin:0 0 6px; font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
-                  <div style="font-size:12px; line-height:1.7; color:var(--brown-700); border-top:1px solid var(--hair); padding-top:10px">{{ s.detail }}</div>
+            <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="3">
+              <details class="svc-row" style="border-bottom:1px solid var(--hair)">
+                <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px 2px; font-family:var(--font-heading); font-weight:600; font-size:19px">
+                  {{ s.name }}
+                  <span class="chev">›</span>
+                </summary>
+                <div class="svc-body" style="padding:0 2px 24px; max-width:64ch">
+                  <p style="margin:0 0 8px; font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
+                  <p style="margin:0; font-size:13px; line-height:1.65; color:var(--brown-700)">{{ s.detail }}</p>
                 </div>
-              </sc-for>
-            </div>
+              </details>
+            </sc-for>
           </div>
         </sc-for>
       </section>
@@ -146,26 +152,35 @@
       </section>
     </sc-if>
 
+    <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ true }}">
+      <section style="max-width:840px; margin:0 auto; padding:96px 28px 120px; animation:rise .5s ease both">
+        <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:22px">About</div>
+        <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(40px,5.4vw,64px); line-height:1.05; letter-spacing:-0.02em; margin:0 0 8px">Rimsha Rashid</h1>
+        <p style="font-family:var(--font-heading); font-weight:600; font-size:18px; letter-spacing:0.02em; color:var(--color-accent-700); margin:0 0 40px">Software Engineer</p>
+
+        <div class="blueprint" style="padding:40px 36px; margin-bottom:36px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <p style="margin:0; font-size:19px; line-height:1.75; color:var(--ink); text-wrap:pretty">Ek Din means "one day" in Urdu — the promise I made myself as a kid looking ahead, and the one I still keep now, pushing past my own limits.</p>
+          <p style="margin:14px 0 0; font-family:var(--font-heading); font-weight:600; font-size:19px; color:var(--color-accent-700)">That one day starts now.</p>
+        </div>
+
+        <p style="font-size:16px; line-height:1.75; color:color-mix(in srgb, var(--ink) 78%, transparent); margin:0 0 36px">With a background in software engineering, I bring a genuine passion for solving problems and building the technical groundwork businesses run on. When your business succeeds, we succeed together.</p>
+
+        <p style="font-family:var(--font-heading); font-weight:600; font-size:24px; line-height:1.3; letter-spacing:-0.01em; margin:0 0 40px; max-width:26ch">I turned my dreams into reality. Now it's your turn.</p>
+
+        <div style="border-top:1px solid var(--hair); padding-top:22px">
+          <div style="font-family:var(--font-heading); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:color-mix(in srgb, var(--ink) 55%, transparent); margin-bottom:4px">Email</div>
+          <a href="{{ mailtoPlain }}" style="font-size:16px">{{ contactEmail }}</a>
+        </div>
+      </section>
+    </sc-if>
+
     <sc-if value="{{ isContact }}" hint-placeholder-val="{{ true }}">
       <section style="max-width:1120px; margin:0 auto; padding:96px 28px 104px; display:grid; grid-template-columns:0.85fr 1.15fr; gap:72px; align-items:start; animation:rise .5s ease both">
         <div>
           <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:22px">Contact</div>
-          <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(40px,5vw,64px); line-height:1.05; letter-spacing:-0.02em; margin:0 0 20px">Let's start with the basics.</h1>
-          <p style="font-size:17px; line-height:1.65; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 36px; max-width:40ch">Fill in the form and it opens an email to me with your details ready to send. Replies usually come within one business day.</p>
-          <div style="border-top:1px solid var(--hair); padding-top:22px; display:flex; flex-direction:column; gap:18px">
-            <div>
-              <div style="font-family:var(--font-heading); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:color-mix(in srgb, var(--ink) 55%, transparent); margin-bottom:4px">Email</div>
-              <a href="{{ mailtoPlain }}" style="font-size:16px">{{ contactEmail }}</a>
-            </div>
-            <div>
-              <div style="font-family:var(--font-heading); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:color-mix(in srgb, var(--ink) 55%, transparent); margin-bottom:4px">Response time</div>
-              <div style="font-size:16px">Within 1 business day</div>
-            </div>
-            <div>
-              <div style="font-family:var(--font-heading); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:color-mix(in srgb, var(--ink) 55%, transparent); margin-bottom:4px">Good first message</div>
-              <div style="font-size:15px; line-height:1.6; color:color-mix(in srgb, var(--ink) 70%, transparent)">What your business does, what you have already, and what isn't working.</div>
-            </div>
-          </div>
+          <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(40px,5vw,64px); line-height:1.05; letter-spacing:-0.02em; margin:0 0 20px">Let's get started.</h1>
+          <p style="font-size:17px; line-height:1.65; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 36px; max-width:40ch">Welcome! Fill out the form and tell me a bit about what you're looking to do — we'll get in touch soon!</p>
         </div>
 
         <div class="blueprint" style="padding:40px 36px; background:#ffffff">
@@ -182,20 +197,27 @@
           <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
             <form onSubmit="{{ submit }}" style="display:grid; grid-template-columns:1fr 1fr; gap:20px">
               <div class="field">
-                <label>Name</label>
-                <input class="input" type="text" required="{{ true }}" value="{{ form.name }}" onChange="{{ onName }}" placeholder="Your name">
+                <label>Full Name</label>
+                <input class="input" type="text" required="{{ true }}" value="{{ form.name }}" onChange="{{ onName }}" placeholder="Your full name">
               </div>
               <div class="field">
                 <label>Email</label>
                 <input class="input" type="email" required="{{ true }}" value="{{ form.email }}" onChange="{{ onEmail }}" placeholder="you@example.com">
               </div>
               <div class="field">
-                <label>Phone</label>
-                <input class="input" type="tel" value="{{ form.phone }}" onChange="{{ onPhone }}" placeholder="Optional">
-              </div>
-              <div class="field">
                 <label>Company</label>
                 <input class="input" type="text" value="{{ form.company }}" onChange="{{ onCompany }}" placeholder="Business name">
+              </div>
+              <div class="field">
+                <label>Type of Company</label>
+                <select class="input" value="{{ form.companyType }}" onChange="{{ onCompanyType }}">
+                  <option value="">Select one</option>
+                  <option value="Retail & E-commerce">Retail & E-commerce</option>
+                  <option value="Healthcare & Wellness">Healthcare & Wellness</option>
+                  <option value="Hospitality & Food">Hospitality & Food</option>
+                  <option value="Technology & Software">Technology & Software</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
               <div class="field">
                 <label>Service interested in</label>
@@ -215,19 +237,17 @@
                 <label>Timeline</label>
                 <select class="input" value="{{ form.timeline }}" onChange="{{ onTimeline }}">
                   <option value="">Select one</option>
-                  <option value="As soon as possible">As soon as possible</option>
-                  <option value="Within a month">Within a month</option>
                   <option value="1–3 months">1–3 months</option>
-                  <option value="Just exploring">Just exploring</option>
+                  <option value="3–6 months">3–6 months</option>
+                  <option value="Not sure">Not sure</option>
                 </select>
               </div>
               <div class="field" style="grid-column:1 / -1">
                 <label>Message</label>
-                <textarea class="input" rows="5" value="{{ form.message }}" onChange="{{ onMessage }}" placeholder="What does your business do, and what do you need?"></textarea>
+                <textarea class="input" rows="5" value="{{ form.message }}" onChange="{{ onMessage }}" placeholder="Share a brief overview of your project."></textarea>
               </div>
               <div style="grid-column:1 / -1; display:flex; align-items:center; gap:16px; flex-wrap:wrap">
-                <button type="submit" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:12px 26px; font-size:15px">Send message</button>
-                <span style="font-size:12px; color:color-mix(in srgb, var(--ink) 55%, transparent)">Opens your email app with everything filled in.</span>
+                <button type="submit" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:12px 26px; font-size:15px">Submit</button>
               </div>
             </form>
           </sc-if>
@@ -238,24 +258,20 @@
   </main>
 
   <footer style="border-top:1px solid var(--hair)">
-    <div style="max-width:1120px; margin:0 auto; padding:40px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap">
-      <div style="font-family:var(--font-heading); font-weight:600; font-size:15px; letter-spacing:0.22em; text-transform:uppercase">Ek Din</div>
-      <div style="display:flex; gap:26px; align-items:center; font-size:14px">
-        <button onClick="{{ goHome }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:color-mix(in srgb, var(--ink) 70%, transparent)">Home</button>
-        <button onClick="{{ goServices }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:color-mix(in srgb, var(--ink) 70%, transparent)">Services</button>
-        <a href="{{ mailtoPlain }}" style="font-size:14px">{{ contactEmail }}</a>
-      </div>
+    <div style="max-width:1120px; margin:0 auto; padding:32px 28px; display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center">
+      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; letter-spacing:0.1em; text-transform:uppercase">Ek Din Consulting</div>
+      <div style="font-size:12px; color:color-mix(in srgb, var(--ink) 55%, transparent)">© {{ currentYear }} Ek Din Consulting. All rights reserved.</div>
     </div>
   </footer>
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;contactEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;rimsha.a.rashid@gmail.com&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bandTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;navy&quot;,&quot;brown&quot;],&quot;default&quot;:&quot;navy&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showProcess&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;contactEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;rar1228@ekdin.co&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bandTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;navy&quot;,&quot;brown&quot;],&quot;default&quot;:&quot;navy&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showProcess&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
 class Component extends DCLogic {
   state = {
     page: 'home',
     sent: false,
-    form: { name: '', email: '', phone: '', company: '', service: '', timeline: '', message: '' }
+    form: { name: '', email: '', company: '', companyType: '', service: '', timeline: '', message: '' }
   };
 
   go(page) {
@@ -270,7 +286,7 @@ class Component extends DCLogic {
     };
   }
 
-  email() { return this.props.contactEmail ?? 'rimsha.a.rashid@gmail.com'; }
+  email() { return this.props.contactEmail ?? 'rar1228@ekdin.co'; }
 
   submit(e) {
     e.preventDefault();
@@ -279,8 +295,8 @@ class Component extends DCLogic {
     const body = [
       'Name: ' + f.name,
       'Email: ' + f.email,
-      'Phone: ' + (f.phone || '—'),
       'Company: ' + (f.company || '—'),
+      'Type of company: ' + (f.companyType || '—'),
       'Service: ' + (f.service || '—'),
       'Timeline: ' + (f.timeline || '—'),
       '',
@@ -300,7 +316,11 @@ class Component extends DCLogic {
       { num: '04', name: 'Business email setup', blurb: 'Email on your own domain instead of a personal address.', detail: 'Mailboxes, aliases, signatures, plus SPF and DKIM so mail lands in inboxes.', group: 'setup' },
       { num: '05', name: 'QR codes', blurb: 'Codes for menus, signage, packaging, business cards and shop windows.', detail: 'Print-ready files at the right size, pointing to pages you can change later.', group: 'setup' },
       { num: '06', name: 'SEO basics', blurb: 'The groundwork that helps people find you when they search nearby.', detail: 'Titles, descriptions, sitemap, page speed and a search console you can read.', group: 'grow' },
-      { num: '07', name: 'Social media setup', blurb: 'Accounts claimed, named consistently and connected back to your site.', detail: 'Profiles, handles, link pages and a posting setup you can maintain.', group: 'grow' }
+      { num: '07', name: 'Social media setup', blurb: 'Accounts claimed, named consistently and connected back to your site.', detail: 'Profiles, handles, link pages and a posting setup you can maintain.', group: 'grow' },
+      { num: '08', name: 'Internal business tools', blurb: "Appointment intake, inventory, staff scheduling — not just the public website.", detail: 'Built in Power Apps and connected to how you already work.', group: 'advise' },
+      { num: '09', name: 'Fractional tech lead', blurb: "A monthly retainer — the person you call when you don't know what to buy or build.", detail: 'Ongoing advice on tools, vendors and priorities, without hiring in-house.', group: 'advise' },
+      { num: '10', name: 'Legacy site & system audits', blurb: 'A review of what you already have, broken or not, with a prioritized fix list.', detail: 'Security, performance and structure checked, written up in plain language.', group: 'advise' },
+      { num: '11', name: 'Integrations', blurb: 'Connecting your website to tools you already pay for.', detail: 'QuickBooks, scheduling apps, CRMs — wired together instead of run separately.', group: 'advise' }
     ];
   }
 
@@ -313,21 +333,26 @@ class Component extends DCLogic {
     return {
       isHome: page === 'home',
       isServices: page === 'services',
+      isAbout: page === 'about',
       isContact: page === 'contact',
       homeColor: page === 'home' ? active : muted,
       servicesColor: page === 'services' ? active : muted,
+      aboutColor: page === 'about' ? active : muted,
       goHome: () => this.go('home'),
       goServices: () => this.go('services'),
+      goAbout: () => this.go('about'),
       goContact: () => this.go('contact'),
       bandColor: band,
       showProcess: this.props.showProcess ?? true,
       contactEmail: this.email(),
+      currentYear: new Date().getFullYear(),
       mailtoPlain: 'mailto:' + this.email(),
       homeServices: all.slice(0, 6),
       groups: [
         { title: 'Build', note: 'What people see', items: all.filter((s) => s.group === 'build') },
         { title: 'Set up', note: 'The plumbing behind it', items: all.filter((s) => s.group === 'setup') },
-        { title: 'Grow', note: 'Getting found', items: all.filter((s) => s.group === 'grow') }
+        { title: 'Grow', note: 'Getting found', items: all.filter((s) => s.group === 'grow') },
+        { title: 'Advise', note: 'Beyond the website', items: all.filter((s) => s.group === 'advise') }
       ],
       pillars: [
         { kicker: 'Websites', text: 'Designed and built end to end, or rebuilt from whatever you have now.' },
@@ -335,19 +360,19 @@ class Component extends DCLogic {
         { kicker: 'QR & local presence', text: 'QR codes, listings and profiles so people can find and reach you.' }
       ],
       steps: [
-        { n: '1', title: 'Short call', text: 'Twenty minutes on what your business does and what is getting in the way.' },
-        { n: '2', title: 'Written scope', text: 'A plain-language plan of what gets built, in what order, and what it costs.' },
-        { n: '3', title: 'Build & handover', text: 'Everything set up in your name, with instructions you can actually follow.' }
+        { title: 'Discovery', text: "We talk through what's required and what it will take to get there." },
+        { title: 'Mockup & revisions', text: 'A working mockup, refined together over a few sessions until it feels right.' },
+        { title: 'Finalize & handover', text: 'Once approved, everything is built, tested, and handed over ready to use.' }
       ],
       form: this.state.form,
       sent: this.state.sent,
       notSent: !this.state.sent,
-      resetForm: () => this.setState({ sent: false, form: { name: '', email: '', phone: '', company: '', service: '', timeline: '', message: '' } }),
+      resetForm: () => this.setState({ sent: false, form: { name: '', email: '', company: '', companyType: '', service: '', timeline: '', message: '' } }),
       submit: (e) => this.submit(e),
       onName: this.set('name'),
       onEmail: this.set('email'),
-      onPhone: this.set('phone'),
       onCompany: this.set('company'),
+      onCompanyType: this.set('companyType'),
       onService: this.set('service'),
       onTimeline: this.set('timeline'),
       onMessage: this.set('message')

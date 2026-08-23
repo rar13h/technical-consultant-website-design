@@ -1,47 +1,47 @@
 /* Industry — design-system tokens and component classes. This file is the source of truth for the system's look; retune it here and see readme.md. */
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Cormorant+Garamond:wght@500;600;700&display=swap');
 
 :root {
-  --color-bg: #f2f2f3;
-  --color-surface: #e9e9ea;
-  --color-text: #1d1f20;
-  --color-accent: #5980a6;
-  --color-accent-2: #728fab;
-  --color-divider: color-mix(in srgb, #1d1f20 16%, transparent);
+  --color-bg: #f7f4ef;
+  --color-surface: #efe9df;
+  --color-text: #161513;
+  --color-accent: #8a6d3f;
+  --color-accent-2: #1c2430;
+  --color-divider: color-mix(in srgb, #161513 16%, transparent);
 
   /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
      same step of any role matches the others in visual value. */
-  --color-neutral-100: #f5f5f8;
-  --color-neutral-200: #e7e7ea;
-  --color-neutral-300: #d4d4d7;
-  --color-neutral-400: #b7b7ba;
-  --color-neutral-500: #98989b;
-  --color-neutral-600: #7a7a7d;
-  --color-neutral-700: #5d5d60;
-  --color-neutral-800: #424244;
-  --color-neutral-900: #2b2b2d;
+  --color-neutral-100: #f7f6f4;
+  --color-neutral-200: #ebe9e5;
+  --color-neutral-300: #d8d5cf;
+  --color-neutral-400: #bab5ac;
+  --color-neutral-500: #9a9489;
+  --color-neutral-600: #7c766b;
+  --color-neutral-700: #5f5a51;
+  --color-neutral-800: #423e37;
+  --color-neutral-900: #2a2722;
 
-  --color-accent-100: #eef6ff;
-  --color-accent-200: #d6ebff;
-  --color-accent-300: #b5d9fd;
-  --color-accent-400: #94bce3;
-  --color-accent-500: #749dc4;
-  --color-accent-600: #597ea3;
-  --color-accent-700: #416180;
-  --color-accent-800: #2c455d;
-  --color-accent-900: #1d2d3d;
+  --color-accent-100: #f7f0e2;
+  --color-accent-200: #ecdfc4;
+  --color-accent-300: #ddc89e;
+  --color-accent-400: #c7a877;
+  --color-accent-500: #ab8a5c;
+  --color-accent-600: #8a6d3f;
+  --color-accent-700: #6e5730;
+  --color-accent-800: #4a3b21;
+  --color-accent-900: #2f2515;
 
-  --color-accent-2-100: #eef6ff;
-  --color-accent-2-200: #d6ebff;
-  --color-accent-2-300: #bdd8f2;
-  --color-accent-2-400: #9ebbd8;
-  --color-accent-2-500: #7e9cb8;
-  --color-accent-2-600: #627d98;
-  --color-accent-2-700: #486077;
-  --color-accent-2-800: #314457;
-  --color-accent-2-900: #1f2d3a;
+  --color-accent-2-100: #eef3f7;
+  --color-accent-2-200: #cddae5;
+  --color-accent-2-300: #a3b5c9;
+  --color-accent-2-400: #7891ac;
+  --color-accent-2-500: #52698a;
+  --color-accent-2-600: #3a4f68;
+  --color-accent-2-700: #2a3a4d;
+  --color-accent-2-800: #1c2430;
+  --color-accent-2-900: #10151c;
 
-  --font-heading: "Barlow Condensed", system-ui, sans-serif;
+  --font-heading: "Cormorant Garamond", Georgia, serif;
   --font-heading-weight: 600;
   --font-body: "Barlow", system-ui, sans-serif;
 
