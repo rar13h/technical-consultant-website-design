@@ -56,6 +56,10 @@
   .rail-col { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; padding: 0 20px; }
   .rail-node { width: 54px; height: 54px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--hair); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.02em; color: var(--navy); flex-shrink: 0; }
   .rail-col:hover .rail-node { border-color: var(--gold); box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold) 16%, transparent); }
+  .rail-line-v { position: absolute; top: 23px; bottom: 23px; left: 22px; width: 1px; background: var(--gold); z-index: 0; }
+  .rail-row { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: 16px; }
+  .rail-row + .rail-row { margin-top: 22px; }
+  .rail-node-sm { width: 46px; height: 46px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--hair); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 13px; color: var(--navy); flex-shrink: 0; }
   .proof-card { position: relative; padding: 30px 24px 24px; }
   .proof-corner { position: absolute; width: 16px; height: 16px; border: 1.5px solid var(--color-accent-400); }
   .proof-corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
@@ -89,8 +93,6 @@
   .ledger-single:last-child { border-bottom: 1px solid var(--hair); }
   .ledger-single .nm { font-family: var(--font-heading); font-weight: 600; font-size: 18px; letter-spacing: -0.005em; cursor: pointer; }
   .long-arrow { font-family: var(--font-mono); font-size: 20px; color: var(--brown-700); line-height: 1; }
-  .step-mobile-row { padding: 16px 0; border-top: 1px solid var(--hair); }
-  .step-mobile-row:last-of-type { border-bottom: 1px solid var(--hair); margin-bottom: 22px; }
   @media (max-width: 860px) {
     .hero-grid { grid-template-columns: 1fr; }
     .hero-float-card { display: none; }
@@ -247,20 +249,29 @@
 
         <section class="steps-mobile" style="max-width:1120px; margin:0 auto; padding:0 28px 64px">
           <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 20px">How We'll Work Together</h2>
-          <div class="step-mobile-row">
-            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.08em; color:var(--brown-700); margin-bottom:6px">STEP 01</div>
-            <div style="font-family:var(--font-heading); font-weight:600; font-size:17px; margin-bottom:6px">Discovery</div>
-            <p style="margin:0; font-size:13px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">A conversation about what you actually need.</p>
-          </div>
-          <div class="step-mobile-row">
-            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.08em; color:var(--brown-700); margin-bottom:6px">STEP 02</div>
-            <div style="font-family:var(--font-heading); font-weight:600; font-size:17px; margin-bottom:6px">Revisions</div>
-            <p style="margin:0; font-size:13px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">We shape it together until it feels right.</p>
-          </div>
-          <div class="step-mobile-row">
-            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.08em; color:var(--brown-700); margin-bottom:6px">STEP 03</div>
-            <div style="font-family:var(--font-heading); font-weight:600; font-size:17px; margin-bottom:6px">Handover</div>
-            <p style="margin:0; font-size:13px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">Everything built, tested, and yours to run.</p>
+          <div style="position:relative; margin-bottom:28px">
+            <div class="rail-line-v"></div>
+            <div class="rail-row">
+              <div class="rail-node-sm">01</div>
+              <div>
+                <div style="font-family:var(--font-heading); font-weight:600; font-size:17px; margin-bottom:6px">Discovery</div>
+                <p style="margin:0; font-size:13px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">A conversation about what you actually need.</p>
+              </div>
+            </div>
+            <div class="rail-row">
+              <div class="rail-node-sm">02</div>
+              <div>
+                <div style="font-family:var(--font-heading); font-weight:600; font-size:17px; margin-bottom:6px">Revisions</div>
+                <p style="margin:0; font-size:13px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">We shape it together until it feels right.</p>
+              </div>
+            </div>
+            <div class="rail-row">
+              <div class="rail-node-sm">03</div>
+              <div>
+                <div style="font-family:var(--font-heading); font-weight:600; font-size:17px; margin-bottom:6px">Handover</div>
+                <p style="margin:0; font-size:13px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">Everything built, tested, and yours to run.</p>
+              </div>
+            </div>
           </div>
           <div style="text-align:center; margin-top:8px">
             <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:13px 26px; font-size:15px">Request a Quote</button>
