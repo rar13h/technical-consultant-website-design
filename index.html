@@ -21,8 +21,8 @@
     --brown-500: #ab8a5c;
     --brown-200: #ecdfc4;
     --hair: color-mix(in srgb, #161513 16%, transparent);
-    --dark-panel: #10131a;
-    --gold-bright: #c7a877;
+    --panel: #efe9df;
+    --gold: #a9812f;
     --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   }
   html { overflow-x: hidden; }
@@ -32,7 +32,6 @@
   a:hover { color: var(--navy); }
   ::selection { background: color-mix(in srgb, var(--color-accent) 25%, transparent); }
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  @keyframes ekdinPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
   .svc-row summary { list-style: none; cursor: pointer; }
   .svc-row summary::-webkit-details-marker { display: none; }
   .svc-row .chev { display: inline-block; transition: transform .25s ease; color: var(--color-accent-700); }
@@ -52,10 +51,39 @@
   .contact-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 72px; align-items: start; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .flow-arrow { position: absolute; top: 6px; font-size: 13px; line-height: 1; color: var(--color-accent-700); background: var(--paper); padding: 0 5px; }
+  .proof-card { position: relative; padding: 30px 24px 24px; }
+  .proof-corner { position: absolute; width: 16px; height: 16px; border: 1.5px solid var(--color-accent-400); }
+  .proof-corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+  .proof-corner.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+  .proof-corner.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+  .proof-corner.br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+  .map-card { position: relative; aspect-ratio: 4/4.6; display: flex; flex-direction: column; }
+  .map-stage { position: relative; flex: 1; padding: 3%; }
+  .map-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .map-line { stroke: var(--brown-500); stroke-width: 1; opacity: 0.55; transition: opacity .2s ease, stroke .2s ease, stroke-width .2s ease; }
+  .map-line.lit { stroke: var(--gold); opacity: 1; stroke-width: 1.6; }
+  .map-core { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 23%; aspect-ratio: 1; border-radius: 50%; background: var(--navy); color: var(--paper); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-align: center; box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold) 14%, transparent); }
+  .map-node { position: absolute; transform: translate(-50%,-50%); width: 23%; aspect-ratio: 1; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--hair); display: flex; align-items: center; justify-content: center; text-align: center; padding: 4%; cursor: pointer; font-family: var(--font-mono); font-size: clamp(8.5px, 2.6vw, 10.5px); white-space: nowrap; overflow: hidden; letter-spacing: 0.03em; text-transform: uppercase; color: var(--navy); line-height: 1; transition: border-color .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease; }
+  .map-node:hover, .map-node:focus-visible { border-color: var(--gold); box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold) 16%, transparent); }
+  .map-node:focus-visible { outline: 2px solid var(--brown-700); outline-offset: 4px; }
+  .map-node[aria-pressed="true"] { background: var(--navy); border-color: var(--gold); color: var(--paper); box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold) 22%, transparent); }
+  .map-detail { border-top: 1px solid var(--hair); margin-top: 10px; padding: 20px 4% 4px; min-height: 96px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; text-align: center; }
+  .map-detail .d-title { justify-content: center; gap: 14px; }
+  .map-detail .d-title { font-family: var(--font-heading); font-weight: 600; font-size: 19px; color: var(--navy); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .map-detail .d-body { font-size: 13.5px; line-height: 1.6; color: color-mix(in srgb, var(--ink) 70%, transparent); }
+  .map-detail .d-close { background: none; border: 0; cursor: pointer; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; color: var(--brown-700); padding: 4px 8px; text-transform: uppercase; }
+  .map-detail .d-close:focus-visible { outline: 2px solid var(--brown-700); outline-offset: 2px; }
+  .map-detail .d-hint { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brown-700); }
+  @media (prefers-reduced-motion: reduce) {
+    .map-node, .map-line { transition: none; }
+  }
+  .hero-tags-mobile { display: none; }
   @media (max-width: 860px) {
     .hero-grid { grid-template-columns: 1fr; }
     .hero-float-card { display: none; }
-    .ekdin-panel { max-width: 300px; margin: 0 auto; aspect-ratio: 4/3.4; }
+    .map-wrap { display: none; }
+    .hero-tags-mobile { display: flex; }
   }
   @media (max-width: 760px) {
     .contact-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -67,10 +95,6 @@
   }
   @media (max-width: 560px) {
     .form-grid { grid-template-columns: 1fr; }
-  }
-  @media (hover: none), (pointer: coarse) {
-    .ekdin-hint { font-size: 0; }
-    .ekdin-hint::before { content: "touch & scroll to explore"; font-size: 11px; }
   }
   @media (max-width: 480px) {
     section { padding-left: 20px !important; padding-right: 20px !important; }
@@ -119,27 +143,40 @@
             </div>
             <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(42px,5vw,72px); line-height:1.04; letter-spacing:-0.01em; margin:0 0 26px">Engineering the technical side of your business.</h1>
             <p style="font-size:18px; line-height:1.65; max-width:46ch; margin:0 0 32px; color:color-mix(in srgb, var(--ink) 68%, transparent); text-wrap:pretty">The infrastructure and decisions that keep a business running, built, connected, and handled from start to finish.</p>
-            <div class="eyebrow-mono" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px">
-              <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Websites</span>
-              <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Apps</span>
+            <div class="hero-tags-mobile eyebrow-mono" style="gap:10px; flex-wrap:wrap; margin-bottom:36px">
               <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">AI Agents</span>
+              <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Apps</span>
               <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Infrastructure</span>
+              <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Websites</span>
             </div>
             <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap">
               <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:13px 26px; font-size:15px">Schedule a Consultation</button>
             </div>
           </div>
 
-          <div style="position:relative">
-            <div id="ekdinPanel" class="ekdin-panel" style="position:relative; background:var(--dark-panel); border-radius:6px; overflow:hidden; aspect-ratio:4/4.6; box-shadow:0 30px 60px -20px rgba(0,0,0,0.35)">
-              <canvas id="ekdinNet" style="display:block; width:100%; height:100%"></canvas>
-              <i style="position:absolute; top:14px; left:14px; width:10px; height:10px; border-top:1px solid var(--gold-bright); border-left:1px solid var(--gold-bright); opacity:0.7"></i>
-              <i style="position:absolute; top:14px; right:14px; width:10px; height:10px; border-top:1px solid var(--gold-bright); border-right:1px solid var(--gold-bright); opacity:0.7"></i>
-              <i style="position:absolute; bottom:14px; left:14px; width:10px; height:10px; border-bottom:1px solid var(--gold-bright); border-left:1px solid var(--gold-bright); opacity:0.7"></i>
-              <i style="position:absolute; bottom:14px; right:14px; width:10px; height:10px; border-bottom:1px solid var(--gold-bright); border-right:1px solid var(--gold-bright); opacity:0.7"></i>
-              <div class="eyebrow-mono" style="position:absolute; bottom:20px; left:22px; right:22px; display:flex; justify-content:space-between; align-items:flex-end; font-size:11px; color:rgba(255,255,255,0.65); pointer-events:none">
-                <span style="display:flex; align-items:center; gap:6px; color:var(--gold-bright)"><span style="width:6px; height:6px; border-radius:50%; background:var(--gold-bright); display:inline-block; animation:ekdinPulse 1.8s ease-in-out infinite"></span>SYSTEM ACTIVE</span>
-                <span class="ekdin-hint">move your cursor</span>
+          <div class="map-wrap" style="position:relative">
+            <div class="map-card">
+              <div class="map-stage">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <line class="map-line {{ aiLineClass }}" x1="50" y1="50" x2="50" y2="17.5"></line>
+                  <line class="map-line {{ appsLineClass }}" x1="50" y1="50" x2="82.5" y2="37.5"></line>
+                  <line class="map-line {{ infraLineClass }}" x1="50" y1="50" x2="82.5" y2="67.5"></line>
+                  <line class="map-line {{ websitesLineClass }}" x1="50" y1="50" x2="50" y2="85"></line>
+                </svg>
+                <div class="map-core">EK DIN</div>
+                <button class="map-node" style="left:50%; top:17.5%" onClick="{{ selectAi }}" aria-pressed="{{ isAiActive }}" aria-label="AI Agents">AI</button>
+                <button class="map-node" style="left:82.5%; top:37.5%" onClick="{{ selectApps }}" aria-pressed="{{ isAppsActive }}">Apps</button>
+                <button class="map-node" style="left:82.5%; top:67.5%" onClick="{{ selectInfra }}" aria-pressed="{{ isInfraActive }}" aria-label="Infrastructure">Infra</button>
+                <button class="map-node" style="left:50%; top:85%" onClick="{{ selectWebsites }}" aria-pressed="{{ isWebsitesActive }}" aria-label="Websites">Website</button>
+              </div>
+              <div class="map-detail">
+                <sc-if value="{{ noActiveNode }}" hint-placeholder-val="{{ true }}">
+                  <div class="d-hint">Click a point to see what's included</div>
+                </sc-if>
+                <sc-if value="{{ hasActiveNode }}" hint-placeholder-val="{{ false }}">
+                  <div class="d-title">{{ activeNodeTitle }}<button class="d-close" onClick="{{ clearNode }}" aria-label="Close details">Close</button></div>
+                  <div class="d-body">{{ activeNodeBody }}</div>
+                </sc-if>
               </div>
             </div>
           </div>
@@ -148,8 +185,8 @@
 
       <section style="max-width:1120px; margin:0 auto; padding:0 28px 72px">
         <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:32px; flex-wrap:wrap">
-          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0">Capabilities</h2>
-          <button onClick="{{ goServices }}" class="btn btn-ghost" style="color:var(--color-accent-700); font-size:16px; font-weight:600">All services →</button>
+          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0">Services</h2>
+          <button onClick="{{ goServices }}" class="btn btn-ghost" style="color:var(--color-accent-700); font-size:16px; font-weight:600">See all →</button>
         </div>
         <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:40px">
           <sc-for list="{{ homeServices }}" as="s" hint-placeholder-count="3">
@@ -181,6 +218,41 @@
           </div>
         </section>
       </sc-if>
+
+      <section style="max-width:1120px; margin:0 auto; padding:0 28px 96px">
+        <div class="eyebrow-mono" style="display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.05em; color:var(--brown-700); margin-bottom:20px">
+          <span style="width:20px; height:1px; background:var(--brown-700); display:inline-block"></span>
+          CLIENT WORK
+        </div>
+        <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px">A few of the systems we keep running</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; margin-bottom:40px">
+          <div class="proof-card">
+            <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
+            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Healthcare — Concierge Medicine</div>
+            <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">Discreet, dependable digital presence for practices that can't afford downtime.</p>
+            <div style="border-top:1px solid var(--hair); padding-top:14px">
+              <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Ongoing</div>
+            </div>
+          </div>
+          <div class="proof-card">
+            <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
+            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Professional Services — End to End</div>
+            <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">One system, start to finish — a CPA firm's domain, site, and inbox, built to just work.</p>
+            <div style="border-top:1px solid var(--hair); padding-top:14px">
+              <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Full buildout</div>
+            </div>
+          </div>
+          <div class="proof-card">
+            <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
+            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Brand Identity — Digital Card Suite</div>
+            <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">A cohesive brand and contact experience for every member of a wellness team.</p>
+            <div style="border-top:1px solid var(--hair); padding-top:14px">
+              <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Card suite</div>
+            </div>
+          </div>
+        </div>
+        <p class="eyebrow-mono" style="text-align:center; max-width:520px; margin:0 auto; font-size:11px; letter-spacing:0.04em; color:var(--brown-700); line-height:1.7; padding-top:22px; border-top:1px solid var(--hair)">Names and identifying details are withheld by default — discretion is part of how we work, not an exception to it.</p>
+      </section>
 
       <section style="background:var(--brown-900); color:var(--paper)">
         <div style="max-width:1120px; margin:0 auto; padding:88px 28px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap">
@@ -417,6 +489,7 @@ class Component extends DCLogic {
     page: 'home',
     sent: false,
     menuOpen: false,
+    activeNode: null,
     form: { name: '', email: '', company: '', companyType: '', website: '', service: '', timeline: '', message: '' }
   };
 
@@ -427,6 +500,19 @@ class Component extends DCLogic {
 
   toggleMenu() {
     this.setState((s) => ({ menuOpen: !s.menuOpen }));
+  }
+
+  selectNode(key) {
+    this.setState((s) => ({ activeNode: s.activeNode === key ? null : key }));
+  }
+
+  mapNodes() {
+    return {
+      websites: { title: 'Websites', body: "A new site, or an upgrade to what you already have, built mobile-first, launched, and handed over so you can edit it yourself." },
+      apps: { title: 'Apps', body: 'Booking forms, payment portals, and other functionality wired into your existing site, or built fresh as a standalone tool.' },
+      ai: { title: 'AI Agents', body: 'Agentic AI added to your site where it actually helps, scoped and tested so it does something useful, not just a chatbot bolted on.' },
+      infra: { title: 'Infrastructure', body: 'Domain, DNS, and business email set up so everything lives in one place, documented and done right.' }
+    };
   }
 
   set(key) {
@@ -494,6 +580,23 @@ class Component extends DCLogic {
       menuOpen: this.state.menuOpen,
       notMenuOpen: !this.state.menuOpen,
       toggleMenu: () => this.toggleMenu(),
+      isWebsitesActive: this.state.activeNode === 'websites',
+      isAppsActive: this.state.activeNode === 'apps',
+      isAiActive: this.state.activeNode === 'ai',
+      isInfraActive: this.state.activeNode === 'infra',
+      websitesLineClass: this.state.activeNode === 'websites' ? 'lit' : '',
+      appsLineClass: this.state.activeNode === 'apps' ? 'lit' : '',
+      aiLineClass: this.state.activeNode === 'ai' ? 'lit' : '',
+      infraLineClass: this.state.activeNode === 'infra' ? 'lit' : '',
+      selectWebsites: () => this.selectNode('websites'),
+      selectApps: () => this.selectNode('apps'),
+      selectAi: () => this.selectNode('ai'),
+      selectInfra: () => this.selectNode('infra'),
+      clearNode: () => this.setState({ activeNode: null }),
+      hasActiveNode: !!this.state.activeNode,
+      noActiveNode: !this.state.activeNode,
+      activeNodeTitle: this.state.activeNode ? this.mapNodes()[this.state.activeNode].title : '',
+      activeNodeBody: this.state.activeNode ? this.mapNodes()[this.state.activeNode].body : '',
       bandColor: band,
       showProcess: this.props.showProcess ?? true,
       contactEmail: this.email(),
@@ -529,157 +632,6 @@ class Component extends DCLogic {
   }
 }
 
-</script>
-<script>
-(function () {
-  var lastCanvas = null;
-  var raf = null;
-
-  function initNet(canvas) {
-    if (raf) cancelAnimationFrame(raf);
-    var panel = document.getElementById('ekdinPanel');
-    if (!panel) return;
-    var ctx = canvas.getContext('2d');
-    var mouse = { x: -9999, y: -9999 };
-    var nodes = [];
-    var W, H, DPR;
-    var touching = false;
-    var lastScrollY = window.scrollY || window.pageYOffset || 0;
-    var lastScrollTime = 0;
-
-    function resize() {
-      var rect = panel.getBoundingClientRect();
-      DPR = Math.min(window.devicePixelRatio || 1, 2);
-      W = rect.width; H = rect.height;
-      canvas.width = W * DPR; canvas.height = H * DPR;
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    }
-
-    function makeNodes() {
-      nodes = [];
-      var count = Math.max(20, Math.round((W * H) / 9000));
-      for (var i = 0; i < count; i++) {
-        nodes.push({
-          x: Math.random() * W, y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18,
-          r: 1.4 + Math.random() * 1.2
-        });
-      }
-    }
-
-    function step() {
-      if (!document.body.contains(canvas)) return;
-      ctx.clearRect(0, 0, W, H);
-
-      if (!touching) {
-        var scrollY = window.scrollY || window.pageYOffset || 0;
-        var scrollDelta = scrollY - lastScrollY;
-        lastScrollY = scrollY;
-        var rect = panel.getBoundingClientRect();
-        var inView = rect.bottom > 0 && rect.top < (window.innerHeight || 0);
-        if (Math.abs(scrollDelta) > 0.05 && inView) {
-          lastScrollTime = Date.now();
-          var progress = 1 - (rect.top / (window.innerHeight || 1));
-          progress = Math.max(0, Math.min(1, progress));
-          mouse.x = W * 0.5;
-          mouse.y = H * progress;
-        } else if (Date.now() - lastScrollTime > 500) {
-          mouse.x += (-9999 - mouse.x) * 0.04;
-          mouse.y += (-9999 - mouse.y) * 0.04;
-        }
-      }
-
-      for (var i = 0; i < nodes.length; i++) {
-        var n = nodes[i];
-        n.x += n.vx; n.y += n.vy;
-        if (n.x < 0 || n.x > W) n.vx *= -1;
-        if (n.y < 0 || n.y > H) n.vy *= -1;
-        var dx = n.x - mouse.x, dy = n.y - mouse.y;
-        var dist = Math.sqrt(dx * dx + dy * dy);
-        var influence = Math.max(0, 1 - dist / 160);
-        if (influence > 0) {
-          n.x += dx / (dist || 1) * influence * 0.6;
-          n.y += dy / (dist || 1) * influence * 0.6;
-        }
-        n._glow = influence;
-      }
-
-      ctx.lineWidth = 1;
-      for (var a = 0; a < nodes.length; a++) {
-        for (var b = a + 1; b < nodes.length; b++) {
-          var na = nodes[a], nb = nodes[b];
-          var ddx = na.x - nb.x, ddy = na.y - nb.y;
-          var d = Math.sqrt(ddx * ddx + ddy * ddy);
-          if (d < 120) {
-            var op = (1 - d / 120) * 0.35;
-            ctx.strokeStyle = 'rgba(199,168,119,' + op.toFixed(3) + ')';
-            ctx.beginPath();
-            ctx.moveTo(na.x, na.y);
-            ctx.lineTo(nb.x, nb.y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      for (var j = 0; j < nodes.length; j++) {
-        var m = nodes[j];
-        var glow = m._glow || 0;
-        var baseOp = 0.55 + glow * 0.45;
-        var rad = m.r + glow * 2.2;
-        ctx.beginPath();
-        ctx.arc(m.x, m.y, rad, 0, Math.PI * 2);
-        ctx.fillStyle = glow > 0.05 ? 'rgba(231,196,140,' + baseOp.toFixed(3) + ')' : 'rgba(199,168,119,' + baseOp.toFixed(3) + ')';
-        ctx.fill();
-        if (glow > 0.15) {
-          ctx.beginPath();
-          ctx.arc(m.x, m.y, rad + 4, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(231,196,140,' + (glow * 0.18).toFixed(3) + ')';
-          ctx.fill();
-        }
-      }
-
-      raf = requestAnimationFrame(step);
-    }
-
-    function onMove(e) {
-      var rect = panel.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-      touching = true;
-    }
-    function onLeave() { mouse.x = -9999; mouse.y = -9999; touching = false; }
-
-    function onTouch(e) {
-      if (!e.touches || !e.touches.length) return;
-      var rect = panel.getBoundingClientRect();
-      var t = e.touches[0];
-      mouse.x = t.clientX - rect.left;
-      mouse.y = t.clientY - rect.top;
-      touching = true;
-    }
-    function onTouchEnd() {
-      touching = false;
-      lastScrollTime = 0;
-    }
-
-    panel.addEventListener('mousemove', onMove);
-    panel.addEventListener('mouseleave', onLeave);
-    panel.addEventListener('touchstart', onTouch, { passive: true });
-    panel.addEventListener('touchmove', onTouch, { passive: true });
-    panel.addEventListener('touchend', onTouchEnd, { passive: true });
-    panel.addEventListener('touchcancel', onTouchEnd, { passive: true });
-    window.addEventListener('resize', function () { resize(); makeNodes(); });
-    resize(); makeNodes(); step();
-  }
-
-  setInterval(function () {
-    var canvas = document.getElementById('ekdinNet');
-    if (canvas && canvas !== lastCanvas) {
-      lastCanvas = canvas;
-      initNet(canvas);
-    }
-  }, 300);
-})();
 </script>
 </body>
 </html>
