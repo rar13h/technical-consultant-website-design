@@ -51,6 +51,11 @@
   .contact-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 72px; align-items: start; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .flow-arrow { position: absolute; top: 6px; font-size: 13px; line-height: 1; color: var(--color-accent-700); background: var(--paper); padding: 0 5px; }
+  .rail-line { position: absolute; top: 27px; left: 16.6667%; right: 16.6667%; height: 1px; background: var(--gold); z-index: 0; }
+  .rail-cols { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .rail-col { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; padding: 0 20px; }
+  .rail-node { width: 54px; height: 54px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--hair); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.02em; color: var(--navy); flex-shrink: 0; }
+  .rail-col:hover .rail-node { border-color: var(--gold); box-shadow: 0 0 0 6px color-mix(in srgb, var(--gold) 16%, transparent); }
   .proof-card { position: relative; padding: 30px 24px 24px; }
   .proof-corner { position: absolute; width: 16px; height: 16px; border: 1.5px solid var(--color-accent-400); }
   .proof-corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
@@ -221,16 +226,19 @@
       <sc-if value="{{ showProcess }}" hint-placeholder-val="{{ true }}">
         <section class="steps-desktop" style="max-width:1120px; margin:0 auto; padding:0 28px 64px">
           <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px">How We'll Work Together</h2>
-          <div style="position:relative; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:36px; margin-bottom:48px">
-            <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
-              <div class="flow-item">
-                <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.1em; color:var(--brown-700); margin-bottom:12px">{{ st.idx }}</div>
-                <div class="flow-title" style="font-family:var(--font-heading); font-weight:600; font-size:22px; margin-bottom:10px">{{ st.title }}</div>
-                <p style="margin:0; font-size:14px; line-height:1.65; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ st.text }}</p>
-              </div>
-            </sc-for>
-            <span class="flow-arrow" style="left:33.333%; transform:translate(-50%,-50%)">→</span>
-            <span class="flow-arrow" style="left:66.666%; transform:translate(-50%,-50%)">→</span>
+          <div style="position:relative; margin-bottom:48px">
+            <div class="rail-line"></div>
+            <div class="rail-cols">
+              <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+                <div class="rail-col">
+                  <div class="rail-node">{{ st.num }}</div>
+                  <div>
+                    <div style="font-family:var(--font-heading); font-weight:600; font-size:22px; margin-bottom:10px">{{ st.title }}</div>
+                    <p style="margin:0; font-size:14px; line-height:1.65; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ st.text }}</p>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
           </div>
           <div style="text-align:center">
             <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:13px 26px; font-size:15px">Request a Quote</button>
@@ -652,9 +660,9 @@ class Component extends DCLogic {
       setupItems: all.filter((s) => s.group === 'setup'),
       consultItems: all.filter((s) => s.group === 'consult'),
       steps: [
-        { idx: 'STEP 01', title: 'Discovery', text: 'A conversation about what you actually need.' },
-        { idx: 'STEP 02', title: 'Revisions', text: "We shape it together until it feels right." },
-        { idx: 'STEP 03', title: 'Handover', text: 'Everything built, tested, and yours to run.' }
+        { num: '01', title: 'Discovery', text: 'A conversation about what you actually need.' },
+        { num: '02', title: 'Revisions', text: "We shape it together until it feels right." },
+        { num: '03', title: 'Handover', text: 'Everything built, tested, and yours to run.' }
       ],
       form: this.state.form,
       sent: this.state.sent,
