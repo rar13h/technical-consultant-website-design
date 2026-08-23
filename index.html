@@ -52,6 +52,7 @@
   @media (max-width: 860px) {
     .hero-grid { grid-template-columns: 1fr; }
     .hero-float-card { display: none; }
+    .ekdin-panel { max-width: 300px; margin: 0 auto; aspect-ratio: 4/3.4; }
   }
   @media (max-width: 760px) {
     .contact-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -63,6 +64,10 @@
   }
   @media (max-width: 560px) {
     .form-grid { grid-template-columns: 1fr; }
+  }
+  @media (hover: none), (pointer: coarse) {
+    .ekdin-hint { font-size: 0; }
+    .ekdin-hint::before { content: "touch & scroll to explore"; font-size: 11px; }
   }
   @media (max-width: 480px) {
     section { padding-left: 20px !important; padding-right: 20px !important; }
@@ -111,7 +116,7 @@
           </div>
 
           <div style="position:relative">
-            <div id="ekdinPanel" style="position:relative; background:var(--dark-panel); border-radius:6px; overflow:hidden; aspect-ratio:4/4.6; box-shadow:0 30px 60px -20px rgba(0,0,0,0.35)">
+            <div id="ekdinPanel" class="ekdin-panel" style="position:relative; background:var(--dark-panel); border-radius:6px; overflow:hidden; aspect-ratio:4/4.6; box-shadow:0 30px 60px -20px rgba(0,0,0,0.35)">
               <canvas id="ekdinNet" style="display:block; width:100%; height:100%"></canvas>
               <i style="position:absolute; top:14px; left:14px; width:10px; height:10px; border-top:1px solid var(--gold-bright); border-left:1px solid var(--gold-bright); opacity:0.7"></i>
               <i style="position:absolute; top:14px; right:14px; width:10px; height:10px; border-top:1px solid var(--gold-bright); border-right:1px solid var(--gold-bright); opacity:0.7"></i>
@@ -119,7 +124,7 @@
               <i style="position:absolute; bottom:14px; right:14px; width:10px; height:10px; border-bottom:1px solid var(--gold-bright); border-right:1px solid var(--gold-bright); opacity:0.7"></i>
               <div class="eyebrow-mono" style="position:absolute; bottom:20px; left:22px; right:22px; display:flex; justify-content:space-between; align-items:flex-end; font-size:11px; color:rgba(255,255,255,0.65); pointer-events:none">
                 <span style="display:flex; align-items:center; gap:6px; color:var(--gold-bright)"><span style="width:6px; height:6px; border-radius:50%; background:var(--gold-bright); display:inline-block; animation:ekdinPulse 1.8s ease-in-out infinite"></span>SYSTEM ACTIVE</span>
-                <span>move your cursor</span>
+                <span class="ekdin-hint">move your cursor</span>
               </div>
             </div>
           </div>
@@ -515,6 +520,9 @@ class Component extends DCLogic {
     var mouse = { x: -9999, y: -9999 };
     var nodes = [];
     var W, H, DPR;
+    var touching = false;
+    var lastScrollY = window.scrollY || window.pageYOffset || 0;
+    var lastScrollTime = 0;
 
     function resize() {
       var rect = panel.getBoundingClientRect();
@@ -539,6 +547,24 @@ class Component extends DCLogic {
     function step() {
       if (!document.body.contains(canvas)) return;
       ctx.clearRect(0, 0, W, H);
+
+      if (!touching) {
+        var scrollY = window.scrollY || window.pageYOffset || 0;
+        var scrollDelta = scrollY - lastScrollY;
+        lastScrollY = scrollY;
+        var rect = panel.getBoundingClientRect();
+        var inView = rect.bottom > 0 && rect.top < (window.innerHeight || 0);
+        if (Math.abs(scrollDelta) > 0.05 && inView) {
+          lastScrollTime = Date.now();
+          var progress = 1 - (rect.top / (window.innerHeight || 1));
+          progress = Math.max(0, Math.min(1, progress));
+          mouse.x = W * 0.5;
+          mouse.y = H * progress;
+        } else if (Date.now() - lastScrollTime > 500) {
+          mouse.x += (-9999 - mouse.x) * 0.04;
+          mouse.y += (-9999 - mouse.y) * 0.04;
+        }
+      }
 
       for (var i = 0; i < nodes.length; i++) {
         var n = nodes[i];
@@ -596,11 +622,29 @@ class Component extends DCLogic {
       var rect = panel.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
+      touching = true;
     }
-    function onLeave() { mouse.x = -9999; mouse.y = -9999; }
+    function onLeave() { mouse.x = -9999; mouse.y = -9999; touching = false; }
+
+    function onTouch(e) {
+      if (!e.touches || !e.touches.length) return;
+      var rect = panel.getBoundingClientRect();
+      var t = e.touches[0];
+      mouse.x = t.clientX - rect.left;
+      mouse.y = t.clientY - rect.top;
+      touching = true;
+    }
+    function onTouchEnd() {
+      touching = false;
+      lastScrollTime = 0;
+    }
 
     panel.addEventListener('mousemove', onMove);
     panel.addEventListener('mouseleave', onLeave);
+    panel.addEventListener('touchstart', onTouch, { passive: true });
+    panel.addEventListener('touchmove', onTouch, { passive: true });
+    panel.addEventListener('touchend', onTouchEnd, { passive: true });
+    panel.addEventListener('touchcancel', onTouchEnd, { passive: true });
     window.addEventListener('resize', function () { resize(); makeNodes(); });
     resize(); makeNodes(); step();
   }
