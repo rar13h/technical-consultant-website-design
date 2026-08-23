@@ -8,6 +8,19 @@
 <body>
 <x-dc>
 <helmet>
+<title>Ek Din Consulting — Engineering the Technical Side of Your Business</title>
+<meta name="description" content="The infrastructure and decisions that keep a business running, built, connected, and handled from start to finish.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="mask-icon" href="favicon.svg" color="#1c2430">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ek Din Consulting">
+<meta property="og:title" content="Ek Din Consulting — Engineering the Technical Side of Your Business">
+<meta property="og:description" content="The infrastructure and decisions that keep a business running, built, connected, and handled from start to finish.">
+<meta property="og:url" content="https://ekdin.co/">
+<meta property="og:image" content="https://ekdin.co/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ek Din Consulting — Engineering the technical side of your business.">
 <link rel="stylesheet" href="_ds/industry-f6309034-54e2-47f6-83e5-9537e6b30a11/styles.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -45,11 +58,16 @@
   .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
   .site-header-inner { display: flex; align-items: center; gap: 32px; }
   .site-nav { display: flex; gap: 28px; align-items: center; font-size: 14px; }
+  .nav-link { position: relative; padding-bottom: 5px !important; }
+  .nav-link::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 15px; height: 1.5px; background: var(--gold); transform: translateX(-50%) scaleX(0); transition: transform .25s ease; }
+  .nav-link.active::after { transform: translateX(-50%) scaleX(1); }
+  .mobile-menu .nav-link::after { bottom: 10px; }
   .menu-toggle { display: none; background: none; border: 0; padding: 4px 2px; cursor: pointer; }
   .mobile-menu { display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 8px 28px 26px; border-top: 1px solid var(--hair); animation: rise .2s ease both; }
   .mobile-menu button { padding: 15px 0; font-size: 17px; text-align: center; }
   .contact-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 72px; align-items: start; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  select.input { appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%231c2430' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 13px; padding-right: 34px; }
   .flow-arrow { position: absolute; top: 6px; font-size: 13px; line-height: 1; color: var(--color-accent-700); background: var(--paper); padding: 0 5px; }
   .rail-line { position: absolute; top: 27px; left: 16.6667%; right: 16.6667%; height: 1px; background: var(--gold); z-index: 0; }
   .rail-cols { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); }
@@ -60,7 +78,7 @@
   .rail-row { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: 16px; }
   .rail-row + .rail-row { margin-top: 22px; }
   .rail-node-sm { width: 46px; height: 46px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--hair); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 13px; color: var(--navy); flex-shrink: 0; }
-  .proof-card { position: relative; padding: 30px 24px 24px; }
+  .proof-card { position: relative; padding: 30px 24px 24px; background: var(--paper); }
   .proof-corner { position: absolute; width: 16px; height: 16px; border: 1.5px solid var(--color-accent-400); }
   .proof-corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; }
   .proof-corner.tr { top: 0; right: 0; border-left: none; border-bottom: none; }
@@ -139,21 +157,25 @@
         </svg>
       </button>
       <nav class="site-nav">
-        <button onClick="{{ goHome }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ homeColor }}">Home</button>
-        <button onClick="{{ goServices }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ servicesColor }}">Services</button>
-        <button onClick="{{ goAbout }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ aboutColor }}">About</button>
+        <button onClick="{{ goHome }}" class="{{ homeNavClass }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ homeColor }}">Home</button>
+        <button onClick="{{ goServices }}" class="{{ servicesNavClass }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ servicesColor }}">Services</button>
+        <button onClick="{{ goAbout }}" class="{{ aboutNavClass }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ aboutColor }}">About</button>
         <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:8px 16px; font-size:13px; letter-spacing:0.04em">Contact</button>
       </nav>
       <button class="menu-toggle" onClick="{{ toggleMenu }}" aria-label="Menu" style="font-size:22px; line-height:1; color:var(--ink)">
-        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">✕</sc-if>
-        <sc-if value="{{ notMenuOpen }}" hint-placeholder-val="{{ true }}">☰</sc-if>
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="display:block"><line x1="4" y1="4" x2="16" y2="16"></line><line x1="16" y1="4" x2="4" y2="16"></line></svg>
+        </sc-if>
+        <sc-if value="{{ notMenuOpen }}" hint-placeholder-val="{{ true }}">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="display:block"><line x1="3" y1="6" x2="17" y2="6"></line><line x1="3" y1="10" x2="17" y2="10"></line><line x1="3" y1="14" x2="17" y2="14"></line></svg>
+        </sc-if>
       </button>
     </div>
     <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
       <nav class="mobile-menu">
-        <button onClick="{{ goHome }}" style="background:none; border:0; cursor:pointer; font-family:var(--font-body); color:{{ homeColor }}">Home</button>
-        <button onClick="{{ goServices }}" style="background:none; border:0; cursor:pointer; font-family:var(--font-body); color:{{ servicesColor }}">Services</button>
-        <button onClick="{{ goAbout }}" style="background:none; border:0; cursor:pointer; font-family:var(--font-body); color:{{ aboutColor }}">About</button>
+        <button onClick="{{ goHome }}" class="{{ homeNavClass }}" style="background:none; border:0; cursor:pointer; font-family:var(--font-body); color:{{ homeColor }}">Home</button>
+        <button onClick="{{ goServices }}" class="{{ servicesNavClass }}" style="background:none; border:0; cursor:pointer; font-family:var(--font-body); color:{{ servicesColor }}">Services</button>
+        <button onClick="{{ goAbout }}" class="{{ aboutNavClass }}" style="background:none; border:0; cursor:pointer; font-family:var(--font-body); color:{{ aboutColor }}">About</button>
         <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); margin-top:10px">Contact</button>
       </nav>
     </sc-if>
@@ -214,7 +236,7 @@
       <section class="svc-desktop" style="max-width:1120px; margin:0 auto; padding:0 28px 72px">
         <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:32px; flex-wrap:wrap">
           <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0">Services</h2>
-          <button onClick="{{ goServices }}" class="btn btn-ghost" style="color:var(--color-accent-700); font-size:16px; font-weight:600">See all →</button>
+          <button onClick="{{ goServices }}" class="btn btn-ghost" style="color:var(--color-accent-700); font-size:16px; font-weight:600; display:inline-flex; align-items:center; gap:7px">See all <svg width="14" height="9" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="5" x2="12" y2="5"></line><path d="M8 1l5 4-5 4"></path></svg></button>
         </div>
         <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:40px">
           <sc-for list="{{ homeServices }}" as="s" hint-placeholder-count="4">
@@ -230,7 +252,9 @@
       <section class="svc-mobile" style="max-width:1120px; margin:0 auto; padding:0 28px 72px">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px">
           <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0">What We Offer</h2>
-          <span class="long-arrow" onClick="{{ goServices }}" style="cursor:pointer">⟶</span>
+          <span class="long-arrow" onClick="{{ goServices }}" style="cursor:pointer; display:inline-flex">
+            <svg width="24" height="14" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="7" x2="20" y2="7"></line><path d="M14 1l6 6-6 6"></path></svg>
+          </span>
         </div>
         <div class="ledger-single" onClick="{{ goServices }}"><div class="nm">AI &amp; Automation</div></div>
         <div class="ledger-single" onClick="{{ goServices }}"><div class="nm">Digital Presence</div></div>
@@ -256,7 +280,7 @@
             </div>
           </div>
           <div style="text-align:center">
-            <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:13px 26px; font-size:15px">Request a Quote</button>
+            <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--gold); border-color:var(--gold); color:var(--navy); padding:17px 34px; font-size:16px; font-weight:600">Request a Quote</button>
           </div>
         </section>
 
@@ -287,44 +311,47 @@
             </div>
           </div>
           <div style="text-align:center; margin-top:8px">
-            <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:13px 26px; font-size:15px">Request a Quote</button>
+            <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--gold); border-color:var(--gold); color:var(--navy); padding:17px 34px; font-size:16px; font-weight:600">Request a Quote</button>
           </div>
         </section>
       </sc-if>
 
-      <section style="max-width:1120px; margin:0 auto; padding:0 28px 96px">
-        <div class="eyebrow-mono" style="display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.05em; color:var(--brown-700); margin-bottom:20px">
-          <span style="width:20px; height:1px; background:var(--brown-700); display:inline-block"></span>
-          CLIENT WORK
+      <section style="background:oklch(0.28 0.075 25)">
+        <div style="max-width:1120px; margin:0 auto; padding:88px 28px 96px">
+          <div class="eyebrow-mono" style="display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.05em; color:oklch(0.75 0.1 70); margin-bottom:20px">
+            <span style="width:20px; height:1px; background:oklch(0.75 0.1 70); display:inline-block"></span>
+            CLIENT WORK
+          </div>
+          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px; color:var(--paper)">A few of the systems we keep running</h2>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; margin-bottom:40px">
+            <div class="proof-card">
+              <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
+              <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Healthcare — Concierge Medicine</div>
+              <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">Discreet, dependable digital presence for practices that can't afford downtime.</p>
+              <div style="border-top:1px solid var(--hair); padding-top:14px">
+                <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Ongoing</div>
+              </div>
+            </div>
+            <div class="proof-card">
+              <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
+              <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Professional Services — End to End</div>
+              <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">One system, start to finish — a CPA firm's domain, site, and inbox, built to just work.</p>
+              <div style="border-top:1px solid var(--hair); padding-top:14px">
+                <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Full buildout</div>
+              </div>
+            </div>
+            <div class="proof-card">
+              <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
+              <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Brand Identity — Digital Card Suite</div>
+              <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">A cohesive brand and contact experience for every member of a wellness team.</p>
+              <div style="border-top:1px solid var(--hair); padding-top:14px">
+                <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Card suite</div>
+              </div>
+            </div>
+          </div>
+          <p class="eyebrow-mono" style="text-align:center; max-width:520px; margin:0 auto; font-size:11px; letter-spacing:0.04em; color:oklch(0.75 0.1 70 / 0.8); line-height:1.7; padding-top:22px; border-top:1px solid oklch(0.9 0 0 / 0.15)">Names and identifying details are withheld by default — discretion is part of how we work, not an exception to it.</p>
         </div>
-        <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px">A few of the systems we keep running</h2>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; margin-bottom:40px">
-          <div class="proof-card">
-            <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
-            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Healthcare — Concierge Medicine</div>
-            <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">Discreet, dependable digital presence for practices that can't afford downtime.</p>
-            <div style="border-top:1px solid var(--hair); padding-top:14px">
-              <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Ongoing</div>
-            </div>
-          </div>
-          <div class="proof-card">
-            <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
-            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Professional Services — End to End</div>
-            <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">One system, start to finish — a CPA firm's domain, site, and inbox, built to just work.</p>
-            <div style="border-top:1px solid var(--hair); padding-top:14px">
-              <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Full buildout</div>
-            </div>
-          </div>
-          <div class="proof-card">
-            <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
-            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Brand Identity — Digital Card Suite</div>
-            <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">A cohesive brand and contact experience for every member of a wellness team.</p>
-            <div style="border-top:1px solid var(--hair); padding-top:14px">
-              <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Card suite</div>
-            </div>
-          </div>
-        </div>
-        <p class="eyebrow-mono" style="text-align:center; max-width:520px; margin:0 auto; font-size:11px; letter-spacing:0.04em; color:var(--brown-700); line-height:1.7; padding-top:22px; border-top:1px solid var(--hair)">Names and identifying details are withheld by default — discretion is part of how we work, not an exception to it.</p>
+      </section>
       </section>
 
       <section style="background:var(--brown-900); color:var(--paper)">
@@ -355,7 +382,7 @@
               <h2 style="font-family:var(--font-heading); font-weight:600; font-size:19px; margin:0 0 4px; color:var(--paper)">AI &amp; Automation — {{ s.name }}</h2>
               <p style="font-size:13px; line-height:1.5; margin:0; color:color-mix(in srgb, var(--paper) 75%, transparent); max-width:52ch">{{ s.blurb }} {{ s.detail }}</p>
             </div>
-            <button onClick="{{ goContact }}" style="background:none; border:0; cursor:pointer; padding:0; font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); white-space:nowrap; flex-shrink:0">Ask about this →</button>
+            <button onClick="{{ goContact }}" style="background:none; border:0; cursor:pointer; padding:0; font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); white-space:nowrap; flex-shrink:0; display:inline-flex; align-items:center; gap:6px">Ask about this <svg width="12" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="5" x2="12" y2="5"></line><path d="M8 1l5 4-5 4"></path></svg></button>
           </div>
         </sc-for>
       </section>
@@ -374,7 +401,7 @@
                 <details class="svc-row" style="border-bottom:1px solid var(--hair)">
                   <summary style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 2px; font-family:var(--font-heading); font-weight:600; font-size:16px">
                     {{ s.name }}
-                    <span class="chev">›</span>
+                    <span class="chev"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:block"><path d="M6 3l6 5-6 5"></path></svg></span>
                   </summary>
                   <div class="svc-body" style="padding:0 2px 16px">
                     <p style="margin:0 0 6px; font-size:13px; line-height:1.55; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
@@ -396,7 +423,7 @@
                 <details class="svc-row" style="border-bottom:1px solid var(--hair)">
                   <summary style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 2px; font-family:var(--font-heading); font-weight:600; font-size:16px">
                     {{ s.name }}
-                    <span class="chev">›</span>
+                    <span class="chev"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:block"><path d="M6 3l6 5-6 5"></path></svg></span>
                   </summary>
                   <div class="svc-body" style="padding:0 2px 16px">
                     <p style="margin:0 0 6px; font-size:13px; line-height:1.55; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
@@ -418,7 +445,7 @@
                 <details class="svc-row" style="border-bottom:1px solid var(--hair)">
                   <summary style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 2px; font-family:var(--font-heading); font-weight:600; font-size:16px">
                     {{ s.name }}
-                    <span class="chev">›</span>
+                    <span class="chev"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:block"><path d="M6 3l6 5-6 5"></path></svg></span>
                   </summary>
                   <div class="svc-body" style="padding:0 2px 16px">
                     <p style="margin:0 0 6px; font-size:13px; line-height:1.55; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
@@ -438,7 +465,7 @@
             <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(28px,3.4vw,42px); letter-spacing:-0.015em; margin:0 0 12px; max-width:22ch">No two businesses are the same.</h2>
             <p style="margin:0; font-size:16px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent); max-width:48ch">Needs range from the basics to more advanced work. Let's talk through yours so I can give you an accurate price.</p>
           </div>
-          <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:13px 26px; font-size:15px; flex-shrink:0">Request a Quote</button>
+          <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--gold); border-color:var(--gold); color:var(--navy); padding:17px 34px; font-size:16px; font-weight:600; flex-shrink:0">Request a Quote</button>
         </div>
       </section>
     </sc-if>
@@ -705,6 +732,9 @@ class Component extends DCLogic {
       homeColor: page === 'home' ? active : muted,
       servicesColor: page === 'services' ? active : muted,
       aboutColor: page === 'about' ? active : muted,
+      homeNavClass: 'nav-link' + (page === 'home' ? ' active' : ''),
+      servicesNavClass: 'nav-link' + (page === 'services' ? ' active' : ''),
+      aboutNavClass: 'nav-link' + (page === 'about' ? ' active' : ''),
       goHome: () => this.go('home'),
       goServices: () => this.go('services'),
       goAbout: () => this.go('about'),

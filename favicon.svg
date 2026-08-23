@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Ek Din Consulting</title>
+  <rect width="64" height="64" rx="14" fill="#f7f4ef"/>
+  <path d="M22 12 V52" stroke="#1c2430" stroke-width="6" stroke-linecap="round"/>
+  <path d="M22 16 C37 16 43 24 43 34 C43 44 37 51 22 51" stroke="#1c2430" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M22 26 H39" stroke="#a9812f" stroke-width="5" stroke-linecap="round"/>
+</svg>
