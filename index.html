@@ -44,8 +44,11 @@
   .flow-item:hover .flow-title { color: var(--color-accent-700); }
   .flow-title { transition: color .2s ease; }
   .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
-  .site-header-inner { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
-  .site-nav { display: flex; gap: 28px; align-items: center; font-size: 14px; flex-wrap: wrap; }
+  .site-header-inner { display: flex; align-items: center; gap: 32px; }
+  .site-nav { display: flex; gap: 28px; align-items: center; font-size: 14px; }
+  .menu-toggle { display: none; background: none; border: 0; padding: 4px 2px; cursor: pointer; }
+  .mobile-menu { display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 8px 28px 26px; border-top: 1px solid var(--hair); animation: rise .2s ease both; }
+  .mobile-menu button { padding: 15px 0; font-size: 17px; text-align: center; }
   .contact-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 72px; align-items: start; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .flow-arrow { position: absolute; top: 6px; font-size: 13px; line-height: 1; color: var(--color-accent-700); background: var(--paper); padding: 0 5px; }
@@ -59,8 +62,8 @@
     .flow-arrow { display: none; }
   }
   @media (max-width: 640px) {
-    .site-header-inner { gap: 16px 22px; padding-top: 4px; padding-bottom: 4px; }
-    .site-nav { gap: 16px; font-size: 13px; }
+    .site-nav { display: none; }
+    .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
   }
   @media (max-width: 560px) {
     .form-grid { grid-template-columns: 1fr; }
@@ -89,7 +92,19 @@
         <button onClick="{{ goAbout }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ aboutColor }}">About</button>
         <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:8px 16px; font-size:13px; letter-spacing:0.04em">Contact</button>
       </nav>
+      <button class="menu-toggle" onClick="{{ toggleMenu }}" aria-label="Menu" style="font-size:22px; line-height:1; color:var(--ink)">
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">✕</sc-if>
+        <sc-if value="{{ notMenuOpen }}" hint-placeholder-val="{{ true }}">☰</sc-if>
+      </button>
     </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <nav class="mobile-menu">
+        <button onClick="{{ goHome }}" style="background:none; border:0; cursor:pointer; font-family:var(--font-body); color:{{ homeColor }}">Home</button>
+        <button onClick="{{ goServices }}" style="background:none; border:0; cursor:pointer; font-family:var(--font-body); color:{{ servicesColor }}">Services</button>
+        <button onClick="{{ goAbout }}" style="background:none; border:0; cursor:pointer; font-family:var(--font-body); color:{{ aboutColor }}">About</button>
+        <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); margin-top:10px">Contact</button>
+      </nav>
+    </sc-if>
   </header>
 
   <main style="flex:1">
@@ -401,12 +416,17 @@ class Component extends DCLogic {
   state = {
     page: 'home',
     sent: false,
+    menuOpen: false,
     form: { name: '', email: '', company: '', companyType: '', website: '', service: '', timeline: '', message: '' }
   };
 
   go(page) {
-    this.setState({ page, sent: false });
+    this.setState({ page, sent: false, menuOpen: false });
     if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  toggleMenu() {
+    this.setState((s) => ({ menuOpen: !s.menuOpen }));
   }
 
   set(key) {
@@ -471,6 +491,9 @@ class Component extends DCLogic {
       goServices: () => this.go('services'),
       goAbout: () => this.go('about'),
       goContact: () => this.go('contact'),
+      menuOpen: this.state.menuOpen,
+      notMenuOpen: !this.state.menuOpen,
+      toggleMenu: () => this.toggleMenu(),
       bandColor: band,
       showProcess: this.props.showProcess ?? true,
       contactEmail: this.email(),
