@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 70" width="230" height="70">
+  <title>Ek Din Consulting — Logo</title>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=IBM+Plex+Mono:wght@500&display=swap');
+      .ekd-word { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 30px; fill: #1c2430; }
+      .ekd-label { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500; font-size: 10px; letter-spacing: 2px; fill: #a9812f; }
+    </style>
+  </defs>
+
+  <!-- bulb mark: stem & glass, single filament -->
+  <g transform="translate(0,9) scale(0.634)">
+    <path d="M35 10 V72" stroke="#1c2430" stroke-width="2" stroke-linecap="square"></path>
+    <path d="M35 14 C48 14 54 22 54 32 C54 42 48 50 35 50" stroke="#1c2430" stroke-width="2" fill="none" stroke-linecap="square"></path>
+    <path d="M35 24 H50" stroke="#a9812f" stroke-width="1.5" stroke-linecap="square"></path>
+    <path d="M27 58 H43 M29 64 H41" stroke="#1c2430" stroke-width="1.5" stroke-linecap="square"></path>
+  </g>
+
+  <!-- precision rule wordmark -->
+  <text x="60" y="34" class="ekd-word">Ek Din</text>
+  <line x1="62" y1="48" x2="128" y2="48" stroke="#a9812f" stroke-width="1"></line>
+  <text x="136" y="51" class="ekd-label">CONSULTING</text>
+</svg>

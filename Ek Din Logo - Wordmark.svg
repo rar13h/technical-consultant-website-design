@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" width="320" height="100">
+  <title>Ek Din Consulting — Precision Rule Wordmark</title>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=IBM+Plex+Mono:wght@500&display=swap');
+      .ekd-word { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 46px; fill: #1c2430; }
+      .ekd-label { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500; font-size: 11px; letter-spacing: 3.2px; fill: #a9812f; }
+    </style>
+  </defs>
+  <text x="0" y="45" class="ekd-word">Ek Din</text>
+  <line x1="2" y1="68" x2="188" y2="68" stroke="#a9812f" stroke-width="1"></line>
+  <text x="198" y="72" class="ekd-label">CONSULTING</text>
+</svg>

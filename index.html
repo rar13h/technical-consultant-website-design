@@ -125,7 +125,19 @@
 
   <header style="position:sticky; top:0; z-index:20; backdrop-filter:saturate(180%) blur(18px); background:color-mix(in srgb, var(--paper) 78%, transparent); border-bottom:1px solid var(--hair)">
     <div class="site-header-inner" style="max-width:1120px; margin:0 auto; padding:14px 28px">
-      <button onClick="{{ goHome }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-heading); font-weight:600; font-size:17px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink); margin-right:auto">Ek Din Consulting</button>
+      <button onClick="{{ goHome }}" aria-label="Ek Din Consulting — Home" style="background:none; border:0; padding:0; cursor:pointer; margin-right:auto; display:flex; align-items:center">
+        <svg width="171" height="52" viewBox="0 0 230 70" role="img" aria-label="Ek Din Consulting" style="display:block">
+          <g transform="translate(0,9) scale(0.634)">
+            <path d="M35 10 V72" stroke="var(--navy)" stroke-width="2.8" stroke-linecap="square"></path>
+            <path d="M35 14 C48 14 54 22 54 32 C54 42 48 50 35 50" stroke="var(--navy)" stroke-width="2.8" fill="none" stroke-linecap="square"></path>
+            <path d="M35 24 H50" stroke="var(--gold)" stroke-width="2.2" stroke-linecap="square"></path>
+            <path d="M27 58 H43 M29 64 H41" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="square"></path>
+          </g>
+          <text x="60" y="34" font-family="var(--font-heading)" font-weight="500" font-size="30" fill="var(--navy)">Ek Din</text>
+          <line x1="62" y1="48" x2="128" y2="48" stroke="var(--gold)" stroke-width="1"></line>
+          <text x="136" y="51" font-family="var(--font-mono)" font-weight="500" font-size="10" letter-spacing="2" fill="var(--gold)">CONSULTING</text>
+        </svg>
+      </button>
       <nav class="site-nav">
         <button onClick="{{ goHome }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ homeColor }}">Home</button>
         <button onClick="{{ goServices }}" style="background:none; border:0; padding:0; cursor:pointer; font-family:var(--font-body); font-size:14px; color:{{ servicesColor }}">Services</button>
@@ -463,6 +475,19 @@
 
         <div class="blueprint" style="padding:40px 36px; background:#ffffff">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="margin-bottom:28px">
+            <svg width="188" height="57" viewBox="0 0 230 70" role="img" aria-label="Ek Din Consulting" style="display:block">
+              <g transform="translate(0,9) scale(0.634)">
+                <path d="M35 10 V72" stroke="var(--navy)" stroke-width="2.8" stroke-linecap="square"></path>
+                <path d="M35 14 C48 14 54 22 54 32 C54 42 48 50 35 50" stroke="var(--navy)" stroke-width="2.8" fill="none" stroke-linecap="square"></path>
+                <path d="M35 24 H50" stroke="var(--gold)" stroke-width="2.2" stroke-linecap="square"></path>
+                <path d="M27 58 H43 M29 64 H41" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="square"></path>
+              </g>
+              <text x="60" y="34" font-family="var(--font-heading)" font-weight="500" font-size="30" fill="var(--navy)">Ek Din</text>
+              <line x1="62" y1="48" x2="128" y2="48" stroke="var(--gold)" stroke-width="1"></line>
+              <text x="136" y="51" font-family="var(--font-mono)" font-weight="500" font-size="10" letter-spacing="2" fill="var(--gold)">CONSULTING</text>
+            </svg>
+          </div>
           <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
             <div style="display:flex; flex-direction:column; gap:14px; padding:24px 0">
               <div style="font-family:var(--font-heading); font-weight:600; font-size:28px">Your email is ready to send.</div>
@@ -537,7 +562,17 @@
 
   <footer style="border-top:1px solid var(--hair)">
     <div style="max-width:1120px; margin:0 auto; padding:32px 28px; display:flex; flex-direction:column; align-items:center; gap:6px; text-align:center">
-      <div style="font-family:var(--font-heading); font-weight:600; font-size:14px; letter-spacing:0.1em; text-transform:uppercase">Ek Din Consulting</div>
+      <svg width="264" height="80" viewBox="0 0 230 70" role="img" aria-label="Ek Din Consulting" style="display:block">
+        <g transform="translate(0,9) scale(0.634)">
+          <path d="M35 10 V72" stroke="var(--navy)" stroke-width="2.8" stroke-linecap="square"></path>
+          <path d="M35 14 C48 14 54 22 54 32 C54 42 48 50 35 50" stroke="var(--navy)" stroke-width="2.8" fill="none" stroke-linecap="square"></path>
+          <path d="M35 24 H50" stroke="var(--gold)" stroke-width="2.2" stroke-linecap="square"></path>
+          <path d="M27 58 H43 M29 64 H41" stroke="var(--navy)" stroke-width="2.2" stroke-linecap="square"></path>
+        </g>
+        <text x="60" y="34" font-family="var(--font-heading)" font-weight="500" font-size="30" fill="var(--navy)">Ek Din</text>
+        <line x1="62" y1="48" x2="128" y2="48" stroke="var(--gold)" stroke-width="1"></line>
+        <text x="136" y="51" font-family="var(--font-mono)" font-weight="500" font-size="10" letter-spacing="2" fill="var(--gold)">CONSULTING</text>
+      </svg>
       <div style="font-size:12px; color:color-mix(in srgb, var(--ink) 55%, transparent)">© {{ currentYear }} Ek Din Consulting. All rights reserved.</div>
     </div>
   </footer>
