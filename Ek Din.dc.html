@@ -52,11 +52,11 @@
 
     <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
       <section style="max-width:1120px; margin:0 auto; padding:120px 28px 96px; text-align:center; animation:rise .5s ease both">
-        <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:26px">Technical consulting</div>
-        <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(46px,7vw,88px); line-height:1.02; letter-spacing:-0.02em; margin:0 auto 24px; max-width:16ch">The technical side of your business, handled.</h1>
-        <p style="max-width:56ch; margin:0 auto 36px; font-size:19px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); text-wrap:pretty">Websites, domains, email, QR codes and the rest of the setup that keeps a business running online. One person, start to finish, explained in plain language.</p>
+        <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:26px">Engineering &amp; Consulting</div>
+        <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(46px,7vw,88px); line-height:1.02; letter-spacing:-0.02em; margin:0 auto 24px; max-width:16ch">Engineering the technical side of your business.</h1>
+        <p style="max-width:56ch; margin:0 auto 36px; font-size:19px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); text-wrap:pretty">The infrastructure and decisions that keep a business running — built, connected, and handled from start to finish.</p>
         <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
-          <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:12px 24px; font-size:15px">Start a project</button>
+          <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:12px 24px; font-size:15px">Schedule a Consultation</button>
           <button onClick="{{ goServices }}" class="btn btn-secondary" style="padding:12px 24px; font-size:15px; color:var(--brown-700); border-color:var(--brown-700)">See services</button>
         </div>
       </section>
@@ -66,10 +66,10 @@
           <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0">What I build and set up</h2>
           <button onClick="{{ goServices }}" class="btn btn-ghost" style="color:var(--color-accent-700); font-size:14px">All services →</button>
         </div>
-        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px 40px; border-top:1px solid var(--hair)">
-          <sc-for list="{{ homeServices }}" as="s" hint-placeholder-count="4">
-            <div style="padding:24px 2px; border-bottom:1px solid var(--hair)">
-              <div style="font-family:var(--font-heading); font-weight:600; font-size:19px; margin-bottom:6px; color:var(--brown-700)">{{ s.name }}</div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair)">
+          <sc-for list="{{ homeServices }}" as="s" hint-placeholder-count="3">
+            <div style="padding:28px 24px; border-left:1px solid var(--hair)">
+              <div style="font-family:var(--font-heading); font-weight:600; font-size:19px; margin-bottom:8px; color:var(--brown-700)">{{ s.name }}</div>
               <p style="margin:0; font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
             </div>
           </sc-for>
@@ -79,13 +79,15 @@
       <sc-if value="{{ showProcess }}" hint-placeholder-val="{{ true }}">
         <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px">
           <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px">How it works</h2>
-          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--hair)">
+          <div style="position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--hair)">
             <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
               <div style="padding:28px 28px 8px; border-left:1px solid var(--hair)">
                 <div style="font-family:var(--font-heading); font-weight:600; font-size:21px; margin-bottom:8px">{{ st.title }}</div>
                 <p style="margin:0; font-size:14px; line-height:1.65; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ st.text }}</p>
               </div>
             </sc-for>
+            <span style="position:absolute; top:38px; left:33.333%; transform:translate(-50%,-50%); font-size:13px; line-height:1; color:var(--color-accent-700); background:var(--paper); padding:0 5px">→</span>
+            <span style="position:absolute; top:38px; left:66.666%; transform:translate(-50%,-50%); font-size:13px; line-height:1; color:var(--color-accent-700); background:var(--paper); padding:0 5px">→</span>
           </div>
         </section>
       </sc-if>
@@ -109,19 +111,26 @@
       </section>
 
       <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px">
-        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:56px 64px">
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:48px">
 
           <div>
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg>
-              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:26px; margin:0">Build</h2>
+              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:24px; margin:0">Digital Presence</h2>
             </div>
-            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 20px; max-width:42ch">Everything people see first — the site, the brand, the first impression.</p>
-            <div style="display:flex; flex-direction:column; gap:12px">
-              <sc-for list="{{ buildItems }}" as="s" hint-placeholder-count="2">
-                <div style="display:flex; align-items:baseline; gap:8px; font-family:var(--font-heading); font-weight:600; font-size:16px; color:var(--color-accent-700)">
-                  <span>›</span><span>{{ s.name }}</span>
-                </div>
+            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 8px; max-width:36ch">Built new, upgraded, or extended with what it needs next.</p>
+            <div>
+              <sc-for list="{{ websiteItems }}" as="s" hint-placeholder-count="3">
+                <details class="svc-row" style="border-bottom:1px solid var(--hair)">
+                  <summary style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 2px; font-family:var(--font-heading); font-weight:600; font-size:16px">
+                    {{ s.name }}
+                    <span class="chev">›</span>
+                  </summary>
+                  <div class="svc-body" style="padding:0 2px 16px">
+                    <p style="margin:0 0 6px; font-size:13px; line-height:1.55; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
+                    <p style="margin:0; font-size:12px; line-height:1.6; color:var(--brown-700)">{{ s.detail }}</p>
+                  </div>
+                </details>
               </sc-for>
             </div>
           </div>
@@ -129,29 +138,21 @@
           <div>
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg>
-              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:26px; margin:0">Set up</h2>
+              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:24px; margin:0">Infrastructure</h2>
             </div>
-            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 20px; max-width:42ch">The infrastructure behind the business — the setup no one notices until it's missing.</p>
-            <div style="display:flex; flex-direction:column; gap:12px">
-              <sc-for list="{{ setupItems }}" as="s" hint-placeholder-count="3">
-                <div style="display:flex; align-items:baseline; gap:8px; font-family:var(--font-heading); font-weight:600; font-size:16px; color:var(--color-accent-700)">
-                  <span>›</span><span>{{ s.name }}</span>
-                </div>
-              </sc-for>
-            </div>
-          </div>
-
-          <div>
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg>
-              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:26px; margin:0">Grow</h2>
-            </div>
-            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 20px; max-width:42ch">The groundwork that helps people find you and keep coming back.</p>
-            <div style="display:flex; flex-direction:column; gap:12px">
-              <sc-for list="{{ growItems }}" as="s" hint-placeholder-count="2">
-                <div style="display:flex; align-items:baseline; gap:8px; font-family:var(--font-heading); font-weight:600; font-size:16px; color:var(--color-accent-700)">
-                  <span>›</span><span>{{ s.name }}</span>
-                </div>
+            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 8px; max-width:36ch">The foundation a business runs on — set up once, documented, and done right.</p>
+            <div>
+              <sc-for list="{{ setupItems }}" as="s" hint-placeholder-count="4">
+                <details class="svc-row" style="border-bottom:1px solid var(--hair)">
+                  <summary style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 2px; font-family:var(--font-heading); font-weight:600; font-size:16px">
+                    {{ s.name }}
+                    <span class="chev">›</span>
+                  </summary>
+                  <div class="svc-body" style="padding:0 2px 16px">
+                    <p style="margin:0 0 6px; font-size:13px; line-height:1.55; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
+                    <p style="margin:0; font-size:12px; line-height:1.6; color:var(--brown-700)">{{ s.detail }}</p>
+                  </div>
+                </details>
               </sc-for>
             </div>
           </div>
@@ -159,14 +160,21 @@
           <div>
             <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M15 9l-2 6-6 2 2-6z"></path></svg>
-              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:26px; margin:0">Advise</h2>
+              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:24px; margin:0">Strategy &amp; Advisory</h2>
             </div>
-            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 20px; max-width:42ch">Ongoing technical guidance, beyond a single project, whenever you need it.</p>
-            <div style="display:flex; flex-direction:column; gap:12px">
-              <sc-for list="{{ adviseItems }}" as="s" hint-placeholder-count="4">
-                <div style="display:flex; align-items:baseline; gap:8px; font-family:var(--font-heading); font-weight:600; font-size:16px; color:var(--color-accent-700)">
-                  <span>›</span><span>{{ s.name }}</span>
-                </div>
+            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 8px; max-width:36ch">Ongoing guidance, beyond a single project, whenever you need it.</p>
+            <div>
+              <sc-for list="{{ consultItems }}" as="s" hint-placeholder-count="2">
+                <details class="svc-row" style="border-bottom:1px solid var(--hair)">
+                  <summary style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 2px; font-family:var(--font-heading); font-weight:600; font-size:16px">
+                    {{ s.name }}
+                    <span class="chev">›</span>
+                  </summary>
+                  <div class="svc-body" style="padding:0 2px 16px">
+                    <p style="margin:0 0 6px; font-size:13px; line-height:1.55; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
+                    <p style="margin:0; font-size:12px; line-height:1.6; color:var(--brown-700)">{{ s.detail }}</p>
+                  </div>
+                </details>
               </sc-for>
             </div>
           </div>
@@ -254,13 +262,9 @@
                 <label>Service interested in</label>
                 <select class="input" value="{{ form.service }}" onChange="{{ onService }}">
                   <option value="">Select one</option>
-                  <option value="Website design &amp; build">Website design &amp; build</option>
-                  <option value="Domain setup &amp; DNS">Domain setup &amp; DNS</option>
-                  <option value="Business email setup">Business email setup</option>
-                  <option value="QR codes">QR codes</option>
-                  <option value="SEO basics">SEO basics</option>
-                  <option value="Social media setup">Social media setup</option>
-                  <option value="Logo &amp; brand basics">Logo &amp; brand basics</option>
+                  <option value="Digital Presence">Digital Presence</option>
+                  <option value="Infrastructure">Infrastructure</option>
+                  <option value="Strategy &amp; Advisory">Strategy &amp; Advisory</option>
                   <option value="Not sure yet">Not sure yet</option>
                 </select>
               </div>
@@ -341,19 +345,15 @@ class Component extends DCLogic {
 
   services() {
     return [
-      { num: '01', name: 'Website design & build', blurb: 'A fast, mobile-first site that says what you do and how to reach you.', detail: 'Copy structure, build, launch, and a short handover so you can edit it yourself.', group: 'build' },
-      { num: '02', name: 'Logo & brand basics', blurb: 'A simple mark, type choices and colors that hold up across print and screen.', detail: 'Files packaged for signage, socials, invoices and the site.', group: 'build' },
-      { num: '03', name: 'Domain setup & DNS', blurb: 'Register the right domain and point the records where they belong.', detail: 'Transfers, renewals, subdomains, SSL, and records documented in writing.', group: 'setup' },
-      { num: '04', name: 'Business email setup', blurb: 'Email on your own domain instead of a personal address.', detail: 'Mailboxes, aliases, signatures, plus SPF and DKIM so mail lands in inboxes.', group: 'setup' },
-      { num: '05', name: 'QR codes', blurb: 'Codes for menus, signage, packaging, business cards and shop windows.', detail: 'Print-ready files at the right size, pointing to pages you can change later.', group: 'setup' },
-      { num: '06', name: 'SEO basics', blurb: 'The groundwork that helps people find you when they search nearby.', detail: 'Titles, descriptions, sitemap, page speed and a search console you can read.', group: 'grow' },
-      { num: '07', name: 'Social media setup', blurb: 'Accounts claimed, named consistently and connected back to your site.', detail: 'Profiles, handles, link pages and a posting setup you can maintain.', group: 'grow' },
-      { num: '08', name: 'Internal business tools', blurb: "Appointment intake, inventory, staff scheduling — not just the public website.", detail: 'Built in Power Apps and connected to how you already work.', group: 'advise' },
-      { num: '09', name: 'Fractional tech lead', blurb: "A monthly retainer — the person you call when you don't know what to buy or build.", detail: 'Ongoing advice on tools, vendors and priorities, without hiring in-house.', group: 'advise' },
-      { num: '10', name: 'Legacy site & system audits', blurb: 'A review of what you already have, broken or not, with a prioritized fix list.', detail: 'Security, performance and structure checked, written up in plain language.', group: 'advise' },
-      { num: '11', name: 'Integrations', blurb: 'Connecting your website to tools you already pay for.', detail: 'QuickBooks, scheduling apps, CRMs — wired together instead of run separately.', group: 'advise' },
-      { num: '12', name: 'Application modernization', blurb: 'Bringing an aging app or system up to a standard that can actually grow with you.', detail: 'Updated architecture, dependencies and infrastructure, migrated without disrupting the business.', group: 'advise' },
-      { num: '13', name: 'Agentic AI integration', blurb: 'AI that takes action inside your existing tools, not just a chatbot bolted on.', detail: 'Scoped, tested automation wired into the systems you already use.', group: 'advise' }
+      { num: '01', name: 'Website design & build', blurb: 'A new site, or an upgrade to what you already have.', detail: 'Built mobile-first, launched, and handed over so you can edit it yourself.', group: 'website' },
+      { num: '02', name: 'AI integration', blurb: 'Agentic AI added to your site where it actually helps.', detail: 'Scoped and tested so it does something useful, not just a chatbot bolted on.', group: 'website' },
+      { num: '03', name: 'Add-ons', blurb: 'Forms, payment portals, and more, added to what is already there.', detail: 'Booking forms, checkout, and other functionality wired into your existing site.', group: 'website' },
+      { num: '04', name: 'New business launch', blurb: 'Domain, site, and social media — start to finish for a brand-new business.', detail: 'Everything a new business needs to exist online, set up together from day one.', group: 'setup' },
+      { num: '05', name: 'Domain & business email', blurb: 'Google Workspace set up so everything lives in one place.', detail: 'Domain, DNS, and business email on your own name instead of a personal address.', group: 'setup' },
+      { num: '06', name: 'Logo & brand basics', blurb: 'A simple mark, type choices and colors that hold up everywhere.', detail: 'Files packaged for the site, signage, socials, and invoices.', group: 'setup' },
+      { num: '07', name: 'QR codes & digital business cards', blurb: 'Codes and cards for menus, signage, and networking.', detail: 'Print-ready files and a scannable digital card, pointing to pages you can update later.', group: 'setup' },
+      { num: '08', name: 'End-to-end consulting', blurb: 'Ongoing guidance on what to build, buy, or fix next.', detail: 'The person you call when you are not sure what your business needs technically.', group: 'consult' },
+      { num: '09', name: 'Audits', blurb: 'A review of what you have now, with a prioritized fix list.', detail: 'Security, performance, and structure checked, written up in plain language.', group: 'consult' }
     ];
   }
 
@@ -380,11 +380,10 @@ class Component extends DCLogic {
       contactEmail: this.email(),
       currentYear: new Date().getFullYear(),
       mailtoPlain: 'mailto:' + this.email(),
-      homeServices: [all[0], all[2], all[5], all[9]],
-      buildItems: all.filter((s) => s.group === 'build'),
+      homeServices: [all[0], all[4], all[7]],
+      websiteItems: all.filter((s) => s.group === 'website'),
       setupItems: all.filter((s) => s.group === 'setup'),
-      growItems: all.filter((s) => s.group === 'grow'),
-      adviseItems: all.filter((s) => s.group === 'advise'),
+      consultItems: all.filter((s) => s.group === 'consult'),
       steps: [
         { title: 'Discovery', text: "We talk through what's required and what it will take to get there." },
         { title: 'Mockup & revisions', text: 'A working mockup, refined together over a few sessions until it feels right.' },
