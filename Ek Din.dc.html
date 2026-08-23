@@ -57,32 +57,19 @@
         <p style="max-width:56ch; margin:0 auto 36px; font-size:19px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); text-wrap:pretty">Websites, domains, email, QR codes and the rest of the setup that keeps a business running online. One person, start to finish, explained in plain language.</p>
         <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
           <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:12px 24px; font-size:15px">Start a project</button>
-          <button onClick="{{ goServices }}" class="btn btn-secondary" style="padding:12px 24px; font-size:15px">See services</button>
-        </div>
-      </section>
-
-      <section style="max-width:1120px; margin:0 auto; padding:0 28px 96px">
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--hair); border-bottom:1px solid var(--hair)">
-          <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="3">
-            <div style="padding:32px 28px; border-left:1px solid var(--hair)">
-              <div style="font-family:var(--font-heading); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brown-700); margin-bottom:10px">{{ p.kicker }}</div>
-              <div style="font-size:15px; line-height:1.6; color:color-mix(in srgb, var(--ink) 72%, transparent)">{{ p.text }}</div>
-            </div>
-          </sc-for>
+          <button onClick="{{ goServices }}" class="btn btn-secondary" style="padding:12px 24px; font-size:15px; color:var(--brown-700); border-color:var(--brown-700)">See services</button>
         </div>
       </section>
 
       <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px">
-        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:40px; flex-wrap:wrap">
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:32px; flex-wrap:wrap">
           <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0">What I build and set up</h2>
           <button onClick="{{ goServices }}" class="btn btn-ghost" style="color:var(--color-accent-700); font-size:14px">All services →</button>
         </div>
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:26px">
-          <sc-for list="{{ homeServices }}" as="s" hint-placeholder-count="6">
-            <div class="card blueprint" style="padding:26px 24px; gap:10px">
-              <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-              <div style="font-family:var(--font-heading); font-size:12px; letter-spacing:0.12em; color:var(--color-accent-700)">{{ s.num }}</div>
-              <div style="font-family:var(--font-heading); font-weight:600; font-size:22px; line-height:1.15">{{ s.name }}</div>
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:20px 40px; border-top:1px solid var(--hair)">
+          <sc-for list="{{ homeServices }}" as="s" hint-placeholder-count="4">
+            <div style="padding:24px 2px; border-bottom:1px solid var(--hair)">
+              <div style="font-family:var(--font-heading); font-weight:600; font-size:19px; margin-bottom:6px; color:var(--brown-700)">{{ s.name }}</div>
               <p style="margin:0; font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
             </div>
           </sc-for>
@@ -103,13 +90,13 @@
         </section>
       </sc-if>
 
-      <section style="background:{{ bandColor }}; color:var(--paper)">
+      <section style="background:var(--brown-900); color:var(--paper)">
         <div style="max-width:1120px; margin:0 auto; padding:88px 28px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap">
           <div>
             <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(28px,3.4vw,42px); letter-spacing:-0.015em; margin:0 0 10px; color:var(--paper)">Not sure what you need yet?</h2>
             <p style="margin:0; font-size:17px; line-height:1.6; color:color-mix(in srgb, #ffffff 70%, transparent); max-width:52ch">Send a short description of your business. I'll reply with what I'd set up first and what can wait.</p>
           </div>
-          <button onClick="{{ goContact }}" class="btn" style="background:var(--paper); border-color:var(--paper); color:var(--navy); padding:13px 26px; font-size:15px">Get in touch</button>
+          <button onClick="{{ goContact }}" class="btn" style="background:var(--paper); border-color:var(--paper); color:var(--brown-900); padding:13px 26px; font-size:15px">Get in touch</button>
         </div>
       </section>
     </sc-if>
@@ -121,27 +108,70 @@
         <p style="max-width:60ch; margin:0; font-size:18px; line-height:1.65; color:color-mix(in srgb, var(--ink) 65%, transparent)">Take one piece or the whole setup. Work is scoped per project after a short call, so you only pay for what your business actually uses.</p>
       </section>
 
-      <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px; display:flex; flex-direction:column; gap:64px">
-        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+      <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px">
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:56px 64px">
+
           <div>
-            <div style="display:flex; align-items:baseline; gap:16px; padding-bottom:16px; border-bottom:1px solid var(--hair); margin-bottom:8px">
-              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:30px; margin:0">{{ g.title }}</h2>
-              <span style="font-size:13px; color:color-mix(in srgb, var(--ink) 55%, transparent)">{{ g.note }}</span>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg>
+              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:26px; margin:0">Build</h2>
             </div>
-            <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="3">
-              <details class="svc-row" style="border-bottom:1px solid var(--hair)">
-                <summary style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px 2px; font-family:var(--font-heading); font-weight:600; font-size:19px">
-                  {{ s.name }}
-                  <span class="chev">›</span>
-                </summary>
-                <div class="svc-body" style="padding:0 2px 24px; max-width:64ch">
-                  <p style="margin:0 0 8px; font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">{{ s.blurb }}</p>
-                  <p style="margin:0; font-size:13px; line-height:1.65; color:var(--brown-700)">{{ s.detail }}</p>
+            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 20px; max-width:42ch">Everything people see first — the site, the brand, the first impression.</p>
+            <div style="display:flex; flex-direction:column; gap:12px">
+              <sc-for list="{{ buildItems }}" as="s" hint-placeholder-count="2">
+                <div style="display:flex; align-items:baseline; gap:8px; font-family:var(--font-heading); font-weight:600; font-size:16px; color:var(--color-accent-700)">
+                  <span>›</span><span>{{ s.name }}</span>
                 </div>
-              </details>
-            </sc-for>
+              </sc-for>
+            </div>
           </div>
-        </sc-for>
+
+          <div>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg>
+              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:26px; margin:0">Set up</h2>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 20px; max-width:42ch">The infrastructure behind the business — the setup no one notices until it's missing.</p>
+            <div style="display:flex; flex-direction:column; gap:12px">
+              <sc-for list="{{ setupItems }}" as="s" hint-placeholder-count="3">
+                <div style="display:flex; align-items:baseline; gap:8px; font-family:var(--font-heading); font-weight:600; font-size:16px; color:var(--color-accent-700)">
+                  <span>›</span><span>{{ s.name }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg>
+              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:26px; margin:0">Grow</h2>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 20px; max-width:42ch">The groundwork that helps people find you and keep coming back.</p>
+            <div style="display:flex; flex-direction:column; gap:12px">
+              <sc-for list="{{ growItems }}" as="s" hint-placeholder-count="2">
+                <div style="display:flex; align-items:baseline; gap:8px; font-family:var(--font-heading); font-weight:600; font-size:16px; color:var(--color-accent-700)">
+                  <span>›</span><span>{{ s.name }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M15 9l-2 6-6 2 2-6z"></path></svg>
+              <h2 style="font-family:var(--font-heading); font-weight:600; font-size:26px; margin:0">Advise</h2>
+            </div>
+            <p style="font-size:14px; line-height:1.6; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 20px; max-width:42ch">Ongoing technical guidance, beyond a single project, whenever you need it.</p>
+            <div style="display:flex; flex-direction:column; gap:12px">
+              <sc-for list="{{ adviseItems }}" as="s" hint-placeholder-count="4">
+                <div style="display:flex; align-items:baseline; gap:8px; font-family:var(--font-heading); font-weight:600; font-size:16px; color:var(--color-accent-700)">
+                  <span>›</span><span>{{ s.name }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       <section style="background:{{ bandColor }}; color:var(--paper)">
@@ -156,7 +186,8 @@
       <section style="max-width:840px; margin:0 auto; padding:96px 28px 120px; animation:rise .5s ease both">
         <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:22px">About</div>
         <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(40px,5.4vw,64px); line-height:1.05; letter-spacing:-0.02em; margin:0 0 8px">Rimsha Rashid</h1>
-        <p style="font-family:var(--font-heading); font-weight:600; font-size:18px; letter-spacing:0.02em; color:var(--color-accent-700); margin:0 0 40px">Software Engineer</p>
+        <p style="font-family:var(--font-heading); font-weight:600; font-size:18px; letter-spacing:0.02em; color:var(--color-accent-700); margin:0 0 10px">Software Engineer</p>
+        <p style="font-size:13px; letter-spacing:0.04em; text-transform:uppercase; color:color-mix(in srgb, var(--ink) 55%, transparent); margin:0 0 40px">Fully remote — operating on EST</p>
 
         <div class="blueprint" style="padding:40px 36px; margin-bottom:36px">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
@@ -320,7 +351,9 @@ class Component extends DCLogic {
       { num: '08', name: 'Internal business tools', blurb: "Appointment intake, inventory, staff scheduling — not just the public website.", detail: 'Built in Power Apps and connected to how you already work.', group: 'advise' },
       { num: '09', name: 'Fractional tech lead', blurb: "A monthly retainer — the person you call when you don't know what to buy or build.", detail: 'Ongoing advice on tools, vendors and priorities, without hiring in-house.', group: 'advise' },
       { num: '10', name: 'Legacy site & system audits', blurb: 'A review of what you already have, broken or not, with a prioritized fix list.', detail: 'Security, performance and structure checked, written up in plain language.', group: 'advise' },
-      { num: '11', name: 'Integrations', blurb: 'Connecting your website to tools you already pay for.', detail: 'QuickBooks, scheduling apps, CRMs — wired together instead of run separately.', group: 'advise' }
+      { num: '11', name: 'Integrations', blurb: 'Connecting your website to tools you already pay for.', detail: 'QuickBooks, scheduling apps, CRMs — wired together instead of run separately.', group: 'advise' },
+      { num: '12', name: 'Application modernization', blurb: 'Bringing an aging app or system up to a standard that can actually grow with you.', detail: 'Updated architecture, dependencies and infrastructure, migrated without disrupting the business.', group: 'advise' },
+      { num: '13', name: 'Agentic AI integration', blurb: 'AI that takes action inside your existing tools, not just a chatbot bolted on.', detail: 'Scoped, tested automation wired into the systems you already use.', group: 'advise' }
     ];
   }
 
@@ -347,18 +380,11 @@ class Component extends DCLogic {
       contactEmail: this.email(),
       currentYear: new Date().getFullYear(),
       mailtoPlain: 'mailto:' + this.email(),
-      homeServices: all.slice(0, 6),
-      groups: [
-        { title: 'Build', note: 'What people see', items: all.filter((s) => s.group === 'build') },
-        { title: 'Set up', note: 'The plumbing behind it', items: all.filter((s) => s.group === 'setup') },
-        { title: 'Grow', note: 'Getting found', items: all.filter((s) => s.group === 'grow') },
-        { title: 'Advise', note: 'Beyond the website', items: all.filter((s) => s.group === 'advise') }
-      ],
-      pillars: [
-        { kicker: 'Websites', text: 'Designed and built end to end, or rebuilt from whatever you have now.' },
-        { kicker: 'Domains & email', text: 'Domains, DNS and business email set up properly and documented.' },
-        { kicker: 'QR & local presence', text: 'QR codes, listings and profiles so people can find and reach you.' }
-      ],
+      homeServices: [all[0], all[2], all[5], all[9]],
+      buildItems: all.filter((s) => s.group === 'build'),
+      setupItems: all.filter((s) => s.group === 'setup'),
+      growItems: all.filter((s) => s.group === 'grow'),
+      adviseItems: all.filter((s) => s.group === 'advise'),
       steps: [
         { title: 'Discovery', text: "We talk through what's required and what it will take to get there." },
         { title: 'Mockup & revisions', text: 'A working mockup, refined together over a few sessions until it feels right.' },
