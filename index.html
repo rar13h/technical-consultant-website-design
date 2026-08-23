@@ -79,11 +79,20 @@
     .map-node, .map-line { transition: none; }
   }
   .hero-tags-mobile { display: none; }
+  .svc-mobile, .steps-mobile { display: none; }
+  .ledger-single { padding: 17px 2px; border-top: 1px solid var(--hair); text-align: center; }
+  .ledger-single:last-child { border-bottom: 1px solid var(--hair); }
+  .ledger-single .nm { font-family: var(--font-heading); font-weight: 600; font-size: 18px; letter-spacing: -0.005em; cursor: pointer; }
+  .long-arrow { font-family: var(--font-mono); font-size: 20px; color: var(--brown-700); line-height: 1; }
+  .step-mobile-row { padding: 16px 0; border-top: 1px solid var(--hair); }
+  .step-mobile-row:last-of-type { border-bottom: 1px solid var(--hair); margin-bottom: 22px; }
   @media (max-width: 860px) {
     .hero-grid { grid-template-columns: 1fr; }
     .hero-float-card { display: none; }
     .map-wrap { display: none; }
     .hero-tags-mobile { display: flex; }
+    .svc-desktop, .steps-desktop { display: none; }
+    .svc-mobile, .steps-mobile { display: block; }
   }
   @media (max-width: 760px) {
     .contact-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -183,7 +192,7 @@
         </div>
       </section>
 
-      <section style="max-width:1120px; margin:0 auto; padding:0 28px 72px">
+      <section class="svc-desktop" style="max-width:1120px; margin:0 auto; padding:0 28px 72px">
         <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:32px; flex-wrap:wrap">
           <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0">Services</h2>
           <button onClick="{{ goServices }}" class="btn btn-ghost" style="color:var(--color-accent-700); font-size:16px; font-weight:600">See all →</button>
@@ -199,9 +208,19 @@
         </div>
       </section>
 
+      <section class="svc-mobile" style="max-width:1120px; margin:0 auto; padding:0 28px 72px">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px">
+          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0">What We Offer</h2>
+          <span class="long-arrow" onClick="{{ goServices }}" style="cursor:pointer">⟶</span>
+        </div>
+        <div class="ledger-single" onClick="{{ goServices }}"><div class="nm">Digital Presence</div></div>
+        <div class="ledger-single" onClick="{{ goServices }}"><div class="nm">Setup</div></div>
+        <div class="ledger-single" onClick="{{ goServices }}"><div class="nm">Strategy</div></div>
+      </section>
+
       <sc-if value="{{ showProcess }}" hint-placeholder-val="{{ true }}">
-        <section style="max-width:1120px; margin:0 auto; padding:0 28px 64px">
-          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px">How it works</h2>
+        <section class="steps-desktop" style="max-width:1120px; margin:0 auto; padding:0 28px 64px">
+          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px">How We'll Work Together</h2>
           <div style="position:relative; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:36px; margin-bottom:48px">
             <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
               <div class="flow-item">
@@ -214,6 +233,28 @@
             <span class="flow-arrow" style="left:66.666%; transform:translate(-50%,-50%)">→</span>
           </div>
           <div style="text-align:center">
+            <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:13px 26px; font-size:15px">Request a Quote</button>
+          </div>
+        </section>
+
+        <section class="steps-mobile" style="max-width:1120px; margin:0 auto; padding:0 28px 64px">
+          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 20px">How We'll Work Together</h2>
+          <div class="step-mobile-row">
+            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.08em; color:var(--brown-700); margin-bottom:6px">STEP 01</div>
+            <div style="font-family:var(--font-heading); font-weight:600; font-size:17px; margin-bottom:6px">Discovery</div>
+            <p style="margin:0; font-size:13px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">A conversation about what you actually need.</p>
+          </div>
+          <div class="step-mobile-row">
+            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.08em; color:var(--brown-700); margin-bottom:6px">STEP 02</div>
+            <div style="font-family:var(--font-heading); font-weight:600; font-size:17px; margin-bottom:6px">Revisions</div>
+            <p style="margin:0; font-size:13px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">We shape it together until it feels right.</p>
+          </div>
+          <div class="step-mobile-row">
+            <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.08em; color:var(--brown-700); margin-bottom:6px">STEP 03</div>
+            <div style="font-family:var(--font-heading); font-weight:600; font-size:17px; margin-bottom:6px">Handover</div>
+            <p style="margin:0; font-size:13px; line-height:1.6; color:color-mix(in srgb, var(--ink) 68%, transparent)">Everything built, tested, and yours to run.</p>
+          </div>
+          <div style="text-align:center; margin-top:8px">
             <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:13px 26px; font-size:15px">Request a Quote</button>
           </div>
         </section>
@@ -611,9 +652,9 @@ class Component extends DCLogic {
       setupItems: all.filter((s) => s.group === 'setup'),
       consultItems: all.filter((s) => s.group === 'consult'),
       steps: [
-        { idx: 'STEP 01', title: 'Discovery', text: "We talk through what's required and what it will take to get there." },
-        { idx: 'STEP 02', title: 'Mockup & revisions', text: 'A working mockup, refined together over a few sessions until it feels right.' },
-        { idx: 'STEP 03', title: 'Finalize & handover', text: 'Once approved, everything is built, tested, and handed over ready to use.' }
+        { idx: 'STEP 01', title: 'Discovery', text: 'A conversation about what you actually need.' },
+        { idx: 'STEP 02', title: 'Revisions', text: "We shape it together until it feels right." },
+        { idx: 'STEP 03', title: 'Handover', text: 'Everything built, tested, and yours to run.' }
       ],
       form: this.state.form,
       sent: this.state.sent,
