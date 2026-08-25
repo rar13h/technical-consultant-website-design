@@ -86,6 +86,32 @@
   .proof-corner.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
   .proof-corner.br { bottom: 0; right: 0; border-left: none; border-top: none; }
 
+  .cw-metrics { display: flex; gap: 0; flex-wrap: wrap; margin-bottom: 44px; }
+  .cw-metric { flex: 1 1 150px; padding: 0 24px; }
+  .cw-metric:first-child { padding-left: 0; }
+  .cw-metric + .cw-metric { border-left: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); }
+  .cw-metric-val { font-family: var(--font-heading); font-weight: 600; font-size: clamp(24px,2.6vw,30px); color: var(--color-accent-400); font-variant-numeric: tabular-nums; line-height: 1; }
+  .cw-metric-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 68%, transparent); margin-top: 8px; }
+  .cw-deck { position: relative; height: 400px; }
+  .cw-card { position: absolute; top: 0; left: 50%; width: min(560px,86%); height: 100%; background: var(--panel); padding: 30px 34px 24px; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; }
+  .cw-quote { flex: 1 1 auto; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--color-accent-400) transparent; }
+  .cw-quote::-webkit-scrollbar { width: 5px; }
+  .cw-quote::-webkit-scrollbar-thumb { background: var(--color-accent-400); }
+  .cw-quote p { font-family: var(--font-heading); font-style: italic; font-weight: 500; font-size: 16.5px; line-height: 1.58; color: var(--ink); }
+  .cw-quote p + p { margin-top: 10px; }
+  .cw-quote p:first-child::before { content: "\201C"; }
+  .cw-quote p:last-child::after { content: "\201D"; }
+  .cw-attrib { flex: 0 0 auto; border-top: 1px solid var(--hair); margin-top: 14px; padding-top: 14px; display: flex; justify-content: space-between; gap: 10px; }
+  .cw-name { font-family: var(--font-heading); font-weight: 600; font-size: 15px; color: var(--ink); }
+  .cw-ctx { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brown-700); }
+  .cw-arrow { width: 44px; height: 44px; border-radius: 50%; background: transparent; border: 1.5px solid color-mix(in srgb, var(--paper) 30%, transparent); color: var(--paper); display: inline-flex; align-items: center; justify-content: center; transition: border-color .18s ease, background .18s ease; }
+  .cw-arrow:hover { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 16%, transparent); }
+  .cw-dots { display: flex; gap: 9px; justify-content: center; }
+  .cw-dot { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--color-accent-400); background: transparent; padding: 0; }
+  .cw-dot.active { background: var(--gold); border-color: var(--gold); }
+  @media (prefers-reduced-motion: no-preference) { .cw-card { transition: transform .5s cubic-bezier(.65,0,.35,1), opacity .5s ease; } }
+  @media (max-width: 640px) { .cw-deck { height: 440px; } .cw-card { width: 88%; } }
+
   .map-card { position: relative; aspect-ratio: 4/4.6; display: flex; flex-direction: column; }
   .map-stage { position: relative; flex: 1; padding: 3%; }
   .map-stage svg { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -317,40 +343,87 @@
         </section>
       </sc-if>
 
-      <section style="background:oklch(0.28 0.075 25)">
+      <section style="background:var(--navy)">
         <div style="max-width:1120px; margin:0 auto; padding:88px 28px 96px">
-          <div class="eyebrow-mono" style="display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.05em; color:oklch(0.75 0.1 70); margin-bottom:20px">
-            <span style="width:20px; height:1px; background:oklch(0.75 0.1 70); display:inline-block"></span>
+          <div class="eyebrow-mono" style="display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.05em; color:var(--color-accent-400); margin-bottom:20px">
+            <span style="width:20px; height:1px; background:var(--color-accent-400); display:inline-block"></span>
             CLIENT WORK
           </div>
-          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px; color:var(--paper)">A few of the systems we keep running</h2>
-          <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px; margin-bottom:40px">
-            <div class="proof-card">
-              <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
-              <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Healthcare: Concierge Medicine</div>
-              <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">Discreet, dependable digital presence for practices that can't afford downtime.</p>
-              <div style="border-top:1px solid var(--hair); padding-top:14px">
-                <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Ongoing</div>
+          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(30px,3.6vw,44px); letter-spacing:-0.015em; margin:0 0 40px; color:var(--paper)">What it's like to work with us</h2>
+
+          <div class="cw-metrics">
+            <sc-for list="{{ testimonialMetrics }}" as="m" hint-placeholder-count="3">
+              <div class="cw-metric">
+                <div class="cw-metric-val">{{ m.val }}</div>
+                <div class="cw-metric-label">{{ m.label }}</div>
               </div>
-            </div>
-            <div class="proof-card">
-              <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
-              <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Professional Services: End to End</div>
-              <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">One system, start to finish: CPA firms' domains, sites, and inboxes, built to just work.</p>
-              <div style="border-top:1px solid var(--hair); padding-top:14px">
-                <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Full buildout</div>
-              </div>
-            </div>
-            <div class="proof-card">
-              <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
-              <div class="eyebrow-mono" style="font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-400); margin-bottom:14px">Brand Identity: Digital Card Suite</div>
-              <p style="font-family:var(--font-heading); font-weight:500; font-size:19px; line-height:1.5; margin:0 0 20px; min-height:80px">A cohesive brand and contact experience for every member of a wellness team.</p>
-              <div style="border-top:1px solid var(--hair); padding-top:14px">
-                <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Card suite</div>
-              </div>
-            </div>
+            </sc-for>
           </div>
-          <p class="eyebrow-mono" style="text-align:center; max-width:520px; margin:0 auto; font-size:11px; letter-spacing:0.04em; color:oklch(0.75 0.1 70 / 0.8); line-height:1.7; padding-top:22px; border-top:1px solid oklch(0.9 0 0 / 0.15)">Names and identifying details are withheld by default. Discretion is part of how we work, not an exception to it.</p>
+
+          <div class="cw-deck" tabindex="0" aria-label="Client testimonials, use left and right arrow keys" onKeyDown="{{ onDeckKeyDown }}" onPointerDown="{{ onDeckPointerDown }}" onPointerUp="{{ onDeckPointerUp }}">
+            <sc-for list="{{ testimonialCards }}" as="t" hint-placeholder-count="4">
+              <div class="cw-card" style="{{ t.cardStyle }}">
+                <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
+                <div class="cw-quote">
+                  <sc-for list="{{ t.quote }}" as="p" hint-placeholder-count="1">
+                    <p>{{ p }}</p>
+                  </sc-for>
+                </div>
+                <div class="cw-attrib">
+                  <span class="cw-name">{{ t.name }}</span>
+                  <span class="cw-ctx">{{ t.context }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin-top:28px">
+            <button onClick="{{ prevTestimonial }}" class="cw-arrow" aria-label="Previous testimonial">
+              <svg width="9" height="14" viewBox="0 0 9 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M8 1 2 7l6 6"></path></svg>
+            </button>
+            <div class="cw-dots">
+              <sc-for list="{{ testimonialDots }}" as="d" hint-placeholder-count="4">
+                <button class="{{ d.dotClass }}" onClick="{{ d.goTo }}" aria-label="{{ d.label }}"></button>
+              </sc-for>
+            </div>
+            <button onClick="{{ nextTestimonial }}" class="cw-arrow" aria-label="Next testimonial">
+              <svg width="9" height="14" viewBox="0 0 9 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><path d="M1 1l6 6-6 6"></path></svg>
+            </button>
+          </div>
+
+          <p class="eyebrow-mono" style="text-align:center; max-width:520px; margin:44px auto 0; font-size:11px; letter-spacing:0.04em; color:color-mix(in srgb, var(--paper) 68%, transparent); line-height:1.7; padding-top:22px; border-top:1px solid color-mix(in srgb, var(--paper) 15%, transparent)">Names and identifying details are withheld by default. Discretion is part of how we work, not an exception to it.</p>
+
+          <div style="text-align:center; margin-top:32px">
+            <button onClick="{{ toggleFeedback }}" class="btn btn-secondary" style="border-color:color-mix(in srgb, var(--paper) 30%, transparent); color:var(--paper); padding:11px 22px; font-size:13px">{{ feedbackToggleLabel }}</button>
+
+            <sc-if value="{{ feedbackOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative; max-width:400px; margin:22px auto 0; padding:28px 26px; background:var(--panel); text-align:left">
+                <span class="proof-corner tl"></span><span class="proof-corner tr"></span><span class="proof-corner bl"></span><span class="proof-corner br"></span>
+
+                <sc-if value="{{ feedbackSent }}" hint-placeholder-val="{{ false }}">
+                  <div style="text-align:center; padding:6px 0">
+                    <div style="font-family:var(--font-heading); font-weight:600; font-size:18px; color:var(--ink)">Thank you for your feedback.</div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ feedbackNotSent }}" hint-placeholder-val="{{ true }}">
+                  <form onSubmit="{{ submitFeedback }}" style="display:flex; flex-direction:column; gap:14px">
+                    <div class="field">
+                      <label>Business Name</label>
+                      <input class="input" type="text" required="{{ true }}" value="{{ feedbackForm.business }}" onChange="{{ onFeedbackBusiness }}" placeholder="Your business name">
+                    </div>
+                    <div class="field">
+                      <label>Feedback</label>
+                      <textarea class="input" required="{{ true }}" value="{{ feedbackForm.feedback }}" onChange="{{ onFeedbackText }}" placeholder="Tell us about your experience" rows="4"></textarea>
+                    </div>
+                    <sc-if value="{{ feedbackError }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-size:13px; color:#a4453a">Something went wrong sending that. Please try again.</div>
+                    </sc-if>
+                    <button type="submit" class="btn btn-primary" disabled="{{ feedbackSending }}" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:11px 22px; font-size:14px">{{ feedbackSubmitLabel }}</button>
+                  </form>
+                </sc-if>
+              </div>
+            </sc-if>
+          </div>
         </div>
       </section>
       </section>
@@ -681,6 +754,12 @@ class Component extends DCLogic {
     menuOpen: false,
     chatOpen: false,
     activeNode: null,
+    testimonialIndex: 0,
+    feedbackOpen: false,
+    feedbackForm: { business: '', feedback: '' },
+    feedbackSending: false,
+    feedbackSent: false,
+    feedbackError: false,
     form: { name: '', email: '', company: '', companyType: '', website: '', service: '', timeline: '', message: '' }
   };
 
@@ -712,6 +791,103 @@ class Component extends DCLogic {
 
   selectNode(key) {
     this.setState((s) => ({ activeNode: s.activeNode === key ? null : key }));
+  }
+
+  toggleFeedback() {
+    this.setState((s) => ({ feedbackOpen: !s.feedbackOpen, feedbackSent: false, feedbackError: false }));
+  }
+
+  setFeedback(key) {
+    return (e) => {
+      const v = e.target.value;
+      this.setState((s) => ({ feedbackForm: { ...s.feedbackForm, [key]: v } }));
+    };
+  }
+
+  async submitFeedback(e) {
+    e.preventDefault();
+    const f = this.state.feedbackForm;
+    this.setState({ feedbackSending: true, feedbackError: false });
+    try {
+      const res = await fetch('https://formspree.io/f/mgawbrly', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'New client feedback' + (f.business ? ': ' + f.business : ''),
+          business: f.business || 'N/A',
+          feedback: f.feedback
+        })
+      });
+      if (res.ok) {
+        this.setState({ feedbackSent: true, feedbackSending: false, feedbackForm: { business: '', feedback: '' } });
+      } else {
+        this.setState({ feedbackSending: false, feedbackError: true });
+      }
+    } catch (err) {
+      this.setState({ feedbackSending: false, feedbackError: true });
+    }
+  }
+
+  testimonials() {
+    return [
+      { name: 'Ocean Therapy', context: 'Wellness & Branding', quote: [
+        "I had the pleasure of working with Ek Din on developing marketable assets and improving my website. Ek Din took the time to understand my goals, provided thoughtful recommendations, and delivered professional results that elevated my brand reach.",
+        "What stood out most was the responsiveness, attention to detail, and ability to turn ideas into effective, polished marketing materials. That support made the entire process smooth and stress-free.",
+        "I highly recommend Ek Din to anyone looking for creative, reliable, and knowledgeable support with branding, marketing assets, or website development. Their expertise made a meaningful impact on our business, and we will definitely use them for our future and ongoing needs."
+      ]},
+      { name: 'Concierge Medical Practice', context: 'New York, NY', quote: [
+        "Our patients see a polished, professional presence now, and everything behind the scenes just works. Ek Din understood the discretion our practice needs and delivered exactly that, quietly and reliably. From the first meeting to the final launch, the experience was smooth and the delivery was exactly what we asked for, on time and without surprises. Once we launched, Ek Din walked us through how to make updates ourselves, so we're never stuck waiting on anyone for small changes."
+      ]},
+      { name: 'JJ LLC', context: 'Professional Services', quote: [
+        "Ek Din delivered a comprehensive, end-to-end website solution for our firm, encompassing domain acquisition, professional design, and a fully configured business inbox. The engagement was executed with precision, clear communication, and a level of diligence not often encountered in vendor relationships of this kind. Every milestone was delivered on schedule. We regard Ek Din as a trusted, long-term partner for our firm's technical needs."
+      ]},
+      { name: 'Private Medical Practice', context: 'Palm Beach, FL', quote: [
+        "Ek Din turned our new site around in just a few weeks, start to finish, and it has run without a single issue since launch. Every request has been answered promptly, and Ek Din has always been upfront about what's realistic and how long it will actually take. Our patient information has stayed exactly as secure as we were promised it would be. Fast, precise, and easy to reach whenever we needed something adjusted."
+      ]}
+    ];
+  }
+
+  testimonialCardStyle(i) {
+    const total = this.testimonials().length;
+    let offset = i - this.state.testimonialIndex;
+    if (offset > total / 2) offset -= total;
+    if (offset < -total / 2) offset += total;
+    if (offset === 0) return 'transform:translate(-50%,0) scale(1); opacity:1; z-index:3; pointer-events:auto';
+    if (Math.abs(offset) === 1) return `transform:translate(calc(-50% + ${offset * 72}%),0) scale(.86); opacity:.4; z-index:2; pointer-events:none`;
+    return `transform:translate(calc(-50% + ${offset * 72}%),0) scale(.8); opacity:0; z-index:1; pointer-events:none`;
+  }
+
+  nextTestimonial() {
+    const total = this.testimonials().length;
+    this.setState((s) => ({ testimonialIndex: (s.testimonialIndex + 1) % total }));
+  }
+
+  prevTestimonial() {
+    const total = this.testimonials().length;
+    this.setState((s) => ({ testimonialIndex: (s.testimonialIndex + total - 1) % total }));
+  }
+
+  goToTestimonial(i) {
+    this.setState({ testimonialIndex: i });
+  }
+
+  onDeckPointerDown(e) {
+    this._deckStartX = e.clientX;
+  }
+
+  onDeckPointerUp(e) {
+    if (this._deckStartX == null) return;
+    const dx = e.clientX - this._deckStartX;
+    this._deckStartX = null;
+    if (Math.abs(dx) > 40) {
+      if (dx < 0) this.nextTestimonial();
+      else this.prevTestimonial();
+    }
+  }
+
+  onDeckKeyDown(e) {
+    if (e.key === 'ArrowRight') this.nextTestimonial();
+    if (e.key === 'ArrowLeft') this.prevTestimonial();
   }
 
   mapNodes() {
@@ -826,6 +1002,37 @@ class Component extends DCLogic {
       activeNodeTitle: this.state.activeNode ? this.mapNodes()[this.state.activeNode].title : '',
       activeNodeBody: this.state.activeNode ? this.mapNodes()[this.state.activeNode].body : '',
       bandColor: band,
+      testimonialMetrics: [
+        { val: '3+', label: 'Years in business' },
+        { val: '25+', label: 'Clients served' },
+        { val: '100%', label: 'Client-owned' }
+      ],
+      testimonialCards: this.testimonials().map((t, i) => ({
+        ...t,
+        cardStyle: this.testimonialCardStyle(i)
+      })),
+      testimonialDots: this.testimonials().map((t, i) => ({
+        dotClass: i === this.state.testimonialIndex ? 'cw-dot active' : 'cw-dot',
+        label: `Testimonial ${i + 1}, ${t.name}`,
+        goTo: () => this.goToTestimonial(i)
+      })),
+      prevTestimonial: () => this.prevTestimonial(),
+      nextTestimonial: () => this.nextTestimonial(),
+      onDeckPointerDown: (e) => this.onDeckPointerDown(e),
+      onDeckPointerUp: (e) => this.onDeckPointerUp(e),
+      onDeckKeyDown: (e) => this.onDeckKeyDown(e),
+      feedbackOpen: this.state.feedbackOpen,
+      feedbackToggleLabel: this.state.feedbackOpen ? 'Close' : 'Share your feedback',
+      toggleFeedback: () => this.toggleFeedback(),
+      feedbackForm: this.state.feedbackForm,
+      feedbackSent: this.state.feedbackSent,
+      feedbackNotSent: !this.state.feedbackSent,
+      feedbackSending: this.state.feedbackSending,
+      feedbackError: this.state.feedbackError,
+      feedbackSubmitLabel: this.state.feedbackSending ? 'Sending…' : 'Submit',
+      submitFeedback: (e) => this.submitFeedback(e),
+      onFeedbackBusiness: this.setFeedback('business'),
+      onFeedbackText: this.setFeedback('feedback'),
       showProcess: this.props.showProcess ?? true,
       contactEmail: this.email(),
       currentYear: new Date().getFullYear(),
