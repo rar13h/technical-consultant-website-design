@@ -45,6 +45,20 @@
   a:hover { color: var(--navy); }
   ::selection { background: color-mix(in srgb, var(--color-accent) 25%, transparent); }
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .liquid-field { position: absolute; inset: -12%; filter: blur(60px); z-index: 0; pointer-events: none; }
+  .liquid-blob { position: absolute; border-radius: 50%; mix-blend-mode: multiply; will-change: transform; }
+  .liquid-blob.b1 { width: 46vmax; height: 46vmax; left: -10%; top: -18%; background: radial-gradient(circle, var(--navy-mid), transparent 70%); opacity: 0.13; animation: liquidA 32s ease-in-out infinite; }
+  .liquid-blob.b2 { width: 38vmax; height: 38vmax; right: -8%; top: 4%; background: radial-gradient(circle, var(--brown-700), transparent 70%); opacity: 0.15; animation: liquidB 38s ease-in-out infinite; animation-delay: -9s; }
+  .liquid-blob.b3 { width: 32vmax; height: 32vmax; left: 30%; bottom: -24%; background: radial-gradient(circle, var(--gold), transparent 70%); opacity: 0.2; animation: liquidC 26s ease-in-out infinite; animation-delay: -4s; }
+  @keyframes liquidA { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(7%,9%) scale(1.15); } }
+  @keyframes liquidB { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-9%,6%) scale(0.92); } }
+  @keyframes liquidC { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(5%,-12%) scale(1.18); } }
+  .liquid-content { position: relative; z-index: 1; }
+  .liquid-wave { position: relative; height: clamp(56px,8vw,110px); overflow: hidden; line-height: 0; }
+  .liquid-wave svg { position: absolute; top: 0; left: 0; height: 100%; width: 200%; animation: liquidWave 28s linear infinite; }
+  @keyframes liquidWave { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (max-width: 640px) { .liquid-field { filter: blur(34px); } }
+  @media (prefers-reduced-motion: reduce) { .liquid-blob, .liquid-wave svg { animation: none !important; } }
   .svc-row summary { list-style: none; cursor: pointer; }
   .svc-row summary::-webkit-details-marker { display: none; }
   .svc-row .chev { display: inline-block; transition: transform .25s ease; color: var(--color-accent-700); }
@@ -55,7 +69,7 @@
   .flow-item:hover { transform: translateX(4px); }
   .flow-item:hover .flow-title { color: var(--color-accent-700); }
   .flow-title { transition: color .2s ease; }
-  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; position: relative; z-index: 1; }
   .site-header-inner { display: flex; align-items: center; gap: 32px; }
   .site-nav { display: flex; gap: 28px; align-items: center; font-size: 14px; }
   .nav-link { position: relative; padding-bottom: 5px !important; }
@@ -211,7 +225,12 @@
   <main style="flex:1">
 
     <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
-      <section style="max-width:1200px; margin:0 auto; padding:64px 28px 110px; animation:rise .5s ease both">
+      <section style="max-width:1200px; margin:0 auto; padding:64px 28px 110px; animation:rise .5s ease both; position:relative; overflow:hidden">
+        <div class="liquid-field" aria-hidden="true">
+          <div class="liquid-blob b1"></div>
+          <div class="liquid-blob b2"></div>
+          <div class="liquid-blob b3"></div>
+        </div>
         <div class="hero-grid">
           <div>
             <div class="eyebrow-mono" style="display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.05em; color:var(--brown-700); margin-bottom:28px">
@@ -343,6 +362,8 @@
         </section>
       </sc-if>
 
+      <div class="liquid-wave" aria-hidden="true"><svg viewBox="0 0 2400 160" preserveAspectRatio="none"><path fill="#1c2430" d="M0,110 C75,80 225,140 300,110 C375,80 525,140 600,110 C675,80 825,140 900,110 C975,80 1125,140 1200,110 C1275,80 1425,140 1500,110 C1575,80 1725,140 1800,110 C1875,80 2025,140 2100,110 C2175,80 2325,140 2400,110 L2400,160 L0,160 Z"/></svg></div>
+
       <section style="background:var(--navy)">
         <div style="max-width:1120px; margin:0 auto; padding:88px 28px 96px">
           <div class="eyebrow-mono" style="display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.05em; color:var(--color-accent-400); margin-bottom:20px">
@@ -428,6 +449,8 @@
       </section>
       </section>
 
+      <div class="liquid-wave" aria-hidden="true"><svg viewBox="0 0 2400 160" preserveAspectRatio="none"><path fill="#4a3b21" d="M0,110 C75,80 225,140 300,110 C375,80 525,140 600,110 C675,80 825,140 900,110 C975,80 1125,140 1200,110 C1275,80 1425,140 1500,110 C1575,80 1725,140 1800,110 C1875,80 2025,140 2100,110 C2175,80 2325,140 2400,110 L2400,160 L0,160 Z"/></svg></div>
+
       <section style="background:var(--brown-900); color:var(--paper)">
         <div style="max-width:1120px; margin:0 auto; padding:88px 28px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap">
           <div>
@@ -440,10 +463,17 @@
     </sc-if>
 
     <sc-if value="{{ isServices }}" hint-placeholder-val="{{ true }}">
-      <section style="max-width:1120px; margin:0 auto; padding:96px 28px 64px; animation:rise .5s ease both">
-        <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:22px">Services</div>
-        <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(42px,6vw,74px); line-height:1.04; letter-spacing:-0.02em; margin:0 0 22px; max-width:18ch">Everything a business needs to exist online.</h1>
-        <p style="max-width:60ch; margin:0; font-size:18px; line-height:1.65; color:color-mix(in srgb, var(--ink) 65%, transparent)">Take one piece or the whole setup. Work is scoped per project after a short call, so you only pay for what your business actually uses.</p>
+      <section style="max-width:1120px; margin:0 auto; padding:96px 28px 64px; animation:rise .5s ease both; position:relative; overflow:hidden">
+        <div class="liquid-field" aria-hidden="true">
+          <div class="liquid-blob b1"></div>
+          <div class="liquid-blob b2"></div>
+          <div class="liquid-blob b3"></div>
+        </div>
+        <div class="liquid-content">
+          <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:22px">Services</div>
+          <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(42px,6vw,74px); line-height:1.04; letter-spacing:-0.02em; margin:0 0 22px; max-width:18ch">Everything a business needs to exist online.</h1>
+          <p style="max-width:60ch; margin:0; font-size:18px; line-height:1.65; color:color-mix(in srgb, var(--ink) 65%, transparent)">Take one piece or the whole setup. Work is scoped per project after a short call, so you only pay for what your business actually uses.</p>
+        </div>
       </section>
 
       <section style="max-width:1120px; margin:0 auto; padding:0 28px 40px">
