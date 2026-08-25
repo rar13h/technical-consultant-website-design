@@ -660,6 +660,19 @@
         <button onClick="{{ goContact }}" style="display:inline-flex; align-items:center; gap:8px; background:var(--panel); border:1px solid var(--hair); border-radius:100px; cursor:pointer; padding:14px 26px; font-family:var(--font-mono); font-size:12px; letter-spacing:0.05em; text-transform:uppercase; color:var(--brown-700)">Prefer to do it yourself? Get a checklist instead <svg width="12" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="5" x2="12" y2="5"></line><path d="M8 1l5 4-5 4"></path></svg></button>
       </section>
 
+      <section style="background:var(--navy)">
+        <div style="max-width:1120px; margin:0 auto; padding:64px 28px">
+          <div class="cw-metrics" style="margin-bottom:0">
+            <sc-for list="{{ testimonialMetrics }}" as="m" hint-placeholder-count="3">
+              <div class="cw-metric">
+                <div class="cw-metric-val">{{ m.val }}</div>
+                <div class="cw-metric-label">{{ m.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
       <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px">
         <div style="border-top:1px solid var(--hair); padding-top:48px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap">
           <div>
@@ -1153,7 +1166,7 @@ class Component extends DCLogic {
       activeNodeBody: this.state.activeNode ? this.mapNodes()[this.state.activeNode].body : '',
       bandColor: band,
       testimonialMetrics: [
-        { val: '3+', label: 'Years in business' },
+        { val: '10+', label: 'Years of experience' },
         { val: '25+', label: 'Clients served' },
         { val: '100%', label: 'Client-owned' }
       ],
