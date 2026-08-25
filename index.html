@@ -656,6 +656,10 @@
         </div>
       </section>
 
+      <section style="max-width:1120px; margin:0 auto; padding:0 28px 8px; text-align:center">
+        <button onClick="{{ goContact }}" style="display:inline-flex; align-items:center; gap:8px; background:var(--panel); border:1px solid var(--hair); border-radius:100px; cursor:pointer; padding:14px 26px; font-family:var(--font-mono); font-size:12px; letter-spacing:0.05em; text-transform:uppercase; color:var(--brown-700)">Prefer to do it yourself? Get a checklist instead <svg width="12" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="5" x2="12" y2="5"></line><path d="M8 1l5 4-5 4"></path></svg></button>
+      </section>
+
       <section style="max-width:1120px; margin:0 auto; padding:0 28px 104px">
         <div style="border-top:1px solid var(--hair); padding-top:48px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap">
           <div>
@@ -1085,7 +1089,7 @@ class Component extends DCLogic {
       { num: '02', name: 'E-commerce', blurb: 'A real online store, not just a payment link.', detail: 'Product pages, cart, and checkout set up and connected to how you actually get paid.', group: 'website' },
       { num: '03', name: 'Forms & Integrations', blurb: 'Forms, payment portals, and more, added to what is already there.', detail: 'Booking forms, checkout, and other functionality wired into your existing site.', group: 'website' },
       { num: '04', name: 'SEO basics', blurb: 'Google Business Profile and on-page basics, not a full SEO strategy.', detail: 'Business profile setup, page titles, meta descriptions, alt text, and a submitted sitemap: the mechanical parts of SEO you actually control.', group: 'website' },
-      { num: '05', name: 'Site migration', blurb: 'Website migration without starting over.', detail: 'Preserve the content and design you have already invested in while moving to a platform you fully control.', group: 'website' },
+      { num: '05', name: 'Site migration', blurb: 'Website migration without starting over.', detail: 'Experience moving businesses off GoDaddy, Squarespace, Wix, Shopify, and similar platforms, preserving what you already built while you gain full ownership.', group: 'website' },
       { num: '06', name: 'Website design & build', blurb: 'A new site, or upgrade to what you already have.', detail: 'Mobile-first design, professional launch, and full ownership so you can update it yourself.', group: 'website' },
       { num: '07', name: 'Business launch', blurb: 'Domain, site, and social media, handled start to finish for a business starting from scratch.', detail: 'Everything a business needs to exist online, set up together from day one.', group: 'setup' },
       { num: '08', name: 'Domain & business email', blurb: 'Set up so everything lives in one place, on your own name.', detail: 'Domain, DNS, and business email on your own name instead of a personal address.', group: 'setup' },
@@ -1095,7 +1099,7 @@ class Component extends DCLogic {
       { num: '12', name: 'End-to-end consulting', blurb: 'Ongoing guidance on what to build, buy, or fix next.', detail: 'The person you call when you are not sure what your business needs technically.', group: 'consult' },
       { num: '13', name: 'Roadmapping', blurb: 'A plan for what to build next, and in what order.', detail: 'A working session that turns a vague list of ideas into a sequenced, priced-out plan.', group: 'consult' },
       { num: '14', name: 'DIY Guidance & Checklists', blurb: 'A clear starting point when you would rather do the work yourself.', detail: 'A written checklist and short walkthrough for what to do first, with guidance on what to bring in help for later.', group: 'consult' },
-      { num: '15', name: 'Social media setup', blurb: 'Instagram, YouTube, and other accounts set up and connected to your site.', detail: 'Done for you from start to finish, or walked through step by step if you would rather manage it yourself going forward.', group: 'website' }
+      { num: '15', name: 'Social media', blurb: 'Instagram, TikTok, YouTube, and other accounts set up and connected to your site.', detail: 'Your platforms connected, with a clear picture of what is actually needed and what can wait.', group: 'website' }
     ];
   }
 
@@ -1182,7 +1186,7 @@ class Component extends DCLogic {
       homeServices: [
         Object.assign({}, all.find((s) => s.name === 'AI integration'), { catLabel: 'AI & AUTOMATION' }),
         Object.assign({}, all.find((s) => s.name === 'Website design & build'), { catLabel: 'DIGITAL PRESENCE' }),
-        Object.assign({}, all.find((s) => s.name === 'Social media setup'), { catLabel: 'DIGITAL PRESENCE' }),
+        Object.assign({}, all.find((s) => s.name === 'Social media'), { catLabel: 'DIGITAL PRESENCE' }),
         Object.assign({}, all.find((s) => s.name === 'Domain & business email'), { catLabel: 'INFRASTRUCTURE' }),
         Object.assign({}, all.find((s) => s.name === 'End-to-end consulting'), { catLabel: 'STRATEGY & ADVISORY' })
       ],
