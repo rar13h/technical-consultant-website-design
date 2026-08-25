@@ -118,6 +118,12 @@
   .mobile-menu button { padding: 15px 0; font-size: 17px; text-align: center; }
   .contact-deco { display: block; width: 100%; max-width: 300px; height: auto; margin: 90px auto 0; opacity: 0.16; }
   @media (max-width: 760px) { .contact-deco { margin-top: 24px; max-width: 130px; } }
+  .ticker { background: var(--navy); overflow: hidden; white-space: nowrap; padding: 13px 0; }
+  .ticker-track { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent-400); }
+  .ticker-track span { padding-right: 40px; position: relative; }
+  .ticker-track span::after { content: "\00b7"; position: absolute; right: 16px; color: var(--gold); }
+  @media (prefers-reduced-motion: no-preference) { .ticker-track { animation: ticker-scroll 40s linear infinite; } }
+  @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .contact-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 72px; align-items: start; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   select.input { appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%231c2430' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 13px; padding-right: 34px; }
@@ -290,7 +296,7 @@
               ENGINEERING &amp; CONSULTING
             </div>
             <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(42px,5vw,72px); line-height:1.04; letter-spacing:-0.01em; margin:0 0 26px">Engineering the technical side of your business.</h1>
-            <p style="font-size:18px; line-height:1.65; max-width:46ch; margin:0 0 32px; color:color-mix(in srgb, var(--ink) 68%, transparent); text-wrap:pretty">The infrastructure and decisions that keep a business running, built, connected, and handled from start to finish.</p>
+            <p style="font-size:18px; line-height:1.65; max-width:46ch; margin:0 0 32px; color:color-mix(in srgb, var(--ink) 68%, transparent); text-wrap:pretty">Ek Din moves fast and scopes it honestly from the first call. The technical foundation your business runs on, built once and owned by you, not rented from a platform.</p>
             <div class="hero-tags-mobile eyebrow-mono" style="gap:10px; flex-wrap:wrap; margin-bottom:36px">
               <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">AI Agents</span>
               <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Apps</span>
@@ -330,6 +336,10 @@
           </div>
         </div>
       </section>
+
+      <div class="ticker">
+        <div class="ticker-track"><span>OWN YOUR SITE</span><span>NO MONTHLY LOCK-IN</span><span>BUILT TO LAST</span><span>OWN YOUR SITE</span><span>NO MONTHLY LOCK-IN</span><span>BUILT TO LAST</span><span>OWN YOUR SITE</span><span>NO MONTHLY LOCK-IN</span><span>BUILT TO LAST</span><span>OWN YOUR SITE</span><span>NO MONTHLY LOCK-IN</span><span>BUILT TO LAST</span><span>OWN YOUR SITE</span><span>NO MONTHLY LOCK-IN</span><span>BUILT TO LAST</span><span>OWN YOUR SITE</span><span>NO MONTHLY LOCK-IN</span><span>BUILT TO LAST</span></div>
+      </div>
 
       <section class="svc-desktop" style="max-width:1120px; margin:0 auto; padding:0 28px 72px">
         <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:32px; flex-wrap:wrap">
@@ -855,26 +865,43 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;contactEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;rar1228@ekdin.co&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bandTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;navy&quot;,&quot;brown&quot;],&quot;default&quot;:&quot;navy&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showProcess&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
 class Component extends DCLogic {
-  state = {
-    page: 'home',
-    sent: false,
-    sending: false,
-    sendError: false,
-    menuOpen: false,
-    chatOpen: false,
-    activeNode: null,
-    testimonialIndex: 0,
-    feedbackOpen: false,
-    feedbackForm: { business: '', feedback: '' },
-    feedbackSending: false,
-    feedbackSent: false,
-    feedbackError: false,
-    form: { name: '', email: '', company: '', companyType: '', website: '', service: '', timeline: '', message: '' }
-  };
+  state = this.initPageState();
+
+  initPageState() {
+    const validPages = ['home', 'services', 'about', 'contact'];
+    const fromHash = (typeof window !== 'undefined' && window.location.hash) ? window.location.hash.slice(1) : '';
+    const page = validPages.includes(fromHash) ? fromHash : 'home';
+    if (typeof window !== 'undefined') {
+      window.addEventListener('popstate', () => {
+        const p = window.location.hash ? window.location.hash.slice(1) : 'home';
+        this.setState({ page: validPages.includes(p) ? p : 'home', sent: false, sending: false, sendError: false, menuOpen: false, chatOpen: false });
+      });
+    }
+    return {
+      page,
+      sent: false,
+      sending: false,
+      sendError: false,
+      menuOpen: false,
+      chatOpen: false,
+      activeNode: null,
+      testimonialIndex: 0,
+      feedbackOpen: false,
+      feedbackForm: { business: '', feedback: '' },
+      feedbackSending: false,
+      feedbackSent: false,
+      feedbackError: false,
+      form: { name: '', email: '', company: '', companyType: '', website: '', service: '', timeline: '', message: '' }
+    };
+  }
 
   go(page) {
     this.setState({ page, sent: false, sending: false, sendError: false, menuOpen: false, chatOpen: false });
     if (typeof window !== 'undefined') {
+      const hash = '#' + page;
+      if (window.location.hash !== hash) {
+        history.pushState({ page }, '', hash);
+      }
       const reset = () => {
         window.scrollTo(0, 0);
         document.documentElement.scrollTop = 0;
