@@ -54,12 +54,18 @@
   @keyframes liquidB { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-9%,6%) scale(0.92); } }
   @keyframes liquidC { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(5%,-12%) scale(1.18); } }
   .liquid-content { position: relative; z-index: 1; }
-  .liquid-wave { height: clamp(56px,8vw,110px); background-repeat: repeat-x; background-position: 0 0; background-size: 900px 100%; animation: liquidWaveBG 34s linear infinite; }
-  .liquid-wave.to-navy { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 160' preserveAspectRatio='none'%3E%3Cpath fill='%231c2430' d='M0,120 C40,85 110,85 150,120 C190,155 260,155 300,120 L300,160 L0,160 Z'/%3E%3C/svg%3E"); }
-  .liquid-wave.to-brown { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 160' preserveAspectRatio='none'%3E%3Cpath fill='%234a3b21' d='M0,120 C40,85 110,85 150,120 C190,155 260,155 300,120 L300,160 L0,160 Z'/%3E%3C/svg%3E"); }
-  @keyframes liquidWaveBG { from { background-position: 0 0; } to { background-position: -900px 0; } }
+  .liquid-seam { position: relative; height: clamp(90px,10vw,140px); overflow: hidden; }
+  .liquid-seam .seam-blobs { position: absolute; inset: 0; filter: blur(50px); z-index: 0; }
+  .liquid-seam .seam-blob { position: absolute; border-radius: 50%; will-change: transform; mix-blend-mode: screen; }
+  .liquid-seam .sb1 { width: 60%; aspect-ratio: 1; left: -10%; top: 20%; background: radial-gradient(circle, var(--gold), transparent 70%); opacity: 0.35; animation: seamDrift1 24s ease-in-out infinite; }
+  .liquid-seam .sb2 { width: 50%; aspect-ratio: 1; right: -8%; top: 10%; background: radial-gradient(circle, var(--navy-mid), transparent 70%); opacity: 0.5; animation: seamDrift2 30s ease-in-out infinite; animation-delay: -6s; }
+  @keyframes seamDrift1 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(6%,-8%) scale(1.15); } }
+  @keyframes seamDrift2 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-6%,6%) scale(0.9); } }
+  .liquid-seam.paper-to-navy { background: linear-gradient(180deg, var(--paper) 0%, var(--paper) 26%, var(--navy) 74%, var(--navy) 100%); }
+  .liquid-seam.navy-to-brown { background: linear-gradient(180deg, var(--navy) 0%, var(--navy) 26%, var(--brown-900) 74%, var(--brown-900) 100%); }
+  .liquid-seam.brown-to-paper { background: linear-gradient(180deg, var(--brown-900) 0%, var(--brown-900) 26%, var(--paper) 74%, var(--paper) 100%); }
   @media (max-width: 640px) { .liquid-field { filter: blur(34px); } }
-  @media (prefers-reduced-motion: reduce) { .liquid-blob, .liquid-wave { animation: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .liquid-blob, .seam-blob { animation: none !important; } }
   .svc-row summary { list-style: none; cursor: pointer; }
   .svc-row summary::-webkit-details-marker { display: none; }
   .svc-row .chev { display: inline-block; transition: transform .25s ease; color: var(--color-accent-700); }
@@ -70,20 +76,26 @@
   .flow-item:hover { transform: translateX(4px); }
   .flow-item:hover .flow-title { color: var(--color-accent-700); }
   .hs-card { position: relative; padding: 22px 20px 20px; }
-  .hs-corner { position: absolute; width: 14px; height: 14px; border: 1.5px solid var(--gold); opacity: 0; }
-  @media (prefers-reduced-motion: no-preference) { .hs-corner { transition: opacity .25s ease; } }
-  .hs-card:hover .hs-corner, .hs-card:focus-within .hs-corner { opacity: 1; }
+  .hs-corner { position: absolute; width: 14px; height: 14px; border: 1.5px solid var(--gold); }
   .hs-corner.tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
   .hs-corner.tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
   .hs-corner.bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
   .hs-corner.br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
   .hs-chev { flex-shrink: 0; color: var(--brown-700); }
-  @media (prefers-reduced-motion: no-preference) { .hs-chev { transition: transform .25s ease; } }
-  .flow-item:hover .hs-chev { transform: translateX(4px); color: var(--color-accent-700); }
-  .hs-blurb-wrap { display: grid; grid-template-rows: 0fr; opacity: 0; }
-  @media (prefers-reduced-motion: no-preference) { .hs-blurb-wrap { transition: grid-template-rows .3s ease, opacity .3s ease, margin-top .3s ease; } }
-  .hs-card:hover .hs-blurb-wrap, .hs-card:focus-within .hs-blurb-wrap { grid-template-rows: 1fr; opacity: 1; margin-top: 12px; }
+  .hs-blurb-wrap { margin-top: 12px; }
   .hs-blurb-inner { overflow: hidden; }
+  @media (hover: hover) and (pointer: fine) {
+    .hs-corner { opacity: 0; }
+    .hs-card:hover .hs-corner, .hs-card:focus-within .hs-corner { opacity: 1; }
+    .flow-item:hover .hs-chev { transform: translateX(4px); color: var(--color-accent-700); }
+    .hs-blurb-wrap { display: grid; grid-template-rows: 0fr; opacity: 0; margin-top: 0; }
+    .hs-card:hover .hs-blurb-wrap, .hs-card:focus-within .hs-blurb-wrap { grid-template-rows: 1fr; opacity: 1; margin-top: 12px; }
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .hs-corner { transition: opacity .25s ease; }
+    .hs-chev { transition: transform .25s ease; }
+    .hs-blurb-wrap { transition: grid-template-rows .3s ease, opacity .3s ease, margin-top .3s ease; }
+  }
   .flow-title { transition: color .2s ease; }
   .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; position: relative; z-index: 1; }
   .site-header-inner { display: flex; align-items: center; gap: 32px; }
@@ -116,10 +128,11 @@
   .proof-corner.bl { bottom: 0; left: 0; border-right: none; border-top: none; }
   .proof-corner.br { bottom: 0; right: 0; border-left: none; border-top: none; }
 
-  .cw-metrics { display: flex; gap: 0; flex-wrap: wrap; margin-bottom: 44px; }
-  .cw-metric { flex: 1 1 150px; padding: 0 24px; }
+  .cw-metrics { display: grid; grid-template-columns: repeat(3, 1fr); margin-bottom: 44px; }
+  .cw-metric { padding: 0 24px; min-width: 0; }
   .cw-metric:first-child { padding-left: 0; }
   .cw-metric + .cw-metric { border-left: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); }
+  @media (max-width: 480px) { .cw-metric { padding: 0 10px; } }
   .cw-metric-val { font-family: var(--font-heading); font-weight: 600; font-size: clamp(24px,2.6vw,30px); color: var(--color-accent-400); font-variant-numeric: tabular-nums; line-height: 1; }
   .cw-metric-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 68%, transparent); margin-top: 8px; }
   .cw-deck { position: relative; height: 400px; }
@@ -382,7 +395,9 @@
         </section>
       </sc-if>
 
-      <div class="liquid-wave to-navy" aria-hidden="true"></div>
+      <div class="liquid-seam paper-to-navy" aria-hidden="true">
+        <div class="seam-blobs"><div class="seam-blob sb1"></div><div class="seam-blob sb2"></div></div>
+      </div>
 
       <section style="background:var(--navy)">
         <div style="max-width:1120px; margin:0 auto; padding:88px 28px 96px">
@@ -469,7 +484,9 @@
       </section>
       </section>
 
-      <div class="liquid-wave to-brown" aria-hidden="true"></div>
+      <div class="liquid-seam navy-to-brown" aria-hidden="true">
+        <div class="seam-blobs"><div class="seam-blob sb1"></div><div class="seam-blob sb2"></div></div>
+      </div>
 
       <section style="background:var(--brown-900); color:var(--paper)">
         <div style="max-width:1120px; margin:0 auto; padding:88px 28px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap">
@@ -480,6 +497,10 @@
           <button onClick="{{ goContact }}" class="btn" style="background:var(--paper); border-color:var(--paper); color:var(--brown-900); padding:13px 26px; font-size:15px">Get in touch</button>
         </div>
       </section>
+
+      <div class="liquid-seam brown-to-paper" aria-hidden="true">
+        <div class="seam-blobs"><div class="seam-blob sb1"></div><div class="seam-blob sb2"></div></div>
+      </div>
     </sc-if>
 
     <sc-if value="{{ isServices }}" hint-placeholder-val="{{ true }}">
@@ -534,6 +555,7 @@
                 </details>
               </sc-for>
             </div>
+            <button onClick="{{ goContact }}" style="background:none; border:0; cursor:pointer; padding:0; margin-top:18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); white-space:nowrap; display:inline-flex; align-items:center; gap:6px">Ask about Digital Presence <svg width="12" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="5" x2="12" y2="5"></line><path d="M8 1l5 4-5 4"></path></svg></button>
           </div>
 
           <div>
@@ -556,6 +578,7 @@
                 </details>
               </sc-for>
             </div>
+            <button onClick="{{ goContact }}" style="background:none; border:0; cursor:pointer; padding:0; margin-top:18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); white-space:nowrap; display:inline-flex; align-items:center; gap:6px">Ask about Infrastructure <svg width="12" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="5" x2="12" y2="5"></line><path d="M8 1l5 4-5 4"></path></svg></button>
           </div>
 
           <div>
@@ -578,6 +601,7 @@
                 </details>
               </sc-for>
             </div>
+            <button onClick="{{ goContact }}" style="background:none; border:0; cursor:pointer; padding:0; margin-top:18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); white-space:nowrap; display:inline-flex; align-items:center; gap:6px">Ask about Strategy &amp; Advisory <svg width="12" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="5" x2="12" y2="5"></line><path d="M8 1l5 4-5 4"></path></svg></button>
           </div>
 
         </div>
