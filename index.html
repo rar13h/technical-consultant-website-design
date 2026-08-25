@@ -392,7 +392,9 @@
             </div>
           </div>
           <div style="text-align:center">
-            <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--gold); border-color:var(--gold); color:var(--navy); padding:17px 34px; font-size:16px; font-weight:600">Request a Quote</button>
+            <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--gold); border-color:var(--gold); color:var(--navy); padding:17px 34px; font-size:16px; font-weight:600; margin-bottom:14px">Request a Quote</button>
+            <span style="display:block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:color-mix(in srgb, var(--ink) 45%, transparent); margin-bottom:10px">or</span>
+            <button onClick="{{ goServices }}" style="background:none; border:0; cursor:pointer; padding:0; display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Prefer to do it yourself? Get a checklist instead <svg width="12" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="5" x2="12" y2="5"></line><path d="M8 1l5 4-5 4"></path></svg></button>
           </div>
         </section>
 
@@ -423,7 +425,9 @@
             </div>
           </div>
           <div style="text-align:center; margin-top:8px">
-            <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--gold); border-color:var(--gold); color:var(--navy); padding:17px 34px; font-size:16px; font-weight:600">Request a Quote</button>
+            <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--gold); border-color:var(--gold); color:var(--navy); padding:17px 34px; font-size:16px; font-weight:600; margin-bottom:14px">Request a Quote</button>
+            <span style="display:block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:color-mix(in srgb, var(--ink) 45%, transparent); margin-bottom:10px">or</span>
+            <button onClick="{{ goServices }}" style="background:none; border:0; cursor:pointer; padding:0; display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--brown-700)">Prefer to do it yourself? Get a checklist instead <svg width="12" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="5" x2="12" y2="5"></line><path d="M8 1l5 4-5 4"></path></svg></button>
           </div>
         </section>
       </sc-if>
@@ -1090,7 +1094,8 @@ class Component extends DCLogic {
       { num: '11', name: 'Audits', blurb: 'A review of what you have now, with a prioritized fix list.', detail: 'Security, performance, and structure checked, written up in plain language.', group: 'consult' },
       { num: '12', name: 'End-to-end consulting', blurb: 'Ongoing guidance on what to build, buy, or fix next.', detail: 'The person you call when you are not sure what your business needs technically.', group: 'consult' },
       { num: '13', name: 'Roadmapping', blurb: 'A plan for what to build next, and in what order.', detail: 'A working session that turns a vague list of ideas into a sequenced, priced-out plan.', group: 'consult' },
-      { num: '14', name: 'DIY Guidance & Checklists', blurb: 'A clear starting point when you would rather do the work yourself.', detail: 'A written checklist and short walkthrough for what to do first, with guidance on what to bring in help for later.', group: 'consult' }
+      { num: '14', name: 'DIY Guidance & Checklists', blurb: 'A clear starting point when you would rather do the work yourself.', detail: 'A written checklist and short walkthrough for what to do first, with guidance on what to bring in help for later.', group: 'consult' },
+      { num: '15', name: 'Social media setup', blurb: 'Instagram, YouTube, and other accounts set up and connected to your site.', detail: 'Done for you from start to finish, or walked through step by step if you would rather manage it yourself going forward.', group: 'website' }
     ];
   }
 
@@ -1177,6 +1182,7 @@ class Component extends DCLogic {
       homeServices: [
         Object.assign({}, all.find((s) => s.name === 'AI integration'), { catLabel: 'AI & AUTOMATION' }),
         Object.assign({}, all.find((s) => s.name === 'Website design & build'), { catLabel: 'DIGITAL PRESENCE' }),
+        Object.assign({}, all.find((s) => s.name === 'Social media setup'), { catLabel: 'DIGITAL PRESENCE' }),
         Object.assign({}, all.find((s) => s.name === 'Domain & business email'), { catLabel: 'INFRASTRUCTURE' }),
         Object.assign({}, all.find((s) => s.name === 'End-to-end consulting'), { catLabel: 'STRATEGY & ADVISORY' })
       ],
