@@ -111,10 +111,13 @@
   .nav-link { position: relative; padding-bottom: 5px !important; }
   .nav-link::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 15px; height: 1.5px; background: var(--gold); transform: translateX(-50%) scaleX(0); transition: transform .25s ease; }
   .nav-link.active::after { transform: translateX(-50%) scaleX(1); }
-  .mobile-menu .nav-link::after { bottom: 10px; }
+  .mobile-menu .nav-link::after { bottom: 0; }
+  .mobile-menu .nav-link.active::after { width: 24px; height: 2px; }
   .menu-toggle { display: none; background: none; border: 0; padding: 4px 2px; cursor: pointer; }
   .mobile-menu { display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 8px 28px 26px; border-top: 1px solid var(--hair); animation: rise .2s ease both; }
   .mobile-menu button { padding: 15px 0; font-size: 17px; text-align: center; }
+  .contact-deco { display: block; width: 100%; max-width: 300px; height: auto; margin: 90px auto 0; opacity: 0.16; }
+  @media (max-width: 760px) { .contact-deco { margin-top: 24px; max-width: 130px; } }
   .contact-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 72px; align-items: start; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   select.input { appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%231c2430' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 13px; padding-right: 34px; }
@@ -711,7 +714,7 @@
           <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(40px,5vw,64px); line-height:1.05; letter-spacing:-0.02em; margin:0 0 20px">Let's get started.</h1>
           <p style="font-size:17px; line-height:1.65; color:color-mix(in srgb, var(--ink) 65%, transparent); margin:0 0 36px; max-width:40ch">Welcome! Fill out the form and tell me a bit about what you're looking to do, and we'll get in touch soon!</p>
 
-          <svg width="300" height="196" viewBox="0 0 150 98" style="display:block; width:100%; max-width:300px; height:auto; margin:90px auto 0; opacity:0.16">
+          <svg width="300" height="196" viewBox="0 0 150 98" class="contact-deco">
             <g fill="none" stroke="var(--navy)" stroke-width="1">
               <rect x="30" y="10" width="90" height="60" rx="3"></rect>
               <rect x="37" y="17" width="76" height="46" rx="1"></rect>
