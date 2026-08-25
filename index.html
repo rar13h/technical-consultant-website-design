@@ -65,6 +65,14 @@
   .liquid-seam.navy-to-brown { background: linear-gradient(180deg, var(--navy) 0%, var(--navy) 26%, var(--brown-900) 74%, var(--brown-900) 100%); }
   .liquid-seam.brown-to-paper { background: linear-gradient(180deg, var(--brown-900) 0%, var(--brown-900) 26%, var(--paper) 74%, var(--paper) 100%); }
   @media (max-width: 640px) { .liquid-field { filter: blur(34px); } }
+  .hero-constellation { display: none; }
+  @media (max-width: 640px) {
+    .hero-constellation { display: block; position: absolute; inset: 0; z-index: 0; opacity: 0.4; }
+    .hero-constellation line { stroke: var(--brown-500); stroke-width: 1; opacity: 0.5; }
+    .hero-constellation circle { fill: var(--gold); animation: heroSparkle 3.2s ease-in-out infinite; }
+  }
+  @keyframes heroSparkle { 0%, 100% { opacity: 0.22; } 50% { opacity: 0.9; } }
+  @media (prefers-reduced-motion: reduce) { .hero-constellation circle { animation: none !important; opacity: 0.55; } }
   @media (prefers-reduced-motion: reduce) { .liquid-blob, .seam-blob { animation: none !important; } }
   .svc-row summary { list-style: none; cursor: pointer; }
   .svc-row summary::-webkit-details-marker { display: none; }
@@ -260,6 +268,18 @@
           <div class="liquid-blob b2"></div>
           <div class="liquid-blob b3"></div>
         </div>
+        <svg class="hero-constellation" viewBox="0 0 400 700" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="320" y1="90" x2="360" y2="180"/>
+          <line x1="360" y1="180" x2="300" y2="260"/>
+          <line x1="60" y1="480" x2="120" y2="560"/>
+          <line x1="120" y1="560" x2="80" y2="640"/>
+          <circle cx="320" cy="90" r="2.6" style="animation-delay:-0.4s"/>
+          <circle cx="360" cy="180" r="3.4" style="animation-delay:-1.8s"/>
+          <circle cx="300" cy="260" r="2.2" style="animation-delay:-2.6s"/>
+          <circle cx="60" cy="480" r="2.6" style="animation-delay:-1.1s"/>
+          <circle cx="120" cy="560" r="3.4" style="animation-delay:-0.2s"/>
+          <circle cx="80" cy="640" r="2.2" style="animation-delay:-2.1s"/>
+        </svg>
         <div class="hero-grid">
           <div>
             <div class="eyebrow-mono" style="display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.05em; color:var(--brown-700); margin-bottom:28px">
@@ -510,6 +530,18 @@
           <div class="liquid-blob b2"></div>
           <div class="liquid-blob b3"></div>
         </div>
+        <svg class="hero-constellation" viewBox="0 0 400 500" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="320" y1="60" x2="360" y2="140"/>
+          <line x1="360" y1="140" x2="300" y2="210"/>
+          <line x1="70" y1="330" x2="130" y2="400"/>
+          <line x1="130" y1="400" x2="90" y2="460"/>
+          <circle cx="320" cy="60" r="2.6" style="animation-delay:-0.4s"/>
+          <circle cx="360" cy="140" r="3.4" style="animation-delay:-1.8s"/>
+          <circle cx="300" cy="210" r="2.2" style="animation-delay:-2.6s"/>
+          <circle cx="70" cy="330" r="2.6" style="animation-delay:-1.1s"/>
+          <circle cx="130" cy="400" r="3.4" style="animation-delay:-0.2s"/>
+          <circle cx="90" cy="460" r="2.2" style="animation-delay:-2.1s"/>
+        </svg>
         <div class="liquid-content">
           <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--brown-700); margin-bottom:22px">Services</div>
           <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(42px,6vw,74px); line-height:1.04; letter-spacing:-0.02em; margin:0 0 22px; max-width:18ch">Everything a business needs to exist online.</h1>
