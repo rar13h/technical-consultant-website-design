@@ -54,11 +54,12 @@
   @keyframes liquidB { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-9%,6%) scale(0.92); } }
   @keyframes liquidC { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(5%,-12%) scale(1.18); } }
   .liquid-content { position: relative; z-index: 1; }
-  .liquid-wave { position: relative; height: clamp(56px,8vw,110px); overflow: hidden; line-height: 0; }
-  .liquid-wave svg { position: absolute; top: 0; left: 0; height: 100%; width: 200%; animation: liquidWave 28s linear infinite; }
-  @keyframes liquidWave { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .liquid-wave { height: clamp(56px,8vw,110px); background-repeat: repeat-x; background-position: 0 0; background-size: 150px 100%; animation: liquidWaveBG 20s linear infinite; }
+  .liquid-wave.to-navy { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 160' preserveAspectRatio='none'%3E%3Cpath fill='%231c2430' d='M0,110 C75,80 225,140 300,110 L300,160 L0,160 Z'/%3E%3C/svg%3E"); }
+  .liquid-wave.to-brown { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 160' preserveAspectRatio='none'%3E%3Cpath fill='%234a3b21' d='M0,110 C75,80 225,140 300,110 L300,160 L0,160 Z'/%3E%3C/svg%3E"); }
+  @keyframes liquidWaveBG { from { background-position: 0 0; } to { background-position: -150px 0; } }
   @media (max-width: 640px) { .liquid-field { filter: blur(34px); } }
-  @media (prefers-reduced-motion: reduce) { .liquid-blob, .liquid-wave svg { animation: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .liquid-blob, .liquid-wave { animation: none !important; } }
   .svc-row summary { list-style: none; cursor: pointer; }
   .svc-row summary::-webkit-details-marker { display: none; }
   .svc-row .chev { display: inline-block; transition: transform .25s ease; color: var(--color-accent-700); }
@@ -362,7 +363,7 @@
         </section>
       </sc-if>
 
-      <div class="liquid-wave" aria-hidden="true"><svg viewBox="0 0 2400 160" preserveAspectRatio="none"><path fill="#1c2430" d="M0,110 C75,80 225,140 300,110 C375,80 525,140 600,110 C675,80 825,140 900,110 C975,80 1125,140 1200,110 C1275,80 1425,140 1500,110 C1575,80 1725,140 1800,110 C1875,80 2025,140 2100,110 C2175,80 2325,140 2400,110 L2400,160 L0,160 Z"/></svg></div>
+      <div class="liquid-wave to-navy" aria-hidden="true"></div>
 
       <section style="background:var(--navy)">
         <div style="max-width:1120px; margin:0 auto; padding:88px 28px 96px">
@@ -449,7 +450,7 @@
       </section>
       </section>
 
-      <div class="liquid-wave" aria-hidden="true"><svg viewBox="0 0 2400 160" preserveAspectRatio="none"><path fill="#4a3b21" d="M0,110 C75,80 225,140 300,110 C375,80 525,140 600,110 C675,80 825,140 900,110 C975,80 1125,140 1200,110 C1275,80 1425,140 1500,110 C1575,80 1725,140 1800,110 C1875,80 2025,140 2100,110 C2175,80 2325,140 2400,110 L2400,160 L0,160 Z"/></svg></div>
+      <div class="liquid-wave to-brown" aria-hidden="true"></div>
 
       <section style="background:var(--brown-900); color:var(--paper)">
         <div style="max-width:1120px; margin:0 auto; padding:88px 28px; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap">
@@ -983,7 +984,8 @@ class Component extends DCLogic {
       { num: '10', name: 'QR codes & digital business cards', blurb: 'Codes and cards for menus, signage, and networking.', detail: 'Print-ready files and a scannable digital card, pointing to pages you can update later.', group: 'setup' },
       { num: '11', name: 'Audits', blurb: 'A review of what you have now, with a prioritized fix list.', detail: 'Security, performance, and structure checked, written up in plain language.', group: 'consult' },
       { num: '12', name: 'End-to-end consulting', blurb: 'Ongoing guidance on what to build, buy, or fix next.', detail: 'The person you call when you are not sure what your business needs technically.', group: 'consult' },
-      { num: '13', name: 'Roadmapping', blurb: 'A plan for what to build next, and in what order.', detail: 'A working session that turns a vague list of ideas into a sequenced, priced-out plan.', group: 'consult' }
+      { num: '13', name: 'Roadmapping', blurb: 'A plan for what to build next, and in what order.', detail: 'A working session that turns a vague list of ideas into a sequenced, priced-out plan.', group: 'consult' },
+      { num: '14', name: 'DIY Guidance & Checklists', blurb: 'A clear starting point when you would rather do the work yourself.', detail: 'A written checklist and short walkthrough for what to do first, with guidance on what to bring in help for later.', group: 'consult' }
     ];
   }
 
