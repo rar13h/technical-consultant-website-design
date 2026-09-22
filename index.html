@@ -118,6 +118,79 @@
   .mobile-menu button { padding: 15px 0; font-size: 17px; text-align: center; }
   .contact-deco { display: block; width: 100%; max-width: 300px; height: auto; margin: 90px auto 0; opacity: 0.16; }
   @media (max-width: 760px) { .contact-deco { margin-top: 24px; max-width: 130px; } }
+  /* mock-up previews */
+  .mk-browser { background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 18px 40px rgba(28,36,48,.28), 0 2px 6px rgba(28,36,48,.15); width:100%; max-width:300px; }
+  .mk-browser .bar { height:18px; background:#e9e5dc; display:flex; gap:4px; align-items:center; padding:0 8px; }
+  .mk-browser .bar i { width:6px; height:6px; border-radius:50%; background:#c4bba8; }
+  .mk-browser .shot { overflow:hidden; aspect-ratio:16/10; }
+  .mk-browser img { display:block; width:100%; height:100%; object-fit:cover; animation:mkPan 14s ease-in-out infinite alternate; }
+  @keyframes mkPan { from { transform:scale(1) translateX(0); } to { transform:scale(1.09) translateX(-1.5%); } }
+  .mk-phone { position:relative; width:112px; aspect-ratio:1/2; border-radius:20px; background:#0f1218; padding:4px; box-shadow:0 18px 40px rgba(28,36,48,.3), 0 2px 6px rgba(28,36,48,.2), inset 0 0 0 1px rgba(255,255,255,.12); }
+  .mk-phone .shot { position:relative; width:100%; height:100%; border-radius:16px; overflow:hidden; }
+  .mk-phone img { display:block; width:100%; height:100%; object-fit:cover; object-position:top; }
+  .mk-phone:before { content:""; position:absolute; top:8px; left:50%; width:26px; height:6px; margin-left:-13px; border-radius:4px; background:#0f1218; z-index:2; }
+  .mk-scan { position:absolute; left:18%; right:18%; height:2px; top:70%; background:linear-gradient(90deg,transparent,#e7cfa4,transparent); box-shadow:0 0 8px 2px rgba(231,207,164,.7); animation:mkScan 2.8s ease-in-out infinite; }
+  @keyframes mkScan { 0%,100% { top:70%; opacity:0; } 15%,85% { opacity:1; } 50% { top:85%; } }
+  .mk-type { position:absolute; left:8%; bottom:19%; display:flex; gap:3px; background:#fff; padding:7px 10px; border-radius:12px; box-shadow:0 1px 2px rgba(0,0,0,.12); }
+  .mk-type i { width:5px; height:5px; border-radius:50%; background:#a9a290; animation:mkDot 1.2s ease-in-out infinite; }
+  .mk-type i:nth-child(2) { animation-delay:.15s; } .mk-type i:nth-child(3) { animation-delay:.3s; }
+  @keyframes mkDot { 0%,60%,100% { transform:translateY(0); opacity:.5; } 30% { transform:translateY(-3px); opacity:1; } }
+  .mk-float { animation:mkFloat 6s ease-in-out infinite; }
+  .mk-d1 { animation-delay:-1.2s; } .mk-d2 { animation-delay:-2.4s; } .mk-d3 { animation-delay:-3.6s; } .mk-d4 { animation-delay:-4.8s; }
+  @keyframes mkFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-5px); } }
+  .mk-stage { height:240px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#efe9df,#e0d4ba); border-radius:12px; padding:14px; overflow:hidden; }
+  .mk-strip-wrap { background:var(--navy); color:var(--paper); padding:48px 0 40px; }
+  .mk-strip { display:flex; gap:18px; overflow-x:auto; padding:8px 2px 20px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:var(--gold) rgba(255,255,255,.14); }
+  .mk-strip::-webkit-scrollbar { display:block; height:6px; }
+  .mk-strip::-webkit-scrollbar-thumb { background:var(--gold); border-radius:3px; }
+  .mk-strip::-webkit-scrollbar-track { background:rgba(255,255,255,.14); border-radius:3px; }
+  .mk-strip .it { flex:0 0 230px; scroll-snap-align:start; transition:transform .3s ease; }
+  .mk-strip .it:hover { transform:translateY(-4px); }
+  .mk-strip .mk-stage { height:200px; background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.04)); padding:14px; }
+  .mk-strip .mk-phone { width:82px; }
+  .mk-strip .cap { font-size:13px; margin-top:10px; color:color-mix(in srgb, var(--paper) 75%, transparent); }
+  .mk-strip .cap b { color:var(--paper); display:block; font-size:15px; font-family:var(--font-heading); font-weight:600; }
+  .mk-swipe-hint { display:none; align-items:center; gap:6px; margin:0 0 6px; font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--brown-500); }
+  .mk-swipe-arrow { animation:mkNudge 1.6s ease-in-out infinite; }
+  @keyframes mkNudge { 0%,100% { transform:translateX(0); } 50% { transform:translateX(5px); } }
+  .mk-combo { position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+  .mk-combo .mk-browser { width:82%; max-width:none; margin:0 18% 6% 0; }
+  .mk-combo .mk-phone { position:absolute; right:3%; bottom:-8px; width:72px; }
+  .mk-combo.solo .mk-phone { position:static; width:100px; }
+  .mk-combo.only .mk-browser { width:92%; margin:0; }
+  .mk-range { display:flex; align-items:center; gap:12px; font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--brown-700); margin-bottom:10px; }
+  .mk-range i { flex:1; height:1px; background:linear-gradient(90deg,var(--brown-200),var(--gold)); }
+  .mk-badge { display:inline-block; font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--brown-700); background:var(--brown-200); padding:4px 9px; border-radius:99px; margin-left:8px; vertical-align:middle; }
+  .mk-h-m { display:none; } .mk-h-d { display:inline; }
+  .mk-swipe-hint { display:flex; }
+  .mk-cards { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:4px 2px 20px; scrollbar-width:thin; scrollbar-color:var(--gold) var(--brown-200); }
+  .mk-cards::-webkit-scrollbar { display:block; height:6px; }
+  .mk-cards::-webkit-scrollbar-thumb { background:var(--gold); border-radius:3px; }
+  .mk-cards::-webkit-scrollbar-track { background:var(--brown-200); border-radius:3px; }
+  .mk-card { flex:0 0 300px; scroll-snap-align:start; position:relative; border-radius:14px; overflow:hidden; background:linear-gradient(135deg,#efe9df,#e0d4ba); box-shadow:0 8px 22px rgba(28,36,48,.1); transition:transform .3s ease, box-shadow .3s ease; }
+  .mk-card:hover { transform:translateY(-4px); box-shadow:0 16px 34px rgba(28,36,48,.16); }
+  .mk-card .mk-phone { width:100px; }
+  .mk-cap { position:absolute; left:0; right:0; bottom:0; padding:11px 14px; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.04em; color:#fff; background:linear-gradient(transparent,rgba(15,12,8,.72)); opacity:0; transform:translateY(4px); transition:opacity .25s ease, transform .25s ease; pointer-events:none; }
+  .mk-card:hover .mk-cap, .mk-card:focus-within .mk-cap { opacity:1; transform:translateY(0); }
+  @supports (animation-timeline: view()) {
+    .mk-card, .mk-strip .it { animation:mkReveal linear both; animation-timeline:view(); animation-range:entry 0% entry 45%; }
+    @keyframes mkReveal { from { opacity:0; transform:translateY(26px); } to { opacity:1; transform:none; } }
+  }
+  @media (max-width: 640px) {
+    .mk-combo.solo .mk-phone { width:100px; }
+    .mk-h-m { display:inline; } .mk-h-d { display:none; }
+    .mk-combo .mk-phone { width:64px; }
+    .mk-strip .it { flex:0 0 74%; }
+    .mk-strip .mk-stage { height:230px; }
+    .mk-strip .mk-phone { width:98px; }
+    .mk-cards { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; gap:14px; margin:0 -20px; padding:4px 20px 20px; scroll-padding-left:20px; }
+    .mk-card { flex:0 0 78%; scroll-snap-align:start; }
+    .mk-cap { opacity:1; transform:none; padding:9px 12px; font-size:11px; }
+    .mk-range { flex-wrap:wrap; row-gap:4px; }
+    .mk-range span { flex:0 0 auto; }
+    .mk-range i { flex:1 1 40px; min-width:40px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .mk-browser img, .mk-float, .mk-scan, .mk-type i, .mk-swipe-arrow { animation:none !important; } .mk-card, .mk-strip .it { animation:none !important; opacity:1 !important; } }
   .ticker { background: var(--navy); overflow: hidden; white-space: nowrap; padding: 13px 0; }
   .ticker-track { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent-400); }
   .ticker-track span { padding-right: 40px; position: relative; }
@@ -373,6 +446,24 @@
         <div class="ledger-single" onClick="{{ goServices }}"><div class="nm">Digital Presence</div></div>
         <div class="ledger-single" onClick="{{ goServices }}"><div class="nm">Setup</div></div>
         <div class="ledger-single" onClick="{{ goServices }}"><div class="nm">Strategy</div></div>
+      </section>
+
+      <section class="mk-strip-wrap">
+        <div style="max-width:1120px; margin:0 auto; padding:0 28px">
+          <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.1em; color:var(--brown-500); margin-bottom:10px">MOCK-UPS</div>
+          <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(24px,2.6vw,30px); letter-spacing:-0.015em; margin:0 0 16px; color:var(--paper)">Simple to advanced, a glimpse at what we build.</h2>
+          <div class="mk-swipe-hint"><span class="mk-h-m">Swipe</span><span class="mk-h-d">Scroll</span> <svg class="mk-swipe-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="mk-strip">
+            <div class="it"><div class="mk-stage"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-pro.jpg" alt="Professional services website mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Website</b></div></div>
+            <div class="it"><div class="mk-stage"><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-card.jpg" alt="Digital business card mock-up" width="330" height="660" loading="lazy"><span class="mk-scan"></span></div></div></div><div class="cap"><b>QR card</b></div></div>
+            <div class="it"><div class="mk-stage"><div class="mk-phone mk-float mk-d2"><div class="shot"><img src="mockups/m-bot1.jpg" alt="Chat bot mock-up" width="330" height="660" loading="lazy"><span class="mk-type"><i></i><i></i><i></i></span></div></div></div><div class="cap"><b>Chat bot</b></div></div>
+            <div class="it"><div class="mk-stage"><div class="mk-browser mk-float mk-d3"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-form1.jpg" alt="Project inquiry form mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Form</b></div></div>
+            <div class="it"><div class="mk-stage"><div class="mk-browser mk-float mk-d4"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-store.jpg" alt="Online store mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Online store</b></div></div>
+            <div class="it"><div class="mk-stage"><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-social.jpg" alt="Social media profile mock-up" width="330" height="660" loading="lazy"></div></div></div><div class="cap"><b>Social media</b></div></div>
+            <div class="it"><div class="mk-stage"><div class="mk-browser mk-float mk-d2"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-email.jpg" alt="Business email mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Business email</b></div></div>
+            <div class="it"><div class="mk-stage"><div class="mk-browser mk-float mk-d3"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-brand.jpg" alt="Brand board mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Branding</b></div></div>
+          </div>
+        </div>
       </section>
 
       <sc-if value="{{ showProcess }}" hint-placeholder-val="{{ true }}">
@@ -654,6 +745,26 @@
             <button onClick="{{ goContact }}" style="background:none; border:0; cursor:pointer; padding:0; margin-top:18px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); white-space:nowrap; display:inline-flex; align-items:center; gap:6px">Ask about Strategy &amp; Advisory <svg width="12" height="8" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="0" y1="5" x2="12" y2="5"></line><path d="M8 1l5 4-5 4"></path></svg></button>
           </div>
 
+        </div>
+      </section>
+
+      <section style="max-width:1120px; margin:0 auto; padding:0 28px 96px">
+        <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.1em; color:var(--brown-700); margin-bottom:10px">WHAT WE BUILD</div>
+        <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 8px">See the range.</h2>
+        <p style="margin:0 0 22px; max-width:58ch; font-size:16px; line-height:1.55; color:color-mix(in srgb, var(--ink) 65%, transparent)">Simple to advanced, playful to polished. A small sample of what we build, all designed for desktop and mobile.</p>
+        <div class="mk-range"><span>Simple</span><i></i><span>Advanced</span></div><div class="mk-swipe-hint" style="margin:10px 0 0"><span class="mk-h-m">Swipe</span><span class="mk-h-d">Scroll</span> <svg class="mk-swipe-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="mk-cards">
+          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-cart.jpg" alt="Coffee cart website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-cart.jpg" alt="Coffee cart website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Coffee cart</span></div>
+          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo solo"><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-card.jpg" alt="QR business card" width="330" height="660" loading="lazy"><span class="mk-scan"></span></div></div></div></div><span class="mk-cap">QR card &middot; Digital business card</span></div>
+          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-apparel.jpg" alt="Personal clothing brand website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-apparel.jpg" alt="Personal clothing brand website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Personal clothing brand</span></div>
+          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo only"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-brand2.jpg" alt="Logo suite" width="720" height="450" loading="lazy"></div></div></div></div><span class="mk-cap">Branding &middot; Logo and brand kit</span></div>
+          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-site2.jpg" alt="Editorial salon website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-site2.jpg" alt="Editorial salon website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Editorial salon</span></div>
+          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-form2.jpg" alt="Quote request form on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-form2.jpg" alt="Quote request form on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Form &middot; Quote request</span></div>
+          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-store.jpg" alt="Online store on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-store.jpg" alt="Online store on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Online store &middot; Storefront</span></div>
+          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-pro.jpg" alt="Professional services website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-pro.jpg" alt="Professional services website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Professional services</span></div>
+          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-widget.jpg" alt="Website chat popup on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-widget.jpg" alt="Website chat popup on mobile" width="330" height="660" loading="lazy"><span class="mk-type"><i></i><i></i><i></i></span></div></div></div></div><span class="mk-cap">Chat bot &middot; Website chat popup</span></div>
+          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo solo"><div class="mk-phone mk-float mk-d2"><div class="shot"><img src="mockups/m-bot3.jpg" alt="Order support chat" width="330" height="660" loading="lazy"><span class="mk-type"><i></i><i></i><i></i></span></div></div></div></div><span class="mk-cap">Chat bot &middot; Order support</span></div>
+        </div>
         </div>
       </section>
 
