@@ -317,6 +317,14 @@
     footer > div { padding-left: 20px !important; padding-right: 20px !important; }
     .blueprint { padding: 28px 22px !important; }
   }
+  .hero-bleed { padding-left: 0 !important; padding-right: 0 !important; }
+  .hero-bleed-bg { position: absolute; top: -12%; left: 0; right: 0; height: 128%; background-size: cover; background-position: center 55%; z-index: 0; }
+  .hero-bleed-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(28,36,48,.12) 0%, rgba(22,21,19,.46) 55%, rgba(22,21,19,.88) 100%); }
+  .hero-bleed-overlay-light { background: linear-gradient(175deg, color-mix(in srgb, var(--paper) 62%, transparent) 0%, color-mix(in srgb, var(--paper) 86%, transparent) 55%, color-mix(in srgb, var(--paper) 94%, transparent) 100%); backdrop-filter: blur(1px); }
+  .hero-bleed-content { position: relative; z-index: 2; max-width: 1120px; margin: auto auto 0; padding: 0 28px 64px; width: 100%; }
+  .hero-bleed-tag { font-size: 12px; padding: 7px 14px; border: 1px solid rgba(247,244,239,.35); border-radius: 100px; color: var(--paper); }
+  .hero-bleed-panel { background: color-mix(in srgb, var(--paper) 82%, transparent); backdrop-filter: blur(10px); border: 1px solid color-mix(in srgb, var(--paper) 55%, transparent); border-radius: 18px; padding: 22px; box-shadow: 0 18px 44px rgba(22,21,19,.14); }
+  @media (max-width: 640px) { .hero-bleed { min-height: 76vh !important; } }
 </style>
 </helmet>
 
@@ -365,67 +373,54 @@
   <main style="flex:1">
 
     <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
-      <section style="max-width:1200px; margin:0 auto; padding:64px 28px 110px; animation:rise .5s ease both; position:relative; overflow:hidden">
-        <div class="liquid-field" aria-hidden="true">
-          <div class="liquid-blob b1"></div>
-          <div class="liquid-blob b2"></div>
-          <div class="liquid-blob b3"></div>
-        </div>
-        <svg class="hero-constellation" viewBox="0 0 400 700" preserveAspectRatio="none" aria-hidden="true">
-          <line x1="320" y1="90" x2="360" y2="180"/>
-          <line x1="360" y1="180" x2="300" y2="260"/>
-          <line x1="60" y1="480" x2="120" y2="560"/>
-          <line x1="120" y1="560" x2="80" y2="640"/>
-          <circle cx="320" cy="90" r="2.6" style="animation-delay:-0.4s"/>
-          <circle cx="360" cy="180" r="3.4" style="animation-delay:-1.8s"/>
-          <circle cx="300" cy="260" r="2.2" style="animation-delay:-2.6s"/>
-          <circle cx="60" cy="480" r="2.6" style="animation-delay:-1.1s"/>
-          <circle cx="120" cy="560" r="3.4" style="animation-delay:-0.2s"/>
-          <circle cx="80" cy="640" r="2.2" style="animation-delay:-2.1s"/>
-        </svg>
-        <div class="hero-grid">
-          <div>
-            <div class="eyebrow-mono" style="display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.05em; color:var(--brown-700); margin-bottom:28px">
-              <span style="width:20px; height:1px; background:var(--brown-700); display:inline-block"></span>
-              ENGINEERING &amp; CONSULTING
-            </div>
-            <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(42px,5vw,72px); line-height:1.04; letter-spacing:-0.01em; margin:0 0 26px">Engineering the technical side of your business.</h1>
-            <p style="font-size:18px; line-height:1.65; max-width:46ch; margin:0 0 32px; color:color-mix(in srgb, var(--ink) 68%, transparent); text-wrap:pretty">Ek Din moves fast and scopes it honestly from the first call. The technical foundation your business runs on, built once and owned by you, not rented from a platform.</p>
-            <div class="hero-tags-mobile eyebrow-mono" style="gap:10px; flex-wrap:wrap; margin-bottom:36px">
-              <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">AI Agents</span>
-              <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Apps</span>
-              <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Infrastructure</span>
-              <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Websites</span>
-            </div>
-            <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap">
-              <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:13px 26px; font-size:15px">Schedule a Consultation</button>
-            </div>
-            <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.05em; color:var(--brown-700); margin-top:16px">Boutique by design, so yours gets real attention.</div>
-          </div>
-
-          <div class="map-wrap" style="position:relative">
-            <div class="map-card">
-              <div class="map-stage">
-                <svg viewBox="0 0 100 100" aria-hidden="true">
-                  <line class="map-line {{ aiLineClass }}" x1="50" y1="50" x2="50" y2="17.5"></line>
-                  <line class="map-line {{ appsLineClass }}" x1="50" y1="50" x2="82.5" y2="37.5"></line>
-                  <line class="map-line {{ infraLineClass }}" x1="50" y1="50" x2="82.5" y2="67.5"></line>
-                  <line class="map-line {{ websitesLineClass }}" x1="50" y1="50" x2="50" y2="85"></line>
-                </svg>
-                <div class="map-core">EK DIN</div>
-                <button class="map-node" style="left:50%; top:17.5%" onClick="{{ selectAi }}" aria-pressed="{{ isAiActive }}" aria-label="AI Agents">AI</button>
-                <button class="map-node" style="left:82.5%; top:37.5%" onClick="{{ selectApps }}" aria-pressed="{{ isAppsActive }}">Apps</button>
-                <button class="map-node" style="left:82.5%; top:67.5%" onClick="{{ selectInfra }}" aria-pressed="{{ isInfraActive }}" aria-label="Infrastructure">Infra</button>
-                <button class="map-node" style="left:50%; top:85%" onClick="{{ selectWebsites }}" aria-pressed="{{ isWebsitesActive }}" aria-label="Websites">Website</button>
+      <section class="hero-bleed" id="heroBleed" style="position:relative; overflow:hidden; min-height:84vh; display:flex; flex-direction:column; animation:rise .5s ease both">
+        <div class="hero-bleed-bg" id="heroBleedBg" style="background-image:url('hero-midtown.jpg')"></div>
+        <div class="hero-bleed-overlay hero-bleed-overlay-light"></div>
+        <div class="hero-bleed-content" id="heroBleedContent" style="margin:auto auto; padding:64px 28px">
+          <div class="hero-grid">
+            <div>
+              <div class="eyebrow-mono" style="display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.05em; color:var(--brown-700); margin-bottom:28px">
+                <span style="width:20px; height:1px; background:var(--brown-700); display:inline-block"></span>
+                ENGINEERING &amp; CONSULTING
               </div>
-              <div class="map-detail">
-                <sc-if value="{{ noActiveNode }}" hint-placeholder-val="{{ true }}">
-                  <div class="d-hint">Click a point to see what's included</div>
-                </sc-if>
-                <sc-if value="{{ hasActiveNode }}" hint-placeholder-val="{{ false }}">
-                  <div class="d-title">{{ activeNodeTitle }}<button class="d-close" onClick="{{ clearNode }}" aria-label="Close details">Close</button></div>
-                  <div class="d-body">{{ activeNodeBody }}</div>
-                </sc-if>
+              <h1 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(42px,5vw,72px); line-height:1.04; letter-spacing:-0.01em; margin:0 0 26px">Engineering the technical side of your business.</h1>
+              <p style="font-size:18px; line-height:1.65; max-width:46ch; margin:0 0 32px; color:color-mix(in srgb, var(--ink) 68%, transparent); text-wrap:pretty">Ek Din moves fast and scopes it honestly from the first call. The technical foundation your business runs on, built once and owned by you, not rented from a platform.</p>
+              <div class="hero-tags-mobile eyebrow-mono" style="gap:10px; flex-wrap:wrap; margin-bottom:36px">
+                <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">AI Agents</span>
+                <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Apps</span>
+                <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Infrastructure</span>
+                <span style="font-size:12px; padding:7px 14px; border:1px solid var(--hair); border-radius:100px">Websites</span>
+              </div>
+              <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap">
+                <button onClick="{{ goContact }}" class="btn btn-primary" style="background:var(--navy); border-color:var(--navy); color:var(--paper); padding:13px 26px; font-size:15px">Schedule a Consultation</button>
+              </div>
+              <div class="eyebrow-mono" style="font-size:11px; letter-spacing:0.05em; color:var(--brown-700); margin-top:16px">Boutique by design, so yours gets real attention.</div>
+            </div>
+
+            <div class="map-wrap hero-bleed-panel" style="position:relative">
+              <div class="map-card">
+                <div class="map-stage">
+                  <svg viewBox="0 0 100 100" aria-hidden="true">
+                    <line class="map-line {{ aiLineClass }}" x1="50" y1="50" x2="50" y2="17.5"></line>
+                    <line class="map-line {{ appsLineClass }}" x1="50" y1="50" x2="82.5" y2="37.5"></line>
+                    <line class="map-line {{ infraLineClass }}" x1="50" y1="50" x2="82.5" y2="67.5"></line>
+                    <line class="map-line {{ websitesLineClass }}" x1="50" y1="50" x2="50" y2="85"></line>
+                  </svg>
+                  <div class="map-core">EK DIN</div>
+                  <button class="map-node" style="left:50%; top:17.5%" onClick="{{ selectAi }}" aria-pressed="{{ isAiActive }}" aria-label="AI Agents">AI</button>
+                  <button class="map-node" style="left:82.5%; top:37.5%" onClick="{{ selectApps }}" aria-pressed="{{ isAppsActive }}">Apps</button>
+                  <button class="map-node" style="left:82.5%; top:67.5%" onClick="{{ selectInfra }}" aria-pressed="{{ isInfraActive }}" aria-label="Infrastructure">Infra</button>
+                  <button class="map-node" style="left:50%; top:85%" onClick="{{ selectWebsites }}" aria-pressed="{{ isWebsitesActive }}" aria-label="Websites">Website</button>
+                </div>
+                <div class="map-detail">
+                  <sc-if value="{{ noActiveNode }}" hint-placeholder-val="{{ true }}">
+                    <div class="d-hint">Click a point to see what's included</div>
+                  </sc-if>
+                  <sc-if value="{{ hasActiveNode }}" hint-placeholder-val="{{ false }}">
+                    <div class="d-title">{{ activeNodeTitle }}<button class="d-close" onClick="{{ clearNode }}" aria-label="Close details">Close</button></div>
+                    <div class="d-body">{{ activeNodeBody }}</div>
+                  </sc-if>
+                </div>
               </div>
             </div>
           </div>
@@ -1470,6 +1465,23 @@ class Component extends DCLogic {
     else if (e.key === 'ArrowRight') step(1);
   });
 })();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !window.gsap || !window.ScrollTrigger) return;
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to('#heroBleedBg', {
+      yPercent: 16, ease: 'none',
+      scrollTrigger: { trigger: '#heroBleed', start: 'top top', end: 'bottom top', scrub: true }
+    });
+    gsap.to('#heroBleedContent', {
+      y: -40, opacity: 0.25, ease: 'none',
+      scrollTrigger: { trigger: '#heroBleed', start: 'top top', end: 'bottom top', scrub: true }
+    });
+  })();
 </script>
 </body>
 </html>
