@@ -191,8 +191,8 @@
   .mk-lb-nav.prev { left:20px; } .mk-lb-nav.next { right:20px; }
   @media (max-width:640px) {
     .mk-lb-overlay { padding:60px 16px; }
-    .mk-lb-close { top:12px; right:12px; width:40px; height:40px; }
-    .mk-lb-nav { width:42px; height:42px; }
+    .mk-lb-close { top:12px; right:12px; width:44px; height:44px; }
+    .mk-lb-nav { width:44px; height:44px; }
     .mk-lb-nav.prev { left:8px; } .mk-lb-nav.next { right:8px; }
     .mk-lb-imgs { gap:16px; }
     .mk-lb-imgs img.m { max-width:150px; }
@@ -1427,16 +1427,34 @@ class Component extends DCLogic {
     var titleEl = el.querySelector('.mk-cap') || el.querySelector('.cap');
     overlay.querySelector('.mk-lb-title').textContent = titleEl ? titleEl.textContent.trim() : '';
     overlay.querySelector('.mk-lb-count').textContent = (i + 1) + ' / ' + list.length;
+    if (!overlay.classList.contains('on')) lockScroll();
     overlay.classList.add('on');
-    document.documentElement.style.overflow = 'hidden';
   }
 
   function step(dir) { show(group, index + dir); }
 
-  function close() {
-    if (!overlay) return;
-    overlay.classList.remove('on');
+  var lockY = 0;
+  function lockScroll() {
+    lockY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = (-lockY) + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function unlockScroll() {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
     document.documentElement.style.overflow = '';
+    window.scrollTo(0, lockY);
+  }
+
+  function close() {
+    if (!overlay || !overlay.classList.contains('on')) return;
+    overlay.classList.remove('on');
+    unlockScroll();
   }
 
   document.addEventListener('click', function (e) {
