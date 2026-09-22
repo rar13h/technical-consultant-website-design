@@ -172,9 +172,30 @@
   .mk-card .mk-phone { width:100px; }
   .mk-cap { position:absolute; left:0; right:0; bottom:0; padding:11px 14px; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.04em; color:#fff; background:linear-gradient(transparent,rgba(15,12,8,.72)); opacity:0; transform:translateY(4px); transition:opacity .25s ease, transform .25s ease; pointer-events:none; }
   .mk-card:hover .mk-cap, .mk-card:focus-within .mk-cap { opacity:1; transform:translateY(0); }
-  @supports (animation-timeline: view()) {
-    .mk-card, .mk-strip .it { animation:mkReveal linear both; animation-timeline:view(); animation-range:entry 0% entry 45%; }
-    @keyframes mkReveal { from { opacity:0; transform:translateY(26px); } to { opacity:1; transform:none; } }
+  .mk-strip .it, .mk-card { cursor:pointer; }
+  .mk-strip .it:focus-visible, .mk-card:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+  /* lightbox */
+  .mk-lb-overlay { position:fixed; inset:0; background:rgba(12,10,7,.9); z-index:500; display:flex; align-items:center; justify-content:center; padding:70px 24px; opacity:0; pointer-events:none; transition:opacity .2s ease; }
+  .mk-lb-overlay.on { opacity:1; pointer-events:auto; }
+  .mk-lb-panel { max-width:1100px; max-height:100%; width:100%; display:flex; flex-direction:column; align-items:center; gap:16px; overflow-y:auto; }
+  .mk-lb-imgs { display:flex; align-items:flex-end; justify-content:center; gap:28px; flex-wrap:wrap; width:100%; }
+  .mk-lb-imgs img { display:block; border-radius:10px; box-shadow:0 30px 70px rgba(0,0,0,.5); }
+  .mk-lb-imgs img.d { max-width:100%; width:800px; }
+  .mk-lb-imgs img.m { max-width:220px; width:100%; border-radius:24px; border:7px solid #0f1218; }
+  .mk-lb-title { color:var(--paper); font-family:var(--font-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; text-align:center; }
+  .mk-lb-count { color:color-mix(in srgb, var(--paper) 55%, transparent); font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; margin-top:-8px; }
+  .mk-lb-close, .mk-lb-nav { position:fixed; border-radius:50%; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:var(--paper); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .15s ease; }
+  .mk-lb-close:hover, .mk-lb-nav:hover { background:rgba(255,255,255,.22); }
+  .mk-lb-close { top:20px; right:24px; width:44px; height:44px; z-index:2; }
+  .mk-lb-nav { top:50%; transform:translateY(-50%); width:54px; height:54px; z-index:2; }
+  .mk-lb-nav.prev { left:20px; } .mk-lb-nav.next { right:20px; }
+  @media (max-width:640px) {
+    .mk-lb-overlay { padding:60px 16px; }
+    .mk-lb-close { top:12px; right:12px; width:40px; height:40px; }
+    .mk-lb-nav { width:42px; height:42px; }
+    .mk-lb-nav.prev { left:8px; } .mk-lb-nav.next { right:8px; }
+    .mk-lb-imgs { gap:16px; }
+    .mk-lb-imgs img.m { max-width:150px; }
   }
   @media (max-width: 640px) {
     .mk-combo.solo .mk-phone { width:100px; }
@@ -454,14 +475,14 @@
           <h2 style="font-family:var(--font-heading); font-weight:600; font-size:clamp(24px,2.6vw,30px); letter-spacing:-0.015em; margin:0 0 16px; color:var(--paper)">Simple to advanced, a glimpse at what we build.</h2>
           <div class="mk-swipe-hint"><span class="mk-h-m">Swipe</span><span class="mk-h-d">Scroll</span> <svg class="mk-swipe-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="mk-strip">
-            <div class="it"><div class="mk-stage"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-pro.jpg" alt="Professional services website mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Website</b></div></div>
-            <div class="it"><div class="mk-stage"><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-card.jpg" alt="Digital business card mock-up" width="330" height="660" loading="lazy"><span class="mk-scan"></span></div></div></div><div class="cap"><b>QR card</b></div></div>
-            <div class="it"><div class="mk-stage"><div class="mk-phone mk-float mk-d2"><div class="shot"><img src="mockups/m-bot1.jpg" alt="Chat bot mock-up" width="330" height="660" loading="lazy"><span class="mk-type"><i></i><i></i><i></i></span></div></div></div><div class="cap"><b>Chat bot</b></div></div>
-            <div class="it"><div class="mk-stage"><div class="mk-browser mk-float mk-d3"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-form1.jpg" alt="Project inquiry form mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Form</b></div></div>
-            <div class="it"><div class="mk-stage"><div class="mk-browser mk-float mk-d4"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-store.jpg" alt="Online store mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Online store</b></div></div>
-            <div class="it"><div class="mk-stage"><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-social.jpg" alt="Social media profile mock-up" width="330" height="660" loading="lazy"></div></div></div><div class="cap"><b>Social media</b></div></div>
-            <div class="it"><div class="mk-stage"><div class="mk-browser mk-float mk-d2"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-email.jpg" alt="Business email mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Business email</b></div></div>
-            <div class="it"><div class="mk-stage"><div class="mk-browser mk-float mk-d3"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-brand.jpg" alt="Brand board mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Branding</b></div></div>
+            <div class="it" data-lb="home" data-lb-i="0" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-pro.jpg" alt="Professional services website mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Website</b></div></div>
+            <div class="it" data-lb="home" data-lb-i="1" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage"><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-card.jpg" alt="Digital business card mock-up" width="330" height="660" loading="lazy"><span class="mk-scan"></span></div></div></div><div class="cap"><b>QR card</b></div></div>
+            <div class="it" data-lb="home" data-lb-i="2" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage"><div class="mk-phone mk-float mk-d2"><div class="shot"><img src="mockups/m-bot1.jpg" alt="Chat bot mock-up" width="330" height="660" loading="lazy"><span class="mk-type"><i></i><i></i><i></i></span></div></div></div><div class="cap"><b>Chat bot</b></div></div>
+            <div class="it" data-lb="home" data-lb-i="3" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage"><div class="mk-browser mk-float mk-d3"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-form1.jpg" alt="Project inquiry form mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Form</b></div></div>
+            <div class="it" data-lb="home" data-lb-i="4" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage"><div class="mk-browser mk-float mk-d4"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-store.jpg" alt="Online store mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Online store</b></div></div>
+            <div class="it" data-lb="home" data-lb-i="5" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage"><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-social.jpg" alt="Social media profile mock-up" width="330" height="660" loading="lazy"></div></div></div><div class="cap"><b>Social media</b></div></div>
+            <div class="it" data-lb="home" data-lb-i="6" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage"><div class="mk-browser mk-float mk-d2"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-email.jpg" alt="Business email mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Business email</b></div></div>
+            <div class="it" data-lb="home" data-lb-i="7" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage"><div class="mk-browser mk-float mk-d3"><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-brand.jpg" alt="Brand board mock-up" width="720" height="450" loading="lazy"></div></div></div><div class="cap"><b>Branding</b></div></div>
           </div>
         </div>
       </section>
@@ -754,16 +775,16 @@
         <p style="margin:0 0 22px; max-width:58ch; font-size:16px; line-height:1.55; color:color-mix(in srgb, var(--ink) 65%, transparent)">Simple to advanced, playful to polished. A small sample of what we build, all designed for desktop and mobile.</p>
         <div class="mk-range"><span>Simple</span><i></i><span>Advanced</span></div><div class="mk-swipe-hint" style="margin:10px 0 0"><span class="mk-h-m">Swipe</span><span class="mk-h-d">Scroll</span> <svg class="mk-swipe-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="mk-cards">
-          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-cart.jpg" alt="Coffee cart website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-cart.jpg" alt="Coffee cart website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Coffee cart</span></div>
-          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo solo"><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-card.jpg" alt="QR business card" width="330" height="660" loading="lazy"><span class="mk-scan"></span></div></div></div></div><span class="mk-cap">QR card &middot; Digital business card</span></div>
-          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-apparel.jpg" alt="Personal clothing brand website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-apparel.jpg" alt="Personal clothing brand website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Personal clothing brand</span></div>
-          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo only"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-brand2.jpg" alt="Logo suite" width="720" height="450" loading="lazy"></div></div></div></div><span class="mk-cap">Branding &middot; Logo and brand kit</span></div>
-          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-site2.jpg" alt="Editorial salon website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-site2.jpg" alt="Editorial salon website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Editorial salon</span></div>
-          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-form2.jpg" alt="Quote request form on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-form2.jpg" alt="Quote request form on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Form &middot; Quote request</span></div>
-          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-store.jpg" alt="Online store on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-store.jpg" alt="Online store on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Online store &middot; Storefront</span></div>
-          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-pro.jpg" alt="Professional services website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-pro.jpg" alt="Professional services website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Professional services</span></div>
-          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-widget.jpg" alt="Website chat popup on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-widget.jpg" alt="Website chat popup on mobile" width="330" height="660" loading="lazy"><span class="mk-type"><i></i><i></i><i></i></span></div></div></div></div><span class="mk-cap">Chat bot &middot; Website chat popup</span></div>
-          <div class="mk-card"><div class="mk-stage" style="height:280px"><div class="mk-combo solo"><div class="mk-phone mk-float mk-d2"><div class="shot"><img src="mockups/m-bot3.jpg" alt="Order support chat" width="330" height="660" loading="lazy"><span class="mk-type"><i></i><i></i><i></i></span></div></div></div></div><span class="mk-cap">Chat bot &middot; Order support</span></div>
+          <div class="mk-card" data-lb="services" data-lb-i="0" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-cart.jpg" alt="Coffee cart website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-cart.jpg" alt="Coffee cart website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Coffee cart</span></div>
+          <div class="mk-card" data-lb="services" data-lb-i="1" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage" style="height:280px"><div class="mk-combo solo"><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-card.jpg" alt="QR business card" width="330" height="660" loading="lazy"><span class="mk-scan"></span></div></div></div></div><span class="mk-cap">QR card &middot; Digital business card</span></div>
+          <div class="mk-card" data-lb="services" data-lb-i="2" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-apparel.jpg" alt="Personal clothing brand website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-apparel.jpg" alt="Personal clothing brand website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Personal clothing brand</span></div>
+          <div class="mk-card" data-lb="services" data-lb-i="3" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage" style="height:280px"><div class="mk-combo only"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-brand2.jpg" alt="Logo suite" width="720" height="450" loading="lazy"></div></div></div></div><span class="mk-cap">Branding &middot; Logo and brand kit</span></div>
+          <div class="mk-card" data-lb="services" data-lb-i="4" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-site2.jpg" alt="Editorial salon website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-site2.jpg" alt="Editorial salon website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Editorial salon</span></div>
+          <div class="mk-card" data-lb="services" data-lb-i="5" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-form2.jpg" alt="Quote request form on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-form2.jpg" alt="Quote request form on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Form &middot; Quote request</span></div>
+          <div class="mk-card" data-lb="services" data-lb-i="6" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-store.jpg" alt="Online store on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-store.jpg" alt="Online store on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Online store &middot; Storefront</span></div>
+          <div class="mk-card" data-lb="services" data-lb-i="7" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-pro.jpg" alt="Professional services website on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float "><div class="shot"><img src="mockups/m-pro.jpg" alt="Professional services website on mobile" width="330" height="660" loading="lazy"></div></div></div></div><span class="mk-cap">Website &middot; Professional services</span></div>
+          <div class="mk-card" data-lb="services" data-lb-i="8" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage" style="height:280px"><div class="mk-combo"><div class="mk-browser mk-float "><div class="bar"><i></i><i></i><i></i></div><div class="shot"><img src="mockups/d-widget.jpg" alt="Website chat popup on desktop" width="720" height="450" loading="lazy"></div></div><div class="mk-phone mk-float mk-d1"><div class="shot"><img src="mockups/m-widget.jpg" alt="Website chat popup on mobile" width="330" height="660" loading="lazy"><span class="mk-type"><i></i><i></i><i></i></span></div></div></div></div><span class="mk-cap">Chat bot &middot; Website chat popup</span></div>
+          <div class="mk-card" data-lb="services" data-lb-i="9" tabindex="0" role="button" aria-label="Enlarge"><div class="mk-stage" style="height:280px"><div class="mk-combo solo"><div class="mk-phone mk-float mk-d2"><div class="shot"><img src="mockups/m-bot3.jpg" alt="Order support chat" width="330" height="660" loading="lazy"><span class="mk-type"><i></i><i></i><i></i></span></div></div></div></div><span class="mk-cap">Chat bot &middot; Order support</span></div>
         </div>
         </div>
       </section>
@@ -1352,6 +1373,85 @@ class Component extends DCLogic {
   }
 }
 
+</script>
+<script>
+(function () {
+  var overlay, group = null, index = 0;
+
+  function items(g) {
+    return Array.prototype.slice.call(document.querySelectorAll('[data-lb="' + g + '"]'));
+  }
+
+  function largeSrc(src) {
+    return src.replace(/(^|\/)([dm])-/, function (m, p1, p2) { return p1 + 'lg-' + p2 + '-'; });
+  }
+
+  function build() {
+    overlay = document.createElement('div');
+    overlay.className = 'mk-lb-overlay';
+    overlay.innerHTML =
+      '<button class="mk-lb-close" aria-label="Close" type="button">' +
+        '<svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="4" x2="16" y2="16"></line><line x1="16" y1="4" x2="4" y2="16"></line></svg>' +
+      '</button>' +
+      '<button class="mk-lb-nav prev" aria-label="Previous" type="button">' +
+        '<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L4 8l6 6"></path></svg>' +
+      '</button>' +
+      '<button class="mk-lb-nav next" aria-label="Next" type="button">' +
+        '<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2l6 6-6 6"></path></svg>' +
+      '</button>' +
+      '<div class="mk-lb-panel"><div class="mk-lb-imgs"></div><div class="mk-lb-title"></div><div class="mk-lb-count"></div></div>';
+    document.body.appendChild(overlay);
+    overlay.querySelector('.mk-lb-close').addEventListener('click', close);
+    overlay.querySelector('.mk-lb-nav.prev').addEventListener('click', function (e) { e.stopPropagation(); step(-1); });
+    overlay.querySelector('.mk-lb-nav.next').addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+  }
+
+  function show(g, i) {
+    if (!overlay) build();
+    var list = items(g);
+    if (!list.length) return;
+    i = (i + list.length) % list.length;
+    group = g; index = i;
+    var el = list[i];
+    var imgs = el.querySelectorAll('img');
+    var wrap = overlay.querySelector('.mk-lb-imgs');
+    wrap.innerHTML = '';
+    imgs.forEach(function (img) {
+      var big = document.createElement('img');
+      big.src = largeSrc(img.getAttribute('src'));
+      big.alt = img.alt || '';
+      big.className = img.closest('.mk-phone') ? 'm' : 'd';
+      wrap.appendChild(big);
+    });
+    var titleEl = el.querySelector('.mk-cap') || el.querySelector('.cap');
+    overlay.querySelector('.mk-lb-title').textContent = titleEl ? titleEl.textContent.trim() : '';
+    overlay.querySelector('.mk-lb-count').textContent = (i + 1) + ' / ' + list.length;
+    overlay.classList.add('on');
+    document.documentElement.style.overflow = 'hidden';
+  }
+
+  function step(dir) { show(group, index + dir); }
+
+  function close() {
+    if (!overlay) return;
+    overlay.classList.remove('on');
+    document.documentElement.style.overflow = '';
+  }
+
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-lb]');
+    if (!el) return;
+    show(el.getAttribute('data-lb'), items(el.getAttribute('data-lb')).indexOf(el));
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!overlay || !overlay.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+})();
 </script>
 </body>
 </html>
